@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tailor Health Method</title>
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#1d2733"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{--ink:#1d2733;--bg:#f7f8fa;--card:#fff;--mut:#5b6672;--line:#d9dee5;--tape:#f0c24b;--g:#2f7d5b;--w:#a96a0d;--d:#b04a4a;color-scheme:light dark}
+@media(prefers-color-scheme:dark){:root{--ink:#e9edf2;--bg:#141a21;--card:#1c242d;--mut:#9aa6b2;--line:#2c3743;--g:#5cc79a;--w:#e0a84e;--d:#e58a8a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Avenir Next","Segoe UI",system-ui,sans-serif;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+main{max-width:1000px;margin:auto;padding:16px;display:grid;gap:20px}
+@media(min-width:900px){main{grid-template-columns:minmax(300px,380px) 1fr;align-items:start}header,.wide{grid-column:1/-1}}
+h1{font-size:1.5rem;margin:0;letter-spacing:-.01em}h2{font-size:1.1rem;margin:0 0 8px}
+header p,.mut,small,p.n{color:var(--mut);margin:4px 0}
+section{border-top:3px solid var(--tape);padding-top:12px}
+label{display:block;font-size:.9rem;margin:10px 0 2px}
+input,select,button,textarea{font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;width:100%;min-height:44px}
+button{width:auto;cursor:pointer;background:var(--ink);color:var(--bg);border:0;padding:10px 16px;font-weight:600}
+button.s{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+:focus-visible{outline:3px solid var(--tape);outline-offset:2px}
+.row{display:flex;gap:8px;align-items:end}.row>*{flex:1}
+.chk{display:flex;gap:10px;align-items:center;margin:2px 0}.chk input{width:22px;min-height:22px}.chk label{margin:0}
+.seg{display:flex;gap:6px;margin:8px 0}.seg button{flex:1}.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.seg button[aria-pressed=false]{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.r{border-bottom:1px solid var(--line);padding:10px 0;position:relative;padding-right:84px}
+.r b{display:block}.r span{color:var(--mut);font-size:.9rem}.r p{margin:4px 0 0;font-size:.88rem;color:var(--mut)}
+.r i{position:absolute;right:0;top:10px;font-style:normal;font-weight:700;font-size:.85rem;padding:3px 10px;border-radius:99px;border:2px solid}
+i.g{color:var(--g)}i.w{color:var(--w)}i.d{color:var(--d)}i.n{color:var(--mut)}
+.tape{height:34px;border-radius:6px;position:relative;margin:10px 0 4px;background:
+repeating-linear-gradient(90deg,#0004 0 1px,transparent 1px 8px),
+linear-gradient(90deg,var(--g) 0 37.5%,var(--w) 37.5% 62.5%,var(--d) 62.5%);opacity:.9}
+.tape u{position:absolute;top:-6px;bottom:-6px;width:4px;background:var(--ink);border-radius:2px;outline:2px solid var(--bg)}
+.tl{display:flex;justify-content:space-between;font-size:.75rem;color:var(--mut)}
+.box{border:2px solid var(--d);border-radius:10px;padding:12px;margin:8px 0}
+.ban{background:var(--tape);color:#1d2733;border-radius:8px;padding:10px;font-size:.9rem}
+details{border-top:1px solid var(--line);padding:8px 0}summary{cursor:pointer;font-weight:600;min-height:32px}
+pre{white-space:pre-wrap;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit;font-size:.9rem}
+.hid{display:none}ul{padding-left:20px}li{margin:4px 0}
+@media(prefers-reduced-motion:no-preference){.tape u{transition:left .3s}}
+</style></head><body><main>
+<header><h1>Tailor Health Method</h1>
+<p>Body measurements for health screening and clothes that fit. Screening flags, not diagnoses. For adults 18+; not for pregnancy or postpartum.</p>
+<div id="ios" class="ban hid">On iPhone, tap Share, then Add to Home Screen. Safari clears website data after 7 days without use, and home-screen apps are exempt. Export a backup from the Data section.</div></header>
+
+<div>
+<section><h2>Your measurements</h2>
+<div class="seg" role="group" aria-label="Mode"><button id="mb" aria-pressed="true">Beginner</button><button id="ma" aria-pressed="false">Advanced</button></div>
+<div class="row"><div><label for="sex">Body type baseline</label><select id="sex"><option value="F">Feminine</option><option value="M">Masculine</option></select></div>
+<div><label for="u">Length units</label><select id="u"><option value="in">inches</option><option value="cm">cm</option></select></div></div>
+<small>Studies use sex-specific reference groups and none track non-binary people directly, so pick the baseline closest to your current endocrine and structural profile.</small>
+<label for="h">Height</label><input id="h" type="number" step="any" inputmode="decimal">
+<label for="w">Waist</label><input id="w" type="number" step="any" inputmode="decimal">
+<small>Midpoint between lowest rib and top of hip bone, at the end of a relaxed exhale (optional: 3 slow 4-7-8 breaths first). Use a spring-loaded tape; measure twice and re-measure if they differ by more than 1 cm.</small>
+<div class="chk" style="margin-top:12px"><input type="checkbox" id="c_hide"><label for="c_hide">Hide results</label></div>
+
+<div id="adv" class="hid">
+<label for="age">Age (years)</label><input id="age" type="number" inputmode="numeric">
+<div class="row"><div><label for="bust">Bust / chest</label><input id="bust" type="number" step="any" inputmode="decimal"></div><div><label for="ub">Underbust</label><input id="ub" type="number" step="any" inputmode="decimal"></div></div>
+<div class="row"><div><label for="hip">Hips</label><input id="hip" type="number" step="any" inputmode="decimal"></div><div><label for="neck">Neck</label><input id="neck" type="number" step="any" inputmode="decimal"></div></div>
+<div class="row"><div><label for="sh">Shoulders</label><input id="sh" type="number" step="any" inputmode="decimal"></div><div><label for="arm">Upper arm</label><input id="arm" type="number" step="any" inputmode="decimal"></div></div>
+<div class="row"><div><label for="thigh">Thigh</label><input id="thigh" type="number" step="any" inputmode="decimal"></div><div><label for="inseam">Inseam</label><input id="inseam" type="number" step="any" inputmode="decimal"></div></div>
+<h2 style="margin-top:16px">Show</h2>
+<div class="chk"><input type="checkbox" id="c_bra"><label for="c_bra">Bra size</label></div>
+<div class="chk"><input type="checkbox" id="c_wom"><label for="c_wom">Women’s clothing</label></div>
+<div class="chk"><input type="checkbox" id="c_men"><label for="c_men">Men’s clothing</label></div>
+<div class="chk"><input type="checkbox" id="c_uni" checked><label for="c_uni">Unisex clothing</label></div>
+<div class="chk"><input type="checkbox" id="c_blood"><label for="c_blood">Blood markers</label></div>
+<div id="blood" class="hid"><div class="row"><div><label for="tg">Triglycerides mg/dL</label><input id="tg" type="number" inputmode="decimal"></div><div><label for="hdl">HDL mg/dL</label><input id="hdl" type="number" inputmode="decimal"></div></div>
+<label for="glu">Fasting glucose mg/dL</label><input id="glu" type="number" inputmode="decimal"></div>
+<div class="chk"><input type="checkbox" id="c_cal"><label for="c_cal">Skinfold calipers (3-site)</label></div>
+<div id="cal" class="hid"><small id="calh"></small><div class="row"><div><label for="s1" id="l1">Site 1 mm</label><input id="s1" type="number" step="any"></div><div><label for="s2" id="l2">Site 2 mm</label><input id="s2" type="number" step="any"></div><div><label for="s3">Thigh mm</label><input id="s3" type="number" step="any"></div></div></div>
+<div class="chk"><input type="checkbox" id="c_exp"><label for="c_exp">Experimental mode (ancestry notes)</label></div>
+</div></section>
+
+<section><h2>Weight log</h2><p class="n">Used only for hydration, lean/organ mass tracking and medication baseline. Never shown as a health score.</p>
+<div class="row"><div><label for="wt">Weight</label><input id="wt" type="number" step="any" inputmode="decimal"></div><div><label for="wu">Unit</label><select id="wu"><option value="lb">lb</option><option value="kg">kg</option></select></div><button id="addw" class="s">Log</button></div>
+<ul id="log"></ul></section>
+</div>
+
+<div>
+<div id="safe" class="box hid" role="alert"><b>A health safety message</b><p>Your entries suggest your body may not be getting enough fuel or reserves right now. This is a health safety message, not a judgment about your body. Please contact a doctor as soon as you can. If food, eating or body image feels hard, an eating-disorder specialist can help. If you feel faint, have chest pain, or have a racing or very slow heartbeat, seek urgent care.</p></div>
+<div id="chg" class="box hid" style="border-color:var(--w)"><b>Was this change intended?</b><p>Your logged weight dropped quickly. If it was not planned, it is worth mentioning to a clinician.</p></div>
+<section id="resw"><h2>Results</h2><div id="res"></div><p class="n">No flag does not mean no concern. Results are screening flags, not diagnoses.</p></section>
+
+<section><h2>Talk with your care team</h2>
+<details open><summary>Provider script</summary><pre id="sp"></pre><button class="s" data-c="sp">Copy</button><ul><li>What is the target for this marker?</li><li>What options exist besides weight loss?</li><li>How often should we recheck?</li><li>What is the next step if it does not change?</li></ul></details>
+<details><summary>Therapist script</summary><pre id="st">“My doctor and I set a plan around [metabolic goal]. I want help staying consistent with it, managing health anxiety, and keeping my self-worth separate from body numbers.”</pre><button class="s" data-c="st">Copy</button></details></section>
+
+<section><h2>Data</h2><p class="n">Everything stays on this device. Export a backup before clearing your browser.</p>
+<div class="row"><button id="ex" class="s">Export</button><button id="im" class="s">Import</button><button id="cl" class="s">Clear all</button></div><input id="imf" type="file" accept=".json" class="hid"></section>
+
+<section><h2>Sources and limits</h2>
+<details><summary>What each result is based on</summary><ul>
+<li>WHtR tiers (under 0.50, 0.50 to 0.59, 0.60+): Ashwell &amp; Gibson, BMJ Open 2016; Ashwell, Gunn &amp; Gibson, Obes Rev 2012. Less validated for adults 65+.</li>
+<li>WHR: WHO Expert Consultation 2008. One cutoff per sex (0.90 men, 0.85 women), so two states.</li>
+<li>TG/HDL 3.0 or more: McLaughlin et al., Ann Intern Med 2003. Derived in overweight, non-diabetic adults; sensitivity 64%, specificity 68%.</li>
+<li>TyG: Simental-Mendía et al. 2008; Sánchez-García et al., Int J Endocrinol 2020 (cutoffs vary, so value only).</li>
+<li>Neck 37/33 cm: Chinese cohort, Cardiovasc Diabetol 2013;12:76; Preis et al., JCEM 2010. Cutoffs vary by population.</li>
+<li>Thigh under 60 cm: Heitmann &amp; Frederiksen, BMJ 2009 (Danish cohort).</li>
+<li>Arm 28.6/27.5 cm (age 65+): Clin Interv Aging 2021;16. Single study, needs validation.</li>
+<li>Body fat: US Navy circumference equations and Jackson-Pollock/Siri skinfolds, standard published equations I did not re-check against the original papers. Individual error is about 4 points and larger in lean people, so no tiers are applied.</li>
+<li>Bra: plus-4/plus-5 convention (Wacoal). The traditional method overestimates band size in about 76% and underestimates cup in about 84% of women, so treat it as a start. Sister sizes are a fitter convention.</li>
+<li>Clothing charts below are placeholder sizes, not sourced. Replace them with brand charts.</li>
+<li>Severe check: BMI under 15 is recognized as severe malnutrition in adults. The rapid-loss threshold (5% in 30 days) is a placeholder with no adult source.</li>
+<li>Experimental ancestry notes are text only. No sourced numeric adjustments exist for WHtR.</li></ul></details>
+<details><summary>Not built yet</summary><p class="n">Lean-mass indices from DXA/BIA, calf circumference, comorbidity and lifestyle inputs, and brand-specific bra charts.</p></details></section>
+</div></main>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const K='thm1',F=['sex','u','h','w','age','bust','ub','hip','neck','sh','arm','thigh','inseam','tg','hdl','glu','s1','s2','s3','wu'],C=['c_hide','c_bra','c_wom','c_men','c_uni','c_blood','c_cal','c_exp'];
+let D={f:{},c:{c_uni:true},log:[],adv:false};
+try{D=Object.assign(D,JSON.parse(localStorage.getItem(K)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}};
+const num=id=>{const v=parseFloat($('#'+id).value);return isNaN(v)?null:v};
+const cm=id=>{const v=num(id);return v==null?null:($('#u').value==='in'?v*2.54:v)};
+const inch=c=>c/2.54,r1=x=>Math.round(x*10)/10,r2=x=>Math.round(x*100)/100;
+const kgOf=v=>$('#wu').value==='lb'?v/2.2046:v,fromKg=k=>$('#wu').value==='lb'?k*2.2046:k;
+const row=(n,v,c,l,t)=>`<div class="r"><b>${n}</b><span>${v}</span><i class="${c}">${l}</i>${t?`<p>${t}</p>`:''}</div>`;
+// PLACEHOLDER charts (not sourced): [label, upper bounds in inches]
+const WOM=[['XS (0-2)',[33,25.5,35.5]],['S (4-6)',[35,27.5,37.5]],['M (8-10)',[37,29.5,39.5]],['L (12-14)',[39.5,32,42]],['XL (16-18)',[43,35.5,45.5]],['2XL (20)',[46,39,49]]];
+const MEN=[['S',[37,31]],['M',[40,34]],['L',[44,38]],['XL',[48,42]],['2XL',[52,46]]];
+function size(chart,vals,names){let idx=vals.map((v,i)=>{if(v==null)return -1;let k=chart.findIndex(s=>v<=s[1][i]);return k<0?chart.length:k});
+ const rec=Math.max(...idx);if(rec<0)return null;const over=rec>=chart.length;const out=[];
+ idx.forEach((k,i)=>{if(k>=0&&k<rec&&!over){const hi=chart[rec][1][i],lo=rec?chart[rec-1][1][i]:hi-2;out.push(`take in ${names[i]} by about ${r1((lo+hi)/2-vals[i])} in`)}});
+ return{label:over?'Beyond the chart':chart[rec][0],tail:out}}
+function calc(){
+ const h=cm('h'),w=cm('w'),sex=$('#sex').value,age=num('age'),adv=D.adv,o=[];
+ if(h&&w){const v=w/h,t=v<.5?['g','Great']:v<.6?['w','Watch-out']:['d','Danger'];
+  o.push(`<div class="r"><b>Waist-to-height ratio</b><span>${r2(v)}</span><i class="${t[0]}">${t[1]}</i><div class="tape"><u style="left:${Math.min(98,Math.max(1,(v-.35)/.4*100))}%"></u></div><div class="tl"><span>0.35</span><span>0.50</span><span>0.60</span><span>0.75</span></div>${age>=65?'<p>Tiers are less validated for adults 65 and over.</p>':''}</div>`)}
+ else o.push('<p class="n">Enter height and waist to see your ratio.</p>');
+ if(adv){const hip=cm('hip'),neck=cm('neck'),th=cm('thigh'),arm=cm('arm'),ub=cm('ub'),bu=cm('bust');
+  if(w&&hip){const v=w/hip,lim=sex==='F'?.85:.9;o.push(row('Waist-to-hip ratio',r2(v),v>=lim?'d':'g',v>=lim?'Flag':'Below flag','WHO cutoff: '+lim+' for this baseline.'))}
+  if($('#c_blood').checked){const tg=num('tg'),hd=num('hdl'),gl=num('glu');
+   if(tg&&hd){const v=tg/hd;o.push(row('Triglyceride-to-HDL',r2(v),v>=3?'d':'g',v>=3?'Flag':'Below flag','Screening only (sensitivity 64%, specificity 68%).'))}
+   if(tg&&gl)o.push(row('TyG index',r2(Math.log(tg*gl/2)),'n','Value','Cutoffs vary between studies, so no tier.'))}
+  if(neck){const lim=sex==='F'?33:37;o.push(row('Neck',r1(neck)+' cm',neck>=lim?'d':'g',neck>=lim?'Flag':'Below flag','Cutoffs vary by population ('+lim+' cm here).'))}
+  if(th)o.push(row('Thigh',r1(th)+' cm',th<60?'d':'g',th<60?'Flag':'Below flag','Under 60 cm was linked to higher mortality in one Danish cohort.'));
+  if(arm&&age>=65){const lim=sex==='F'?27.5:28.6;o.push(row('Upper arm (low muscle)',r1(arm)+' cm',arm<=lim?'d':'g',arm<=lim?'Flag':'Below flag','Single-study cutoff for adults 65+.'))}
+  // body fat: calipers first
+  let bf=null,src='';const s=[num('s1'),num('s2'),num('s3')];
+  if($('#c_cal').checked&&s.every(x=>x!=null)&&age){const S=s[0]+s[1]+s[2],d=sex==='M'?1.10938-.0008267*S+.0000016*S*S-.0002574*age:1.0994921-.0009929*S+.0000023*S*S-.0001392*age;bf=495/d-450;src='Jackson-Pollock 3-site; skinfold sum '+r1(S)+' mm'}
+  else if(h&&w&&neck&&(sex==='M'||hip)){bf=sex==='M'?495/(1.0324-.19077*Math.log10(w-neck)+.15456*Math.log10(h))-450:495/(1.29579-.35004*Math.log10(w+hip-neck)+.221*Math.log10(h))-450;src='US Navy circumference method'}
+  if(bf!=null&&isFinite(bf))o.push(row('Body fat estimate','about '+r1(bf)+'% (±4 points)','n','Range',src+'. Least reliable in lean people, so it is not used to flag low fat.'));
+  if($('#c_bra').checked&&ub&&bu){const U=Math.round(inch(ub)),B=inch(bu),band=U+(U%2?5:4),ci=Math.max(0,Math.round(B-U)),cups=['AA','A','B','C','D','DD','DDD/F','G','H','I'],c=cups[Math.min(ci,9)];
+   o.push(row('Bra starting size',band+c,'n','Estimate','Sister sizes: '+(band-2)+cups[Math.min(ci+1,9)]+' or '+(band+2)+cups[Math.max(ci-1,0)]+'. If the band rides up, go down a band and up a cup. Check fit by trying on.'))}
+  const wv=[bu,w,hip].map(x=>x==null?null:inch(x)),mv=[bu,w].map(x=>x==null?null:inch(x));
+  const out=(t,z)=>z&&o.push(row(t,z.label,'n','Placeholder',(z.tail.length?'Size up to your largest measurement, then tailor: '+z.tail.join('; ')+'. ':'')+'Chart is a placeholder, not sourced.'));
+  if($('#c_wom').checked)out('Women’s clothing',size(WOM,wv,['the bust','the waist','the hips']));
+  if($('#c_men').checked)out('Men’s clothing',size(MEN,mv,['the chest','the waist']));
+  if($('#c_uni').checked)out('Unisex clothing',size(MEN,mv,['the chest','the waist']));
+  if(D.c.c_exp)o.push('<p class="n">Experimental notes (no tiers change): BMI misclassifies some groups. Polynesian adults tend to carry less fat and more lean mass at a given BMI, and South Asian adults can carry more fat at a given BMI. No sourced numeric adjustments for WHtR exist. [Experimental: limited longitudinal consensus]</p>')}
+ $('#res').innerHTML=o.join('');$('#resw').classList.toggle('hid',$('#c_hide').checked);
+ // safety checks (backend only)
+ const last=D.log[D.log.length-1],wk=last?last.kg:($('#wt').value?kgOf(+$('#wt').value):null);
+ $('#safe').classList.toggle('hid',!(h&&wk&&wk/((h/100)**2)<15));
+ let ch=false;if(last){const now=new Date(last.d).getTime();ch=D.log.some(e=>{const dt=(now-new Date(e.d).getTime())/864e5;return dt>0&&dt<=30&&last.kg<=e.kg*.95})}
+ $('#chg').classList.toggle('hid',!ch);
+ const wv2=h&&w?r2(w/h):'[value]';
+ $('#sp').textContent=`“I track my health with waist-to-height ratio and these lab markers instead of scale weight. My [metric] is ${wv2}. Which organ system or marker is the concern, what is my target for it, and what treatment options exist for that specific problem? If you need my weight today, can you tell me what it is for?”`}
+function logR(){$('#log').innerHTML=D.log.slice(-6).reverse().map((e,i,a)=>{const p=a[i+1],d=p?` (${fromKg(e.kg-p.kg)>=0?'+':''}${r1(fromKg(e.kg-p.kg))})`:'';return`<li>${e.d}: ${r1(fromKg(e.kg))} ${$('#wu').value}${d} <button class="s" data-d="${e.d}|${e.kg}" aria-label="Delete entry">Delete</button></li>`}).join('')||'<li class="mut">No entries yet.</li>'}
+function paint(){F.forEach(k=>{if(D.f[k]!=null)$('#'+k).value=D.f[k]});C.forEach(k=>$('#'+k).checked=!!D.c[k]);mode(D.adv);sub()}
+function mode(a){D.adv=a;$('#adv').classList.toggle('hid',!a);$('#ma').setAttribute('aria-pressed',a);$('#mb').setAttribute('aria-pressed',!a)}
+function sub(){$('#blood').classList.toggle('hid',!$('#c_blood').checked);$('#cal').classList.toggle('hid',!$('#c_cal').checked);const m=$('#sex').value==='M';$('#l1').textContent=m?'Chest mm':'Triceps mm';$('#l2').textContent=m?'Abdomen mm':'Suprailiac mm';$('#calh').textContent='Needs age. Sites: '+(m?'chest, abdomen, thigh.':'triceps, suprailiac, thigh.')}
+document.addEventListener('input',e=>{const t=e.target;if(F.includes(t.id))D.f[t.id]=t.value;if(C.includes(t.id))D.c[t.id]=t.checked;if(t.id==='u'&&false);sub();save();calc();logR()});
+$('#mb').onclick=()=>{mode(false);save();calc()};$('#ma').onclick=()=>{mode(true);save();calc()};
+$('#addw').onclick=()=>{const v=num('wt');if(v==null)return;D.log.push({d:new Date().toISOString().slice(0,10),kg:kgOf(v)});$('#wt').value='';D.f.wt='';save();logR();calc()};
+$('#log').onclick=e=>{const d=e.target.dataset.d;if(!d)return;const[a,b]=d.split('|');D.log=D.log.filter(x=>!(x.d===a&&String(x.kg)===b));save();logR();calc()};
+$$('[data-c]').forEach(b=>b.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText($('#'+b.dataset.c).textContent);b.textContent='Copied'});
+$('#ex').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D)],{type:'application/json'}));a.download='thm-backup.json';a.click()};
+$('#im').onclick=()=>$('#imf').click();
+$('#imf').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{D=Object.assign({f:{},c:{},log:[],adv:false},JSON.parse(t));save();paint();logR();calc()}catch(x){alert('That file could not be read as a THM backup.')}})};
+$('#cl').onclick=()=>{if(confirm('Delete all saved measurements and weight entries on this device?')){D={f:{},c:{c_uni:true},log:[],adv:false};try{localStorage.removeItem(K)}catch(e){}F.forEach(k=>{if($('#'+k).tagName==='INPUT')$('#'+k).value=''});paint();logR();calc()}};
+if(/iphone|ipad/i.test(navigator.userAgent)&&!navigator.standalone)$('#ios').classList.remove('hid');
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+paint();logR();calc();
+</script></body></html>
