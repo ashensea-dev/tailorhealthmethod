@@ -167,7 +167,7 @@ gauge('Body fat estimate',b.v,b.v!=null?b.v.toFixed(1)+'%':'—',t.ess,t.hi,0,45
 function open(h){dlg.innerHTML='<div class="dc"><button class="ib x" data-act="close" aria-label="Close">'+ic('x')+'</button>'+h+'</div>';if(!dlg.open)dlg.showModal()}
 const archOpts=sel=>Object.keys(ARCH).map(k=>{const a=ARCH[k];return '<label class="opt"><input type="radio" name="arch" value="'+k+'"'+(sel===k?' checked':'')+'><span><b>'+a.l+'</b><small>'+a.d+'</small><small>Healthy '+a.ess+' to '+(a.hi-1)+'% · high risk '+a.hi+'% or more</small></span></label>'}).join('');
 function onboard(){open('<h3>Welcome</h3><p class="sub">Set your baseline once. Everything stays in this browser.</p>'+
-'<label class="fl" for="f-name">Name or handle</label><input type="text" id="f-name" placeholder="e.g. StitchWitch" autocomplete="off">'+
+'<label class="fl" for="f-name">Name or handle</label><input type="text" id="f-name" placeholder="e.g. J. Doe" autocomplete="off">'+
 '<label class="fl" for="f-h">Height in inches</label><input type="text" id="f-h" inputmode="decimal" value="65" autocomplete="off">'+
 '<label class="fl">Physiological baseline</label><div class="note">Pick the baseline closest to your current physiology or primary hormone profile, such as estrogen-dominant or androgen-dominant. It only changes body fat thresholds and risk flags. WHtR thresholds are the same for everyone. Update it any time in Settings as your physiology or transition goals evolve.</div>'+archOpts(null)+
 '<button class="btn pri wide" style="margin-top:12px" data-act="obdone">Start tracking</button>')}
