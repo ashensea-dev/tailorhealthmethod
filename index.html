@@ -419,4 +419,975 @@ footer a{color:var(--ink2)}
           <g class="hs" data-m="underbust" transform="translate(95,133)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">3</text></g>
           <g class="hs" data-m="waist" transform="translate(110,160)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">4</text></g>
           <g class="hs" data-m="hips" transform="translate(110,204)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">5</text></g>
-          <g class="hs" data-m="shoulder" transform="translate(110,78)"><circle r="6.5"/><text x="0
+          <g class="hs" data-m="shoulder" transform="translate(110,78)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">6</text></g>
+          <g class="hs" data-m="nape" transform="translate(66,62)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">7</text></g>
+          <g class="hs" data-m="bodice" transform="translate(122,122)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">8</text></g>
+          <g class="hs" data-m="apex" transform="translate(98,98)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">9</text></g>
+          <g class="hs" data-m="inseam" transform="translate(147,306)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">10</text></g>
+        </svg>
+        <div class="fig-legend" id="figLegend"></div>
+      </div>
+    </section>
+
+    <section class="card reveal" id="healthCard" style="--d:.1s">
+      <h2 class="card-t"><span class="tab"></span>Health Spectrum<span class="sub">binary status · no soft tiers</span></h2>
+      <div class="gauge">
+        <div class="g-head"><span class="g-name">Waist-to-Height Ratio</span> <button class="info" data-tip="Waist ÷ Height, both in inches. Identical thresholds for every archetype: below 0.40 is low risk/underweight, 0.40–0.49 is healthy, 0.50 and above is elevated risk.">i</button><span class="g-val" id="whtrVal">— <small>WHtR</small></span></div>
+        <div class="meter empty" id="whtrMeter">
+          <div class="m-track">
+            <div class="zone z-low" style="width:33.34%"></div><div class="zone z-ok" style="width:33.33%"></div><div class="zone z-high" style="width:33.33%"></div>
+            <div class="z-div" style="left:33.34%"><b>0.40</b></div>
+            <div class="z-div" style="left:66.67%"><b>0.50</b></div>
+            <div class="marker" id="whtrMark" hidden><span class="flag" id="whtrMarkV"></span><span class="pin"></span></div>
+          </div>
+          <div class="m-labels"><span><b>&lt; 0.40</b>Underweight / Low</span><span><b>0.40 – 0.49</b>Healthy Range</span><span><b>≥ 0.50</b>Increased Risk</span></div>
+        </div>
+        <div class="g-foot"><span id="whtrStatus"></span><span class="g-note" id="whtrNote"></span></div>
+      </div>
+      <div class="gauge">
+        <div class="g-head"><span class="g-name">Body Fat % Estimate</span> <button class="info" data-tip="Estimated with the U.S. Navy circumference method from Neck, Waist, Height (and Hips for feminine / non-binary baselines). Thresholds follow your archetype reference model.">i</button><span class="g-val" id="bfVal">— <small>%</small></span></div>
+        <div class="meter empty" id="bfMeter">
+          <div class="m-track" id="bfTrack"></div>
+          <div class="m-labels" id="bfLabels"></div>
+        </div>
+        <div class="g-foot"><span id="bfStatus"></span><span class="g-note" id="bfNote"></span></div>
+      </div>
+      <div id="flagsBox"></div>
+    </section>
+
+    <section class="card reveal" id="measCard" style="--d:.08s">
+      <h2 class="card-t"><span class="tab"></span>Tailoring Measurements<span class="sub">¼-inch precision</span></h2>
+      <div id="partnerBar" hidden><div class="qbar" id="qbar"></div></div>
+      <div class="mlist" id="measList"></div>
+      <div class="m-actions"><button class="btn primary" id="btnLogFirst">＋ Log a Measurement</button></div>
+    </section>
+
+    <section class="card reveal" id="chartCard" style="--d:.12s">
+      <h2 class="card-t"><span class="tab"></span>Historical Graphing<span class="seg"><button id="cmWhtr" class="on">WHtR</button><button id="cmWaist">Waist ″</button></span></h2>
+      <div class="chart-meta" id="chartMeta"></div>
+      <div id="chartBox"></div>
+    </section>
+
+    <section class="card reveal" id="notesCard" style="--d:.14s">
+      <h2 class="card-t"><span class="tab"></span>Pattern Drafting Notes</h2>
+      <div class="pf-focus" id="buildFocus" hidden style="margin-bottom:12px;margin-top:0"></div>
+      <textarea id="notesArea" placeholder="Fabric choices, seam allowances, fit tweaks, con deadlines…"></textarea>
+      <div class="note-status" id="noteStatus">✔ saved locally</div>
+    </section>
+
+    <section class="gear reveal" id="gearCard" style="--d:.16s">
+      <div class="g-top">💡 COSPLAY PATTERN &amp; TAILORING MEASUREMENT TIP</div>
+      <div class="g-body">
+        <div class="g-icon">📏</div>
+        <div>
+          <h4>Ditch the hardware-store tape</h4>
+          <p>Standard hardware tape measures are rigid and distort body curvature. For accurate cosplay pattern drafting and WHtR tracking, use a <b>flexible, retractable vinyl measuring tape</b>.</p>
+          <div class="rec">🛒 <b>Recommended budget option:</b> Loops &amp; Threads 60″ Retractable Tape Measure — Michaels, ~$2.99</div>
+          <a class="btn sm dark" href="https://www.michaels.com/search?q=loops+%26+threads+retractable+tape+measure" target="_blank" rel="noopener">Open Michaels Product Page ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="card reveal" id="actionCard" style="--d:.18s">
+      <h2 class="card-t"><span class="tab"></span>Action Plan Status</h2>
+      <div id="actionSummary"></div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <span>🔒 ALL DATA STAYS IN YOUR BROWSER (localStorage) — NOTHING IS UPLOADED</span>
+  <span>TAILORTRACK · NOT A MEDICAL DEVICE · <a href="#" id="footReset">reset data</a></span>
+</footer>
+
+<!-- modals -->
+<div class="modal" id="obModal"><div class="ovl"></div>
+  <div class="sheet"><div class="grab"></div>
+    <button class="modal-x" data-close aria-label="close">✕</button>
+    <div id="obBody"></div>
+    <div class="m-actions"><button class="btn" id="obBack">← Back</button><button class="btn primary" id="obNext">Next →</button></div>
+  </div>
+</div>
+
+<div class="modal" id="wizModal"><div class="ovl"></div>
+  <div class="sheet"><div class="grab"></div>
+    <button class="modal-x" data-close aria-label="close">✕</button>
+    <div id="wizBody"></div>
+    <div class="m-actions"><button class="btn" id="wizBack">← Back</button><button class="btn primary" id="wizNext">Next →</button></div>
+  </div>
+</div>
+
+<div class="modal" id="planModal"><div class="ovl"></div>
+  <div class="sheet center"><div class="grab"></div>
+    <button class="modal-x" data-close aria-label="close">✕</button>
+    <div id="planBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="setModal"><div class="ovl"></div>
+  <div class="sheet center"><div class="grab"></div>
+    <button class="modal-x" data-close aria-label="close">✕</button>
+    <h3>Settings</h3><div class="sub">Your baseline is yours — update it any time as your physiology or goals evolve.</div>
+    <div id="setBody"></div>
+    <div class="m-actions"><button class="btn primary" id="setSave">Save Changes</button></div>
+  </div>
+</div>
+
+<div class="modal" id="expModal"><div class="ovl"></div>
+  <div class="sheet center"><div class="grab"></div>
+    <button class="modal-x" data-close aria-label="close">✕</button>
+    <h3>Export Cosplay Build Spec Sheet</h3>
+    <div class="sub">Choose an ease allowance. The sheet goes straight to your print / save-as-PDF dialog — it is never displayed inside the app.</div>
+    <div class="ease-opts" id="easeOpts"></div>
+    <div class="m-actions"><button class="btn dark" id="btnPrintGo">🖨 Print / Save as PDF</button></div>
+  </div>
+</div>
+
+<!-- print-only spec sheet: never visible on screen -->
+<div id="printSheet" aria-hidden="true"></div>
+
+<div id="toastBox" aria-live="polite"></div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+'use strict';
+/* ================= global error surface (nothing fails silently) ================= */
+window.addEventListener('error', function(e){
+  try{
+    var b=document.getElementById('toastBox');
+    if(b){ var d=document.createElement('div'); d.className='toast risk'; d.textContent='⚠ Script error: '+e.message; b.appendChild(d); setTimeout(function(){ d.remove(); },7000); }
+  }catch(_){}
+});
+
+/* ================= helpers ================= */
+function $(s){ return document.querySelector(s); }
+function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+function fmtDate(iso){ try{ return new Date(iso+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}); }catch(e){ return iso; } }
+function on(id,fn){ var el=document.getElementById(id); if(el){ el.addEventListener('click',fn); } }
+
+/* ================= reference data ================= */
+var ARCHETYPES={
+  feminine:{label:'Feminine Archetype',desc:'Estrogen-dominant reference model',ess:13,high:33,thr:'Essential min 13% · Healthy 13–32% · High risk ≥33%'},
+  masculine:{label:'Masculine Archetype',desc:'Androgen-dominant reference model',ess:6,high:25,thr:'Essential min 6% · Healthy 6–24% · High risk ≥25%'},
+  nonbinary:{label:'Non-Binary Archetype',desc:'Hormonally neutral / overlap reference model',ess:13,high:25,thr:'Essential min 13% · Healthy 13–24% · High risk ≥25%',
+    note:'Uses a conservative overlap model to ensure safety across physiological shifts without assuming hormone therapy status.'}
+};
+var TARGETS={
+  armor:{name:'Armor Fit (Structured/Heavy)',ico:'🛡️',focus:'Joint stability, upper-body strength, and posture for supporting heavy foam or 3D-printed builds.'},
+  catsuit:{name:'Form-Fitting / Catsuit',ico:'🧵',focus:'Lean tissue preservation and abdominal management for close-tailored spandex or leather.'},
+  heroic:{name:'Heroic / Muscular',ico:'💪',focus:'Progressive hypertrophy and muscular density.'},
+  standard:{name:'Standard Tailoring',ico:'📏',focus:'Pure measurement tracking without specific aesthetic workout framing.'}
+};
+var MEASURES=[
+ {id:'height',n:0,name:'Height',kind:'height',circ:false,tip:'Stand against a wall on flat ground, heels touching the baseboard. This is the denominator of your WHtR.',pat:'Vertical reference · WHtR denominator'},
+ {id:'neck',n:1,name:'Neck',kind:'circ',circ:true,tip:'Around the base of the neck where a collar would sit. Keep one finger under the tape. Feeds the body-fat estimate.',pat:'Collar · gorget · choker block'},
+ {id:'chest',n:2,name:'Chest / Bust',kind:'circ',circ:true,tip:'Fullest part of the chest/bust, tape parallel to the floor, arms relaxed at the sides.',pat:'Bodice block · chest-plate circumference'},
+ {id:'underbust',n:3,name:'Underbust',kind:'circ',circ:true,tip:'Snug around the ribcage directly beneath the chest. Anchors corsetry and underbust armor plating.',pat:'Corset band · underbust plating'},
+ {id:'waist',n:4,name:'Waist',kind:'circ',circ:true,tip:'Natural waist — the narrowest point, usually about 1 inch above the navel. Exhale normally, do not cinch. Drives your WHtR.',pat:'Waist seam · corsetry · belt line'},
+ {id:'hips',n:5,name:'Hips',kind:'circ',circ:true,tip:'Fullest part of the hips/seat, feet together, tape parallel to the floor.',pat:'Skirt / trouser block · tasset line'},
+ {id:'shoulder',n:6,name:'Shoulder Span',kind:'span',circ:true,tip:'Across the back from shoulder bone to shoulder bone. Keep the tape straight, not drooping.',pat:'Pauldron strap line · yoke width'},
+ {id:'nape',n:7,name:'Nape to Waist',kind:'vert',circ:false,tip:'From the nape bone (the prominent C7 vertebra at the back of the neck) down the spine to the natural waistline. Anchors back bodice drafting and zipper length.',pat:'Back bodice length · zipper placement'},
+ {id:'bodice',n:8,name:'Front Bodice Length',kind:'vert',circ:false,tip:'From the high point of the shoulder, over the fullest part of the chest, down to the waistline. Determines front bodice balance.',pat:'Princess seams · front bodice balance'},
+ {id:'apex',n:9,name:'Bust Apex Span',kind:'span',circ:true,tip:'Distance between the two bust apex points — measure point-to-point, not around. Sets dart placement.',pat:'Dart placement · cup shaping'},
+ {id:'inseam',n:10,name:'Inseam',kind:'vert',circ:false,tip:'From the crotch seam point down the inner leg to the ankle bone. Wear footwear similar to the build.',pat:'Trouser length · greaves & boot covers'}
+];
+var M_MAP={}; MEASURES.forEach(function(m){ M_MAP[m.id]=m; });
+var EASES={
+ none:{label:'No ease — body measurements',add:0},
+ lining:{label:'+0.5″ wearing ease (inner lining)',add:0.5},
+ foam15:{label:'+1.5″ under-armor foam / light padding',add:1.5},
+ foam2:{label:'+2.0″ under-armor foam / heavy padding',add:2}
+};
+var PROTOCOLS={
+ A:{title:'Protocol A — Elevated WHtR / High Body Fat',trigger:'WHtR ≥ 0.50 or body fat above archetype healthy range',
+   comorbid:['Visceral adiposity','Insulin resistance / T2D risk','Elevated arterial pressure','Dyslipidemia','Vascular stiffness'],
+   items:[
+    {t:'Prioritize Strength & Muscle Mass Building (Resistance or Calisthenics/Bodyweight)',impact:'HIGHEST',cls:'i1',action:'3 to 4 weekly sessions of compound movements — using weights, resistance bands, or progressive bodyweight calisthenics (squats, push-ups, lunges).',mech:'Depletes muscle glycogen to drive non-insulin-mediated glucose uptake and burn visceral fat faster than cardio alone.'},
+    {t:'Minimize Ultra-Processed Foods & Highly Palatable Refined Alternatives',impact:'VERY HIGH',cls:'i2',action:'Shift away from cheap, hyper-palatable, highly refined convenience foods; focus on whole, minimally processed ingredients.',mech:'(Diabetes & lipid target) Suppresses chronic postprandial insulin spikes, preventing de novo lipogenesis and fatty liver accumulation.'},
+    {t:'Manage Sodium Intake Baseline & Surge Potassium',impact:'HIGH',cls:'i3',action:'Keep total daily sodium under 2,000 mg/day while increasing potassium-rich foods (spinach, avocado, squash).',mech:'(CVD / hypertension target) Reduces arterial fluid retention and vascular resistance caused by abdominal adiposity.'},
+    {t:'Incorporate Regular Cardiovascular Exercise (Steady-State or Intervals)',impact:'MODERATE-HIGH',cls:'i3',action:'Establish a consistent cardio routine — from brisk walking/running (steady-state) to short HIIT sessions 2–3 times per week.',mech:'Improves systemic cardiovascular endurance and mobilizes abdominal visceral fat.'},
+    {t:'Standardize Sleep Duration (7.5–9 Hours Continuous)',impact:'MODERATE',cls:'i4',action:'Maintain consistent sleep/wake schedules and eliminate night-time screens.',mech:'Lowers baseline cortisol to prevent stress-induced central fat storage.'}],
+   cred:{title:'Consult a Credentialed Healthcare & Therapy Specialist',impact:'CONTEXTUAL / HIGH',action:'Seek guidance from a licensed mental health professional or specialist.',cert:'Registered Dietitian (RD/RDN) for nutritional guidance, and a Licensed Professional Counselor (LPC/LMHC) or Licensed Clinical Social Worker (LCSW) holding certification from the Academy for Eating Disorders (CEDS) or specialized training in behavioral health / body image.'}},
+ B:{title:'Protocol B — Low WHtR / Low Body Fat',trigger:'WHtR < 0.40 or body fat below essential-fat threshold',
+   comorbid:['Hypogonadism / hormonal shutdown','Osteopenia (bone density loss)','Immune suppression','Bradycardia'],
+   items:[
+    {t:'Increase Intake of Micronutrients & Healthy Fats',impact:'HIGHEST',cls:'i1',action:'Prioritize nutrient-dense foods rich in healthy fats (nut butter, avocados, olive oil, eggs) to ensure adequate substrate for hormone production.',mech:'Supplies direct precursor substrates for steroid hormone synthesis (testosterone, estrogen, progesterone) and restores HPG axis signalling.'},
+    {t:'Scale Back High-Volume Aerobic Conditioning',impact:'VERY HIGH',cls:'i2',action:'Limit long-distance running or endurance cardio to a maximum of 1–2 light sessions per week.',mech:'Preserves daily energy availability for essential physiological repair and tissue maintenance.'},
+    {t:'Shift Training toward Progressive Hypertrophy (Resistance or Calisthenics)',impact:'HIGH',cls:'i3',action:'Perform progressive hypertrophy movements using moderate weights or bodyweight progressions, ensuring adequate rest intervals (2–3 minutes).',mech:'Provides an anabolic stimulus to rebuild lean mass without triggering metabolic burnout.'}],
+   cred:{title:'Consult a Credentialed Healthcare & Therapy Specialist',impact:'CONTEXTUAL / HIGH',action:'Seek professional clinical evaluation.',cert:'Licensed Clinical Social Worker (LCSW) or Licensed Marriage and Family Therapist (LMFT) holding a Certified Eating Disorders Specialist (CEDS) designation through the International Association of Eating Disorders Professionals (iaedp), alongside a Registered Dietitian (RD) specializing in metabolic recovery.'}}
+};
+
+/* ================= state ================= */
+var LS='tailortrack.v1';
+function speechOK(){ return !!((window.SpeechRecognition||window.webkitSpeechRecognition)); }
+function loadState(){
+  try{
+    var j=JSON.parse(localStorage.getItem(LS));
+    if(!j) return null;
+    j.settings=Object.assign({voice:speechOK(),partner:false}, j.settings||{});
+    j.meas=j.meas||{}; j.entries=j.entries||[]; j.notes=j.notes||'';
+    j.ease=EASES[j.ease]?j.ease:'none'; j.chartMode=j.chartMode==='waist'?'waist':'whtr';
+    return j;
+  }catch(e){ return null; }
+}
+var S=loadState()||{profile:null,meas:{},entries:[],notes:'',settings:{voice:speechOK(),partner:false},ease:'none',chartMode:'whtr'};
+function save(){ try{ localStorage.setItem(LS,JSON.stringify(S)); }catch(e){} }
+function mv(id){ return S.meas[id]?S.meas[id].v:null; }
+
+/* ================= formatting ================= */
+var FR={0:'',0.25:'¼',0.5:'½',0.75:'¾'};
+function snapQ(v){ return Math.round(v*4)/4; }
+function fmt(v){
+  if(v==null) return '—';
+  v=snapQ(v); var w=Math.floor(v); var f=Math.round((v-w)*4)/4;
+  if(f===1){ w+=1; f=0; }
+  return w+FR[f]+'″';
+}
+function fmtPlain(v){ return v==null?'—':(Math.round(v*100)/100)+'″'; }
+function toCm(v){ return v==null?'—':(v*2.54).toFixed(1)+' cm'; }
+
+/* ================= toast / tooltip ================= */
+function toast(msg,cls){
+  var box=$('#toastBox'); if(!box) return;
+  var t=document.createElement('div'); t.className='toast '+(cls||''); t.innerHTML=msg;
+  box.appendChild(t);
+  setTimeout(function(){ t.style.transition='.4s'; t.style.opacity='0'; setTimeout(function(){ t.remove(); },420); },3600);
+}
+function showTip(el){
+  var tipEl=$('#tip'); var txt=el.getAttribute('data-tip');
+  if(!tipEl||!txt) return;
+  tipEl.textContent=txt; tipEl.classList.add('on');
+  var r=el.getBoundingClientRect();
+  var x=clamp(r.left+r.width/2-135,8,window.innerWidth-286);
+  tipEl.style.left=x+'px'; tipEl.style.top=(r.bottom+9)+'px';
+}
+function hideTip(){ var tipEl=$('#tip'); if(tipEl) tipEl.classList.remove('on'); }
+
+/* ================= audio / speech ================= */
+var AC=null;
+function beep(freq,dur){
+  if(!S.settings.voice) return;
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    var o=AC.createOscillator(),g=AC.createGain();
+    o.type='sine'; o.frequency.value=freq||880; g.gain.value=0.07;
+    o.connect(g); g.connect(AC.destination); o.start();
+    g.gain.exponentialRampToValueAtTime(0.0001,AC.currentTime+(dur||0.09));
+    o.stop(AC.currentTime+(dur||0.09)+0.02);
+  }catch(e){}
+}
+function speak(txt){
+  if(!S.settings.voice||!window.speechSynthesis) return;
+  try{ window.speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(txt); u.rate=1.02; window.speechSynthesis.speak(u); }catch(e){}
+}
+function intWords(n){
+  n=Math.max(0,Math.floor(n));
+  var ones=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+  var tens=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+  if(n<20) return ones[n];
+  if(n<100) return tens[Math.floor(n/10)]+(n%10?' '+ones[n%10]:'');
+  return String(n);
+}
+function sayNum(v){
+  var w=Math.floor(v); var f=Math.round((v-w)*4)/4;
+  var FW={0.25:'and a quarter',0.5:'and a half',0.75:'and three quarters'};
+  return intWords(w)+(f>0?' '+FW[f]:'');
+}
+var NUMW={zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90};
+function parseSpoken(raw){
+  if(!raw) return null;
+  var t=String(raw).toLowerCase().replace(/[^a-z0-9.\/ ]/g,' ').replace(/\s+/g,' ').trim();
+  if(!t) return null;
+  var isCm=/(centimeter|centimeters|\bcm\b)/.test(t);
+  /* feet + inches, e.g. "five feet six" */
+  var ftm=t.match(/([a-z]+|\d+)\s*(?:feet|foot|ft)\s*(?:and\s+)?([a-z]+|\d+)?/);
+  if(ftm){
+    var a=NUMW.hasOwnProperty(ftm[1])?NUMW[ftm[1]]:parseInt(ftm[1],10);
+    var b=0;
+    if(ftm[2]){ b=NUMW.hasOwnProperty(ftm[2])?NUMW[ftm[2]]:parseInt(ftm[2],10); if(isNaN(b)) b=0; }
+    if(!isNaN(a)&&a>=3&&a<=8){ var tot=a*12+b; if(tot>=36&&tot<=100) return snapQ(tot); }
+  }
+  var frac=null;
+  if(/three (quarters|quarter|fourths|fourth)/.test(t)) frac=0.75;
+  else if(/half/.test(t)) frac=0.5;
+  else if(/quarter/.test(t)) frac=0.25;
+  if(/point seven/.test(t)) frac=0.75;
+  else if(/point two/.test(t)) frac=0.25;
+  else if(/point five/.test(t)) frac=0.5;
+  var base=null;
+  var dm=t.match(/(\d+)(?:\.(\d+))?/);
+  if(dm){
+    base=parseInt(dm[1],10);
+    if(dm[2]&&frac==null){ frac=snapQ(parseInt((dm[2]+'0').slice(0,2),10)/100); }
+  } else {
+    var s=t.replace(/\b(and|inches|inch|centimeters|centimeter|cm)\b/g,' ')
+           .replace(/three (quarters|quarter|fourths|fourth)/g,' ')
+           .replace(/\b(a|one) (half|quarter)\b/g,' ')
+           .replace(/point (seven|two|five|twenty|fifty)/g,' ');
+    var sum=0,found=false;
+    s.split(/[\s-]+/).forEach(function(w){ if(NUMW.hasOwnProperty(w)){ sum+=NUMW[w]; found=true; } });
+    if(found) base=sum;
+  }
+  if(base==null&&frac!=null) base=0;
+  if(base==null) return null;
+  var v=snapQ(base+(frac||0));
+  if(isCm) v=snapQ(v/2.54);
+  return (v>=4&&v<=130)?v:null;
+}
+function parseManual(str){
+  if(!str) return null;
+  var s=String(str).trim().toLowerCase().replace(',','.');
+  if(!s) return null;
+  var glyph={'¼':0.25,'½':0.5,'¾':0.75};
+  var add=null;
+  for(var k in glyph){ if(s.indexOf(k)>=0){ add=glyph[k]; s=s.replace(k,' '); } }
+  var fr=s.match(/(\d+)\s*\/\s*(\d+)/);
+  if(fr){ var den=parseInt(fr[2],10); if(den>0) add=snapQ(parseInt(fr[1],10)/den); s=s.replace(fr[0],' '); }
+  var m=s.match(/(\d+(?:\.\d+)?)/);
+  if(!m) return null;
+  var v=parseFloat(m[1]);
+  v=(add!=null)?Math.floor(v)+add:snapQ(v);
+  v=snapQ(v);
+  return (v>0&&v<=130)?v:null;
+}
+
+/* ================= health math ================= */
+function calcWHtR(){
+  var w=mv('waist'),h=mv('height');
+  return (w&&h)?w/h:null;
+}
+function calcBFP(){
+  var h=mv('height'),n=mv('neck'),w=mv('waist'),hip=mv('hips');
+  var a=S.profile&&S.profile.archetype;
+  if(!a) return {v:null,need:'set an archetype'};
+  function ok(x){ return x!=null&&isFinite(x)&&x>2&&x<65; }
+  var m=null,f=null;
+  if(h&&n&&w&&w>n){ m=495/(1.0324-0.19077*Math.log(w-n)/Math.LN10+0.15456*Math.log(h)/Math.LN10)-450; }
+  if(h&&n&&w&&hip&&(w+hip-n)>0){ f=495/(1.29579-0.35004*Math.log(w+hip-n)/Math.LN10+0.22100*Math.log(h)/Math.LN10)-450; }
+  if(!ok(m)) m=null; if(!ok(f)) f=null;
+  if(a==='masculine') return {v:m,need:m?null:(h?'neck + waist':'height, neck & waist')};
+  if(a==='feminine') return {v:f,need:f?null:(!h?'height, neck, waist & hips':(!n||!w?'neck & waist':'hips'))};
+  var v=(m!=null&&f!=null)?(m+f)/2:(f!=null?f:m);
+  return {v:v!=null?Math.round(v*10)/10:null,need:v!=null?null:'neck, waist (± hips) & height'};
+}
+function healthFlags(){
+  var flags=[],whtr=calcWHtR(),bf=calcBFP().v,a=S.profile&&S.profile.archetype,th=a?ARCHETYPES[a]:null;
+  if(whtr!=null){
+    if(whtr>=0.50) flags.push({metric:'WHtR',val:whtr.toFixed(3),detail:'Waist-to-Height Ratio ≥ 0.50',proto:'A'});
+    else if(whtr<0.40) flags.push({metric:'WHtR',val:whtr.toFixed(3),detail:'Waist-to-Height Ratio < 0.40',proto:'B'});
+  }
+  if(bf!=null&&th){
+    if(bf>=th.high) flags.push({metric:'Body Fat %',val:bf.toFixed(1)+'%',detail:'Body fat ≥ '+th.high+'% ('+th.label+')',proto:'A'});
+    else if(bf<th.ess) flags.push({metric:'Body Fat %',val:bf.toFixed(1)+'%',detail:'Body fat below '+th.ess+'% essential minimum ('+th.label+')',proto:'B'});
+  }
+  return flags;
+}
+function chip(cls,txt){ return '<span class="status '+cls+'">'+txt+'</span>'; }
+
+/* ================= history ================= */
+function upsertEntry(){
+  var d=todayISO(),snap={};
+  for(var k in S.meas) snap[k]=S.meas[k].v;
+  var ex=null;
+  for(var i=0;i<S.entries.length;i++){ if(S.entries[i].d===d){ ex=S.entries[i]; break; } }
+  if(ex){ ex.m=snap; ex.whtr=calcWHtR(); ex.bf=calcBFP().v; }
+  else S.entries.push({d:d,m:snap,whtr:calcWHtR(),bf:calcBFP().v});
+  S.entries.sort(function(a,b){ return a.d<b.d?-1:1; });
+  if(S.entries.length>80) S.entries=S.entries.slice(-80);
+}
+
+/* ================= modals ================= */
+function openModal(sel){ var m=$(sel); if(!m) return; m.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModals(){ $$('.modal').forEach(function(m){ m.classList.remove('open'); }); document.body.style.overflow=''; }
+
+/* ================= rendering ================= */
+function renderAll(){ renderToggles(); renderProfile(); renderList(); renderFigure(); renderGauges(); renderFlags(); renderChart(); renderNotes(); }
+
+function renderToggles(){
+  var tv=$('#tglVoice'),tp=$('#tglPartner');
+  if(tv) tv.setAttribute('aria-pressed',S.settings.voice?'true':'false');
+  if(tp) tp.setAttribute('aria-pressed',S.settings.partner?'true':'false');
+  var vh=$('#voiceHint'); if(vh) vh.textContent=S.settings.voice?'ON':'OFF';
+  var ph=$('#partnerHint'); if(ph) ph.textContent=S.settings.partner?'ON':'OFF';
+  document.body.classList.toggle('partner',!!S.settings.partner);
+  var pa=$('#pillArch'); if(pa) pa.textContent=S.profile?ARCHETYPES[S.profile.archetype].label.replace(' Archetype',''):'no profile';
+  var pb=$('#partnerBar'); if(pb) pb.hidden=!S.settings.partner;
+  if(S.settings.partner) renderQuickBar();
+}
+function renderQuickBar(){
+  var q=$('#qbar'); if(!q) return;
+  var missing=MEASURES.filter(function(m){ return m.id!=='height'&&!S.meas[m.id]; });
+  var list=(missing.length?missing:MEASURES.filter(function(m){ return m.id!=='height'; })).slice(0,6);
+  q.innerHTML=list.map(function(m){ return '<button class="qchip" data-log="'+m.id+'">🎙 '+m.name+'</button>'; }).join('');
+}
+function renderProfile(){
+  var p=S.profile;
+  if(!p){
+    $('#pfName').textContent='New Maker';
+    $('#pfMeta').textContent='Complete onboarding to set your baseline';
+    $('#pfChips').innerHTML=''; $('#pfFocus').hidden=true; $('#pfAvatar').textContent='?';
+    return;
+  }
+  $('#pfAvatar').textContent=(p.name||'M')[0].toUpperCase();
+  $('#pfName').textContent=p.name||'Maker';
+  var h=mv('height');
+  $('#pfMeta').textContent=ARCHETYPES[p.archetype].label+' · '+(h?'Height '+fmt(h):'Height not set')+' · logging since '+fmtDate(p.since);
+  var chips=['<span class="chip gold">'+ARCHETYPES[p.archetype].thr+'</span>'];
+  if(p.target) chips.push('<span class="chip">'+TARGETS[p.target].ico+' '+TARGETS[p.target].name+'</span>');
+  chips.push('<span class="chip">WHtR scale invariant across archetypes</span>');
+  $('#pfChips').innerHTML=chips.join('');
+  var pf=$('#pfFocus');
+  if(p.target){ pf.hidden=false; pf.innerHTML='<b>Build focus — '+TARGETS[p.target].name+':</b> '+TARGETS[p.target].focus; }
+  else pf.hidden=true;
+}
+function renderList(){
+  var box=$('#measList'); if(!box) return;
+  box.innerHTML=MEASURES.map(function(m){
+    var rec=S.meas[m.id];
+    var val=rec?'<span class="val">'+fmt(rec.v)+'<span class="cm">'+toCm(rec.v)+'</span></span>':'<span class="val none">not logged</span>';
+    var when=rec?'<span class="when">'+fmtDate(rec.d)+'</span>':'';
+    return '<div class="mitem" data-m="'+m.id+'">'+
+      '<span class="num">'+(m.n||'H')+'</span>'+
+      '<span class="nm">'+m.name+' <button class="info" data-tip="'+m.tip+'">i</button><small>'+m.pat+'</small></span>'+
+      val+when+
+      '<button class="btn sm '+(rec?'':'primary')+'" data-log="'+m.id+'">'+(rec?'Re-log':'Log')+'</button>'+
+    '</div>';
+  }).join('');
+  var first=null;
+  for(var i=0;i<MEASURES.length;i++){ if(!S.meas[MEASURES[i].id]){ first=MEASURES[i]; break; } }
+  if(!first) first=MEASURES[4];
+  var bl=$('#btnLogFirst'); if(bl) bl.textContent='＋ Log '+first.name;
+}
+function renderFigure(){
+  MEASURES.forEach(function(m){
+    var t=document.getElementById('fv-'+m.id);
+    if(t) t.textContent=S.meas[m.id]?fmt(S.meas[m.id].v):'—';
+  });
+  $$('.hs').forEach(function(h){
+    h.classList.toggle('empty',!S.meas[h.getAttribute('data-m')]);
+  });
+  var lg=$('#figLegend'); if(!lg) return;
+  lg.innerHTML=MEASURES.filter(function(m){ return m.n>0; }).map(function(m){
+    var rec=S.meas[m.id];
+    return '<div class="lg" data-m="'+m.id+'"><span class="n">'+m.n+'</span>'+m.name+'<span class="v '+(rec?'':'none')+'">'+(rec?fmt(rec.v):'—')+'</span></div>';
+  }).join('');
+}
+function renderGauges(){
+  var whtr=calcWHtR();
+  var wm=$('#whtrMark');
+  if(whtr!=null){
+    $('#whtrVal').innerHTML=whtr.toFixed(3)+' <small>WHtR</small>';
+    wm.hidden=false; wm.style.left=clamp((whtr-0.30)/0.30*100,2,98)+'%';
+    $('#whtrMarkV').textContent=whtr.toFixed(3);
+    $('#whtrMeter').classList.remove('empty');
+    var st=whtr>=0.5?chip('risk','▲ AT RISK — boundary crossed'):(whtr<0.4?chip('low','▽ Below healthy range'):chip('ok','● Healthy range'));
+    $('#whtrStatus').innerHTML=st;
+    $('#whtrNote').textContent='waist '+fmtPlain(mv('waist'))+' ÷ height '+fmtPlain(mv('height'));
+  } else {
+    $('#whtrVal').innerHTML='— <small>WHtR</small>';
+    wm.hidden=true; $('#whtrMeter').classList.add('empty');
+    $('#whtrStatus').innerHTML=chip('na','awaiting waist + height');
+    $('#whtrNote').textContent='Log your Waist (pin 4) and Height to activate this gauge.';
+  }
+  var a=S.profile?S.profile.archetype:null;
+  var th=a?ARCHETYPES[a]:null;
+  var ess=th?th.ess:13, high=th?th.high:25, MAX=45;
+  $('#bfTrack').innerHTML=
+    '<div class="zone z-low" style="width:'+(ess/MAX*100)+'%"></div>'+
+    '<div class="zone z-ok" style="width:'+((high-ess)/MAX*100)+'%"></div>'+
+    '<div class="zone z-high" style="width:'+((MAX-high)/MAX*100)+'%"></div>'+
+    '<div class="z-div" style="left:'+(ess/MAX*100)+'%"><b>'+ess+'%</b></div>'+
+    '<div class="z-div" style="left:'+(high/MAX*100)+'%"><b>'+high+'%</b></div>'+
+    '<div class="marker" id="bfMark" hidden><span class="flag" id="bfMarkV"></span><span class="pin"></span></div>';
+  $('#bfLabels').innerHTML='<span><b>&lt; '+ess+'%</b>Essential-fat risk</span><span><b>'+ess+' – '+(high-1)+'%</b>Healthy range</span><span><b>≥ '+high+'%</b>Increased risk</span>';
+  var res=calcBFP();
+  if(res.v!=null){
+    $('#bfVal').innerHTML=res.v.toFixed(1)+' <small>%</small>';
+    $('#bfMeter').classList.remove('empty');
+    var bm=$('#bfMark'); bm.hidden=false; bm.style.left=clamp(res.v/MAX*100,2,98)+'%';
+    $('#bfMarkV').textContent=res.v.toFixed(1)+'%';
+    var bs=res.v>=high?chip('risk','▲ AT RISK — above healthy range'):(res.v<ess?chip('low','▽ Below essential minimum'):chip('ok','● Healthy range'));
+    $('#bfStatus').innerHTML=bs;
+    $('#bfNote').textContent='U.S. Navy estimate · '+(th?th.label:'');
+  } else {
+    $('#bfVal').innerHTML='— <small>%</small>';
+    $('#bfMeter').classList.add('empty');
+    $('#bfStatus').innerHTML=chip('na','awaiting data');
+    $('#bfNote').textContent=th?('Still needed: '+res.need):'Set an archetype to enable estimation.';
+  }
+}
+function renderFlags(){
+  var flags=healthFlags(),box=$('#flagsBox'),sum=$('#actionSummary');
+  if(!flags.length){
+    box.innerHTML='<div class="risk-banner" style="background:var(--ok-bg)"><div class="stripe" style="background:repeating-linear-gradient(-45deg,var(--ink) 0 9px,#8FCB9B 9px 18px)"></div>'+
+      '<div class="rb-body"><span class="rb-title" style="color:var(--ok)">● No risk flags detected</span>'+
+      '<p>All tracked metrics are inside their healthy ranges. Keep logging to maintain your pattern record.</p></div></div>';
+    if(sum) sum.innerHTML='<p style="font-size:13.5px">No targeted interventions right now — both gauges read <b>Healthy Range</b>. If a metric crosses a boundary, its evidence-based protocol appears here instantly.</p>';
+    return;
+  }
+  box.innerHTML=flags.map(function(f){
+    return '<div class="risk-banner"><div class="stripe"></div><div class="rb-body">'+
+      '<span class="rb-title">⚠️ Health Risk Boundary Crossed</span>'+
+      '<p><b>'+f.detail+'</b> — current value '+f.val+'.</p>'+
+      '<div><button class="btn risk" data-proto="'+f.proto+'">🛠️ View Targeted Action Plan</button></div>'+
+    '</div></div>';
+  }).join('');
+  var protos=[]; flags.forEach(function(f){ if(protos.indexOf(f.proto)<0) protos.push(f.proto); });
+  if(sum) sum.innerHTML='<p style="font-size:13.5px;margin-bottom:10px"><b>▲ '+flags.length+' risk flag'+(flags.length>1?'s':'')+' active:</b> '+flags.map(function(f){return f.metric;}).join(', ')+'.</p>'+
+    protos.map(function(p){ return '<button class="btn risk" style="margin-right:8px" data-proto="'+p+'">🛠️ Protocol '+p+'</button>'; }).join('');
+}
+function renderChart(){
+  var box=$('#chartBox'),meta=$('#chartMeta');
+  if(!box) return;
+  $('#cmWhtr').classList.toggle('on',S.chartMode==='whtr');
+  $('#cmWaist').classList.toggle('on',S.chartMode==='waist');
+  var es=S.entries, key=S.chartMode==='whtr'?'whtr':'waist';
+  var vals=es.map(function(e){ return key==='whtr'?e.whtr:(e.m&&e.m.waist); }).filter(function(v){ return v!=null; });
+  var mh='<span class="cm-chip">entries: <b>'+es.length+'</b></span>';
+  if(es.length) mh+='<span class="cm-chip">since <b>'+fmtDate(es[0].d)+'</b></span>';
+  if(vals.length>=2){
+    var d=vals[vals.length-1]-vals[vals.length-2];
+    mh+='<span class="cm-chip">Δ latest: <b>'+(d>0?'+':'')+(key==='whtr'?d.toFixed(3):d.toFixed(2)+'″')+'</b></span>';
+  }
+  meta.innerHTML=mh;
+  var pts=[];
+  es.forEach(function(e,i){ var v=key==='whtr'?e.whtr:(e.m&&e.m.waist); if(v!=null) pts.push({i:i,d:e.d,v:v}); });
+  if(pts.length<2){ box.innerHTML='<div class="chart-empty">Log on two different days to reveal your trend line. 📈</div>'; return; }
+  var W=560,H=150,pad=26;
+  var lo=Math.min.apply(null,pts.map(function(p){return p.v;}));
+  var hi=Math.max.apply(null,pts.map(function(p){return p.v;}));
+  if(key==='whtr'){ lo=Math.min(lo,0.40)-0.02; hi=Math.max(hi,0.50)+0.02; } else { lo-=1; hi+=1; }
+  var X=function(i){ return pad+i*(W-2*pad)/(pts.length-1); };
+  var Y=function(v){ return H-pad-(v-lo)/(hi-lo)*(H-2*pad); };
+  var band='';
+  if(key==='whtr'){
+    band='<rect x="'+pad+'" y="'+Y(0.49)+'" width="'+(W-2*pad)+'" height="'+(Y(0.40)-Y(0.49))+'" fill="#8FCB9B" opacity=".35"/>'+
+         '<line x1="'+pad+'" x2="'+(W-pad)+'" y1="'+Y(0.50)+'" y2="'+Y(0.50)+'" stroke="#CE4326" stroke-dasharray="4 4" opacity=".55"/>';
+  }
+  var line=''; pts.forEach(function(p,j){ line+=(j?'L':'M')+X(p.i).toFixed(1)+','+Y(p.v).toFixed(1)+' '; });
+  var dots=''; pts.forEach(function(p){ dots+='<circle cx="'+X(p.i).toFixed(1)+'" cy="'+Y(p.v).toFixed(1)+'" r="4" fill="#F2B300" stroke="#201F1A" stroke-width="1.5"><title>'+p.d+': '+(key==='whtr'?p.v.toFixed(3):p.v.toFixed(2)+'″')+'</title></circle>'; });
+  var last=pts[pts.length-1];
+  box.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+band+
+    '<path d="'+line+'" fill="none" stroke="#201F1A" stroke-width="2.2" stroke-linejoin="round"/>'+dots+
+    '<text x="'+X(last.i).toFixed(1)+'" y="'+(Y(last.v)-9).toFixed(1)+'" text-anchor="end" font-family="IBM Plex Mono" font-size="11" font-weight="700">'+(key==='whtr'?last.v.toFixed(3):last.v.toFixed(2)+'″')+'</text>'+
+    '<text x="'+pad+'" y="'+(H-6)+'" font-family="IBM Plex Mono" font-size="9" fill="#5B5648">'+fmtDate(pts[0].d)+'</text>'+
+    '<text x="'+(W-pad)+'" y="'+(H-6)+'" text-anchor="end" font-family="IBM Plex Mono" font-size="9" fill="#5B5648">'+fmtDate(last.d)+'</text></svg>';
+}
+function renderNotes(){
+  var na=$('#notesArea'); if(na) na.value=S.notes;
+  var bf=$('#buildFocus'); if(!bf) return;
+  var t=S.profile&&S.profile.target;
+  bf.hidden=false;
+  if(t) bf.innerHTML='<b>'+TARGETS[t].ico+' '+TARGETS[t].name+':</b> '+TARGETS[t].focus;
+  else bf.innerHTML='<b>No build target set</b> — pick one in Settings to contextualize your notes and training.';
+}
+
+/* ================= onboarding ================= */
+var OB={step:1,name:'',archetype:null,target:null,hv:65};
+function openOnboarding(){
+  OB={step:1,name:'',archetype:null,target:null,hv:65};
+  renderOB(); openModal('#obModal');
+}
+function renderOB(){
+  var b=$('#obBody'); if(!b) return;
+  $('#obBack').style.visibility=OB.step===1?'hidden':'visible';
+  $('#obNext').textContent=OB.step===4?'🧵 Start Tracking':'Next →';
+  var ind='<div class="step-ind">ONBOARDING · STEP '+OB.step+' OF 4</div>';
+  if(OB.step===1){
+    b.innerHTML=ind+'<h3>Welcome to the atelier. ✂️</h3>'+
+    '<div class="sub">TailorTrack keeps your cosplay body measurements, health baselines, and build specs on one pattern table — privately, in your browser.</div>'+
+    '<div class="quote"><b>💡 Physiological Baseline Selection:</b><br>Select the biological baseline that best aligns with your current physiology or primary hormone profile (e.g., estrogen-dominant vs. androgen-dominant). This only affects body fat % and health risk calculation thresholds. You can update your baseline at any time in settings as your physiology or transition goals evolve.</div>'+
+    '<label style="font-weight:650;font-size:13.5px;display:block;margin-top:12px">Your name (or maker handle)</label>'+
+    '<input type="text" id="obName" value="'+OB.name.replace(/"/g,'&quot;')+'" placeholder="e.g., StitchWitch" style="width:100%;margin-top:6px;border:1.5px solid var(--ink);border-radius:8px;padding:10px 12px">';
+  }
+  if(OB.step===2){
+    b.innerHTML=ind+'<h3>Choose your archetype</h3><div class="sub">Sets body-fat thresholds only. WHtR boundaries stay identical for everyone.</div>'+
+    '<div class="arch">'+Object.keys(ARCHETYPES).map(function(k){
+      var a=ARCHETYPES[k];
+      return '<div class="arch-card '+(OB.archetype===k?'sel':'')+'" data-arch="'+k+'"><h5>'+a.label+'</h5><div class="ad">'+a.desc+'</div>'+
+        '<div class="thr"><span>'+a.thr+'</span></div>'+(a.note?'<div class="note">* '+a.note+'</div>':'')+'</div>';
+    }).join('')+'</div>';
+  }
+  if(OB.step===3){
+    b.innerHTML=ind+'<h3>Set your height</h3><div class="sub">The denominator of every WHtR reading. Quarter-inch precision.</div>'+
+    '<div class="stepper"><button class="st-btn" id="hMinus" aria-label="minus one inch">−</button><div class="st-val" id="hVal"></div><button class="st-btn" id="hPlus" aria-label="plus one inch">＋</button></div>'+
+    '<div class="frac-row"><button class="frac" data-hf="0">.0</button><button class="frac" data-hf="0.25">¼</button><button class="frac" data-hf="0.5">½</button><button class="frac" data-hf="0.75">¾</button></div>'+
+    '<div class="cm-read" id="hCm"></div>';
+    obHeightUpd();
+  }
+  if(OB.step===4){
+    b.innerHTML=ind+'<h3>Cosplay Silhouette Build Target <span style="font-size:12px;color:var(--ink2)">(optional)</span></h3>'+
+    '<div class="sub">Contextualizes fitness recommendations alongside your medical metrics. Skippable.</div>'+
+    '<div class="target-grid">'+Object.keys(TARGETS).map(function(k){
+      var t=TARGETS[k];
+      return '<div class="tg-card '+(OB.target===k?'sel':'')+'" data-tg="'+k+'"><span class="ico">'+t.ico+'</span><b>'+t.name+'</b>'+t.focus+'</div>';
+    }).join('')+'<div class="tg-card '+(OB.target===null?'sel':'')+'" data-tg=""><span class="ico">✨</span><b>Decide later</b>Skip for now — you can set this anytime in Settings.</div></div>';
+  }
+}
+function obHeightUpd(){
+  var el=$('#hVal'); if(!el) return;
+  el.innerHTML=fmt(OB.hv).replace('″','')+'<small>″</small>';
+  var c=$('#hCm'); if(c) c.textContent='= '+toCm(OB.hv);
+  $$('#obBody .frac').forEach(function(f){ f.classList.toggle('on',Math.abs(parseFloat(f.getAttribute('data-hf'))-(OB.hv%1))<0.001); });
+}
+function finishOnboarding(){
+  var isNew=!S.profile;
+  S.profile={name:OB.name||'Maker',archetype:OB.archetype,target:OB.target,since:(S.profile&&S.profile.since)||todayISO()};
+  S.meas.height={v:snapQ(OB.hv),d:todayISO()};
+  upsertEntry(); save(); closeModals(); renderAll();
+  toast(isNew?('🧵 Welcome, '+S.profile.name+'! Log your <b>Waist</b> next to unlock the WHtR gauge.'):'✔ Profile updated.','ok');
+  if(isNew) setTimeout(function(){ toast('💡 Tap any numbered pin on the silhouette map to log that measurement.'); },2600);
+}
+
+/* ================= wizard ================= */
+var WZ=null;
+function openWizard(id,automic){
+  if(!S.profile){ openOnboarding(); toast('Set up your profile first — it takes 30 seconds.','risk'); return; }
+  var m=M_MAP[id]; if(!m) return;
+  var cur=mv(id);
+  WZ={id:id,m:m,step:1,whole:cur!=null?Math.floor(cur):(id==='height'?65:30),frac:cur!=null?cur%1:0};
+  renderWiz(); openModal('#wizModal');
+  if(automic&&S.settings.voice) toast('🎙 Tap the mic and read the value aloud.');
+}
+function guideSVG(kind){
+  if(kind==='circ') return '<svg width="150" height="58" viewBox="0 0 150 58"><ellipse cx="75" cy="29" rx="60" ry="20" fill="rgba(242,179,0,.15)" stroke="#201F1A" stroke-width="1.6" stroke-dasharray="5 4"/><path d="M15,29 A60,20 0 0 1 135,29" fill="none" stroke="#F2B300" stroke-width="5"/><text x="75" y="33" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="700">wrap · parallel to floor</text></svg>';
+  if(kind==='span') return '<svg width="150" height="58" viewBox="0 0 150 58"><circle cx="30" cy="29" r="7" fill="#F2B300" stroke="#201F1A" stroke-width="1.6"/><circle cx="120" cy="29" r="7" fill="#F2B300" stroke="#201F1A" stroke-width="1.6"/><line x1="39" y1="29" x2="111" y2="29" stroke="#3E6B8F" stroke-width="1.8" stroke-dasharray="3 3"/><text x="75" y="50" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="700">point-to-point</text></svg>';
+  return '<svg width="150" height="58" viewBox="0 0 150 58"><line x1="75" y1="8" x2="75" y2="50" stroke="#3E6B8F" stroke-width="1.8" stroke-dasharray="3 3"/><line x1="60" y1="8" x2="90" y2="8" stroke="#201F1A" stroke-width="1.6"/><line x1="60" y1="50" x2="90" y2="50" stroke="#201F1A" stroke-width="1.6"/><text x="100" y="32" font-family="IBM Plex Mono" font-size="10" font-weight="700">top → bottom</text></svg>';
+}
+function renderWiz(){
+  if(!WZ) return;
+  var m=WZ.m,b=$('#wizBody'); if(!b) return;
+  $('#wizBack').style.visibility=WZ.step===1?'hidden':'visible';
+  $('#wizNext').textContent=WZ.step===3?'✔ Save Measurement':(WZ.step===2?'Review →':'Got it →');
+  var prog='<div class="tprog"><div class="fill" style="width:'+(WZ.step/3*100)+'%"></div><span class="lbl">STEP '+WZ.step+' / 3</span></div>';
+  if(WZ.step===1){
+    b.innerHTML='<div><h3>'+(m.n?('№'+m.n+' · '):'')+m.name+'</h3>'+
+    '<div class="sub">Step one — position the tape correctly before reading it.</div>'+prog+
+    '<div class="guidebox">'+guideSVG(m.kind)+'<div style="text-align:center;font-size:13px">'+m.tip+'</div></div>'+
+    '<ul class="tip-list"><li>Use a flexible vinyl tape — rigid rulers lie on curves.</li><li>Snug, never compressing. Tape parallel to the floor for circumferences.</li><li>Read at the end of a normal exhale.</li></ul></div>';
+  }
+  if(WZ.step===2){
+    var partner=S.settings.partner;
+    var mic='';
+    if(S.settings.voice){
+      mic='<button class="mic-btn" id="wizMic">🎙 <span id="wizMicTxt">Tap &amp; speak the measurement</span></button>'+
+      '<div class="mic-hint">e.g. '+(m.id==='height'?'“five feet six”':'“thirty two and a half”')+' — quarter fractions snap automatically.</div>'+
+      '<div class="heard" id="wHeard"></div>';
+    }
+    b.innerHTML='<div><h3>'+m.name+' — enter the reading</h3>'+
+    '<div class="sub">'+(partner?'👥 Partner mode: read the value out loud, or use the big controls.':'Quarter-inch precision. Tap 🎙 and speak the number hands-free.')+'</div>'+prog+
+    '<div class="stepper"><button class="st-btn" id="wMinus" aria-label="minus one inch">−</button><div class="st-val" id="wVal"></div><button class="st-btn" id="wPlus" aria-label="plus one inch">＋</button></div>'+
+    '<div class="frac-row"><button class="frac" data-wf="0">.0</button><button class="frac" data-wf="0.25">¼</button><button class="frac" data-wf="0.5">½</button><button class="frac" data-wf="0.75">¾</button></div>'+
+    '<div class="manual-row"><span style="font-size:12px;color:var(--ink2)">or type:</span><input type="text" id="wManual" inputmode="decimal" placeholder="32.5 / 32 ½" autocomplete="off"></div>'+
+    '<div class="cm-read" id="wCm"></div>'+mic+'</div>';
+    wizUpdate();
+  }
+  if(WZ.step===3){
+    var v=WZ.whole+WZ.frac;
+    b.innerHTML='<div><h3>Confirm — '+m.name+'</h3>'+
+    '<div class="sub">'+(S.settings.voice?'Audio confirmation will play on save.':'')+'</div>'+prog+
+    '<div class="confirm-big">'+fmt(v).replace('″','')+'<small>″</small></div>'+
+    '<div class="cm-read">= '+toCm(v)+' · logged '+fmtDate(todayISO())+'</div>'+
+    '<div class="guidebox" style="font-size:13px;text-align:center">'+m.pat+'</div></div>';
+  }
+}
+function wizUpdate(){
+  if(!WZ) return;
+  var el=$('#wVal'); if(!el) return;
+  var v=WZ.whole+WZ.frac;
+  el.innerHTML=fmt(v).replace('″','')+'<small>″</small>';
+  var c=$('#wCm'); if(c) c.textContent='= '+toCm(v);
+  $$('#wizBody .frac').forEach(function(f){ f.classList.toggle('on',Math.abs(parseFloat(f.getAttribute('data-wf'))-WZ.frac)<0.001); });
+}
+function startWizardMic(){
+  var btn=$('#wizMic'); if(!btn||btn.classList.contains('listening')) return;
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){ toast('Speech recognition is not supported in this browser — use the number controls.','risk'); return; }
+  btn.classList.add('listening');
+  var txt=$('#wizMicTxt'); if(txt) txt.textContent='Listening…';
+  var rec; try{ rec=new SR(); }catch(e){ btn.classList.remove('listening'); return; }
+  rec.lang='en-US'; rec.interimResults=false;
+  var stop=function(){ btn.classList.remove('listening'); if(txt) txt.textContent='Tap & speak the measurement'; };
+  rec.onresult=function(ev){
+    var heard=ev.results[0][0].transcript;
+    var h=$('#wHeard'); if(h) h.textContent='heard: “'+heard+'”';
+    var v=parseSpoken(heard);
+    if(v!=null&&WZ){
+      WZ.whole=Math.floor(v); WZ.frac=snapQ(v)%1; wizUpdate();
+      beep(1040,0.1); speak(sayNum(v)+' inches.');
+      if(S.settings.partner) setTimeout(function(){ var n=$('#wizNext'); if(n) n.click(); },650);
+    } else {
+      beep(300,0.12); speak('I did not catch a number. Try again.');
+      toast('Could not parse that — try “thirty two and a half”.','risk');
+    }
+  };
+  rec.onerror=function(){ beep(300,0.12); };
+  rec.onend=stop;
+  try{ rec.start(); beep(1040,0.06); }catch(e){ stop(); }
+}
+function saveWizard(){
+  if(!WZ) return;
+  var v=snapQ(WZ.whole+WZ.frac);
+  S.meas[WZ.id]={v:v,d:todayISO()};
+  upsertEntry(); save(); closeModals(); renderAll();
+  toast('✔ <b>'+WZ.m.name+'</b> logged — '+fmt(v)+' ('+toCm(v)+')','ok');
+  speak(WZ.m.name+' recorded: '+sayNum(v)+' inches.');
+}
+
+/* ================= action plans ================= */
+function openPlan(p){
+  var P=PROTOCOLS[p]; if(!P) return;
+  var items=P.items.map(function(it,i){
+    return '<div class="ap-item"><div class="ap-head"><span class="rank">'+(i+1)+'</span><h5>'+it.t+'</h5><span class="impact '+it.cls+'">IMPACT: '+it.impact+'</span></div>'+
+    '<div class="ap-body"><p><span class="lab">ACTION — </span>'+it.action+'</p><p><span class="lab">MECHANISM — </span>'+it.mech+'</p></div></div>';
+  }).join('');
+  $('#planBody').innerHTML='<span class="proto-stamp">PROTOCOL '+p+'</span>'+
+    '<h3>'+P.title+'</h3><div class="sub">Trigger: '+P.trigger+'. Interventions ranked highest → lowest physiological impact.</div>'+
+    '<div class="comorbid"><b>TARGETED COMORBIDITIES:</b>'+P.comorbid.map(function(c){return '<span>'+c+'</span>';}).join('')+'</div>'+items+
+    '<div class="ap-item"><div class="ap-head"><span class="rank" style="background:var(--blue);color:#fff">✚</span><h5>'+P.cred.title+'</h5><span class="impact i4">IMPACT: '+P.cred.impact+'</span></div>'+
+    '<div class="ap-body"><p><span class="lab">ACTION — </span>'+P.cred.action+'</p><div class="cred-card"><h6>🎓 Recommended credentials</h6>'+P.cred.cert+'</div></div></div>'+
+    '<div class="m-actions"><button class="btn dark" data-close>Close</button></div>';
+  openModal('#planModal');
+}
+
+/* ================= settings ================= */
+var SET={arch:null,tg:null,hv:65};
+function openSettings(){
+  var p=S.profile||{name:'',archetype:null,target:null};
+  var h=mv('height')||65;
+  SET={arch:p.archetype,tg:p.target||null,hv:snapQ(h)};
+  $('#setBody').innerHTML=
+  '<div class="set-row"><label>Maker name</label><input type="text" id="setName" value="'+((p.name||'').replace(/"/g,'&quot;'))+'"></div>'+
+  '<div class="set-row" style="display:block"><label>Physiological baseline <small>Only affects body-fat % &amp; risk thresholds. Fluid — update whenever it suits you.</small></label>'+
+  '<div class="arch" style="margin-top:8px">'+Object.keys(ARCHETYPES).map(function(k){
+    var a=ARCHETYPES[k];
+    return '<div class="arch-card '+(SET.arch===k?'sel':'')+'" data-arch="'+k+'"><h5>'+a.label+'</h5><div class="ad">'+a.desc+'</div><div class="thr"><span>'+a.thr+'</span></div>'+(a.note?'<div class="note">* '+a.note+'</div>':'')+'</div>';
+  }).join('')+'</div></div>'+
+  '<div class="set-row" style="display:block"><label>Height</label>'+
+  '<div class="stepper" style="margin-top:6px"><button class="st-btn" id="sHMinus" aria-label="minus">−</button><div class="st-val" id="sHVal"></div><button class="st-btn" id="sHPlus" aria-label="plus">＋</button></div>'+
+  '<div class="frac-row"><button class="frac" data-shf="0">.0</button><button class="frac" data-shf="0.25">¼</button><button class="frac" data-shf="0.5">½</button><button class="frac" data-shf="0.75">¾</button></div></div>'+
+  '<div class="set-row" style="display:block"><label>Cosplay Build Target <small>Optional context layer for training framing.</small></label>'+
+  '<div class="target-grid" style="margin-top:8px">'+Object.keys(TARGETS).map(function(k){
+    var t=TARGETS[k];
+    return '<div class="tg-card '+(SET.tg===k?'sel':'')+'" data-tg="'+k+'"><span class="ico">'+t.ico+'</span><b>'+t.name+'</b>'+t.focus+'</div>';
+  }).join('')+'<div class="tg-card '+(!SET.tg?'sel':'')+'" data-tg=""><span class="ico">✨</span><b>None</b>No aesthetic framing — pure tracking.</div></div></div>'+
+  '<div class="set-row"><label>Audio &amp; voice features <small>Beeps, spoken prompts and read-backs.</small></label><button class="pill" id="setSpeak" aria-pressed="'+(S.settings.voice?'true':'false')+'"><span class="dot"></span>'+(S.settings.voice?'Enabled':'Disabled')+'</button></div>'+
+  '<div class="set-row"><label>Backup data <small>Download everything as JSON.</small></label><button class="btn sm" id="setExportJson">⬇ Export JSON</button></div>'+
+  '<div class="set-row"><label style="color:var(--risk)">Danger zone <small>Erase profile, measurements and history from this browser.</small></label><button class="btn sm risk" id="setReset">Reset all data</button></div>';
+  setHeightUpd();
+  openModal('#setModal');
+}
+function setHeightUpd(){
+  var el=$('#sHVal'); if(!el) return;
+  el.innerHTML=fmt(SET.hv).replace('″','')+'<small>″</small>';
+  $$('#setBody .frac').forEach(function(f){ f.classList.toggle('on',Math.abs(parseFloat(f.getAttribute('data-shf'))-(SET.hv%1))<0.001); });
+}
+function saveSettings(){
+  if(!SET.arch){ toast('Choose a physiological baseline.','risk'); return; }
+  var nameEl=$('#setName');
+  S.profile={name:(nameEl&&nameEl.value.trim())||'Maker',archetype:SET.arch,target:SET.tg||null,since:(S.profile&&S.profile.since)||todayISO()};
+  S.meas.height={v:snapQ(SET.hv),d:todayISO()};
+  upsertEntry(); save(); closeModals(); renderAll();
+  toast('✔ Settings saved.','ok');
+}
+function downloadJSON(){
+  var blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='tailortrack-backup-'+todayISO()+'.json';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ================= export (print-only spec sheet) ================= */
+function openExport(){
+  if(!S.profile){ openOnboarding(); toast('Set up your profile before exporting.','risk'); return; }
+  renderEase(); openModal('#expModal');
+}
+function renderEase(){
+  var box=$('#easeOpts'); if(!box) return;
+  box.innerHTML=Object.keys(EASES).map(function(k){
+    var e=EASES[k];
+    return '<label class="ease-opt '+(S.ease===k?'sel':'')+'"><input type="radio" name="ease" value="'+k+'" '+(S.ease===k?'checked':'')+'>'+
+    '<span><b>'+e.label+'</b>'+(e.add?' <span style="font-family:var(--mono);font-size:11px;color:var(--ink2)">(circumferences only — lengths unchanged)</span>':'')+'</span></label>';
+  }).join('');
+}
+function statusTxt(val,lo,hi){
+  if(val==null) return '—';
+  if(val>=hi) return '⚠ AT RISK (high)';
+  if(val<lo) return '⚠ BELOW RANGE (low)';
+  return '✔ Healthy range';
+}
+function buildSheet(){
+  if(!S.profile) return;
+  var p=S.profile,e=EASES[S.ease],th=ARCHETYPES[p.archetype];
+  var whtr=calcWHtR(),bf=calcBFP().v;
+  var rows=MEASURES.map(function(m){
+    var rec=S.meas[m.id]; if(!rec) return '';
+    var eased=m.circ?snapQ(rec.v+e.add):null;
+    return '<tr><td>'+(m.n||'—')+'</td><td><b>'+m.name+'</b></td><td>'+m.pat+'</td>'+
+    '<td class="num">'+fmt(rec.v)+'</td><td class="num">'+toCm(rec.v)+'</td>'+
+    '<td class="num">'+(eased!=null?fmt(eased):'— (length)')+'</td><td class="num">'+(eased!=null?toCm(eased):'—')+'</td></tr>';
+  }).join('');
+  $('#printSheet').innerHTML='<div class="sheet-doc">'+
+    '<h1>TAILORTRACK — COSPLAY BUILD SPEC SHEET</h1>'+
+    '<div class="sd-sub">GENERATED '+new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})+' · CREATOR BETA · EASE: '+e.label.toUpperCase()+'</div>'+
+    '<table><tr><th colspan="4">MAKER PROFILE</th></tr>'+
+    '<tr><td><b>Name</b></td><td>'+p.name+'</td><td><b>Archetype</b></td><td>'+th.label+' ('+th.thr+')</td></tr>'+
+    '<tr><td><b>Build target</b></td><td>'+(p.target?TARGETS[p.target].name:'Standard Tailoring')+'</td><td><b>WHtR</b></td><td>'+(whtr!=null?whtr.toFixed(3)+' — '+statusTxt(whtr,0.40,0.50):'—')+'</td></tr>'+
+    '<tr><td><b>Body fat est.</b></td><td>'+(bf!=null?bf.toFixed(1)+'% — '+statusTxt(bf,th.ess,th.high):'—')+'</td><td><b>Height</b></td><td>'+(mv('height')?fmt(mv('height'))+' ('+toCm(mv('height'))+')':'—')+'</td></tr></table>'+
+    '<div class="sd-sec">Anatomical Measurements → Pattern Sizing</div>'+
+    '<table><tr><th>#</th><th>Measurement</th><th>Armor / Fabric Mapping</th><th>Body (in)</th><th>Body (cm)</th><th>+ Ease (in)</th><th>+ Ease (cm)</th></tr>'+
+    (rows||'<tr><td colspan="7">No measurements logged yet.</td></tr>')+'</table>'+
+    '<p class="sd-note">Ease applies to circumference &amp; span measurements only; vertical lengths (nape-to-waist, bodice, inseam) are drafted at body measurement.</p>'+
+    (S.notes?'<div class="sd-sec">Cosplay Notes</div><p style="white-space:pre-wrap;font-size:11px">'+S.notes.replace(/</g,'&lt;')+'</p>':'')+
+    '<div class="sd-sec" style="border:none;margin-top:14px">✂ TailorTrack Cosplay Edition — measurements stored locally on this device. Not a medical device; consult credentialed professionals for health decisions.</div></div>';
+}
+function doPrint(){ buildSheet(); setTimeout(function(){ window.print(); },80); }
+
+/* ================= toggles ================= */
+function toggleVoice(){
+  if(!speechOK()){ toast('🎙 Speech recognition is not supported in this browser (try Chrome or Edge). Manual entry still works.','risk'); return; }
+  S.settings.voice=!S.settings.voice; save(); renderToggles();
+  if(S.settings.voice){ speak('Voice mode enabled.'); toast('🎙 Voice Mode ON — speak measurements hands-free.','ok'); }
+  else toast('Voice Mode off.');
+}
+function togglePartner(){
+  S.settings.partner=!S.settings.partner; save(); renderToggles();
+  if(S.settings.partner){ speak('Partner mode enabled. Tap a measurement chip to begin.'); toast('👥 Partner Mode ON — big controls + quick-log bar for your assistant.','ok'); }
+  else toast('Partner Mode off.');
+}
+
+/* ================= single delegated event hub ================= */
+document.addEventListener('click',function(e){
+  var t=e.target; if(!t||!t.closest) return;
+  var el;
+  if(t.closest('[data-close]')||t.closest('.ovl')){ closeModals(); return; }
+  el=t.closest('[data-log]'); if(el){ openWizard(el.getAttribute('data-log'),el.classList.contains('qchip')); return; }
+  el=t.closest('.hs,.lg'); if(el&&el.getAttribute('data-m')){ openWizard(el.getAttribute('data-m')); return; }
+  el=t.closest('[data-proto]'); if(el){ openPlan(el.getAttribute('data-proto')); return; }
+  if(t.closest('#pillProfile')){ S.profile?openSettings():openOnboarding(); return; }
+  /* wizard */
+  if(t.closest('#wMinus')){ if(WZ&&WZ.whole>0){ WZ.whole--; wizUpdate(); beep(600,0.04);} return; }
+  if(t.closest('#wPlus')){ if(WZ){ WZ.whole=Math.min(129,WZ.whole+1); wizUpdate(); beep(760,0.04);} return; }
+  el=t.closest('#wizBody .frac'); if(el&&WZ){ WZ.frac=parseFloat(el.getAttribute('data-wf')); wizUpdate(); beep(680,0.04); return; }
+  if(t.closest('#wizMic')){ startWizardMic(); return; }
+  /* onboarding */
+  if(t.closest('#hMinus')){ OB.hv=Math.max(36,snapQ(OB.hv-1)); obHeightUpd(); return; }
+  if(t.closest('#hPlus')){ OB.hv=Math.min(100,snapQ(OB.hv+1)); obHeightUpd(); return; }
+  el=t.closest('#obBody .frac'); if(el){ OB.hv=Math.floor(OB.hv)+parseFloat(el.getAttribute('data-hf')); obHeightUpd(); return; }
+  el=t.closest('#obBody .arch-card'); if(el){ OB.archetype=el.getAttribute('data-arch'); renderOB(); return; }
+  el=t.closest('#obBody .tg-card'); if(el){ OB.target=el.getAttribute('data-tg')||null; renderOB(); return; }
+  /* settings */
+  el=t.closest('#setBody .arch-card'); if(el){ SET.arch=el.getAttribute('data-arch'); $$('#setBody .arch-card').forEach(function(c){ c.classList.toggle('sel',c===el); }); return; }
+  el=t.closest('#setBody .tg-card'); if(el){ SET.tg=el.getAttribute('data-tg')||null; $$('#setBody .tg-card').forEach(function(c){ c.classList.toggle('sel',c===el); }); return; }
+  if(t.closest('#sHMinus')){ SET.hv=Math.max(36,snapQ(SET.hv-1)); setHeightUpd(); return; }
+  if(t.closest('#sHPlus')){ SET.hv=Math.min(100,snapQ(SET.hv+1)); setHeightUpd(); return; }
+  el=t.closest('#setBody .frac'); if(el){ SET.hv=Math.floor(SET.hv)+parseFloat(el.getAttribute('data-shf')); setHeightUpd(); return; }
+  if(t.closest('#setSpeak')){
+    S.settings.voice=!S.settings.voice;
+    var sb=$('#setSpeak'); if(sb){ sb.setAttribute('aria-pressed',S.settings.voice?'true':'false'); sb.innerHTML='<span class="dot"></span>'+(S.settings.voice?'Enabled':'Disabled'); }
+    return;
+  }
+  if(t.closest('#setExportJson')){ downloadJSON(); return; }
+  if(t.closest('#setReset')){ if(confirm('Erase all TailorTrack data from this browser? This cannot be undone.')){ localStorage.removeItem(LS); location.reload(); } return; }
+  if(t.closest('#footReset')){ e.preventDefault(); if(confirm('Erase all TailorTrack data from this browser?')){ localStorage.removeItem(LS); location.reload(); } return; }
+});
+
+document.addEventListener('input',function(e){
+  var t=e.target; if(!t) return;
+  if(t.id==='wManual'&&WZ){
+    var p=parseManual(t.value);
+    if(p!=null){ WZ.whole=Math.floor(p); WZ.frac=snapQ(p)%1; wizUpdate(); }
+  }
+  if(t.id==='notesArea'){
+    S.notes=t.value;
+    clearTimeout(document.noteTimer);
+    document.noteTimer=setTimeout(function(){
+      save();
+      var ns=$('#noteStatus'); if(ns){ ns.classList.add('on'); setTimeout(function(){ ns.classList.remove('on'); },1600); }
+    },500);
+  }
+});
+
+document.addEventListener('change',function(e){
+  if(e.target&&e.target.name==='ease'){ S.ease=e.target.value; save(); renderEase(); }
+});
+
+document.addEventListener('mouseover',function(e){
+  var t=e.target; if(!t||!t.closest) return;
+  var tipOwner=t.closest('[data-tip]'); if(tipOwner) showTip(tipOwner);
+  var row=t.closest('.mitem');
+  if(row){ var hs=document.querySelector('.hs[data-m="'+row.getAttribute('data-m')+'"]'); if(hs) hs.classList.add('hot'); }
+  var pin=t.closest('.hs,.lg');
+  if(pin&&pin.getAttribute('data-m')){
+    var r=document.querySelector('.mitem[data-m="'+pin.getAttribute('data-m')+'"]'); if(r) r.classList.add('hl');
+    var hs2=document.querySelector('.hs[data-m="'+pin.getAttribute('data-m')+'"]'); if(hs2) hs2.classList.add('hot');
+  }
+});
+document.addEventListener('mouseout',function(e){
+  var t=e.target; if(!t||!t.closest) return;
+  if(t.closest('[data-tip]')) hideTip();
+  var row=t.closest('.mitem');
+  if(row){ var hs=document.querySelector('.hs[data-m="'+row.getAttribute('data-m')+'"]'); if(hs) hs.classList.remove('hot'); }
+  var pin=t.closest('.hs,.lg');
+  if(pin&&pin.getAttribute('data-m')){
+    var r=document.querySelector('.mitem[data-m="'+pin.getAttribute('data-m')+'"]'); if(r) r.classList.remove('hl');
+    var hs2=document.querySelector('.hs[data-m="'+pin.getAttribute('data-m')+'"]'); if(hs2) hs2.classList.remove('hot');
+  }
+});
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModals(); });
+window.addEventListener('beforeprint',function(){ if(S.profile) buildSheet(); });
+
+/* ================= init & boot ================= */
+function init(){
+  on('tglVoice',toggleVoice);
+  on('tglPartner',togglePartner);
+  on('btnSettings',openSettings);
+  on('btnEditProfile',function(){ S.profile?openSettings():openOnboarding(); });
+  on('btnExportTop',openExport);
+  on('cmWhtr',function(){ S.chartMode='whtr'; save(); renderChart(); });
+  on('cmWaist',function(){ S.chartMode='waist'; save(); renderChart(); });
+  on('btnLogFirst',function(){
+    var first=null;
+    for(var i=0;i<MEASURES.length;i++){ if(!S.meas[MEASURES[i].id]){ first=MEASURES[i]; break; } }
+    openWizard((first||MEASURES[4]).id);
+  });
+  on('obBack',function(){ if(OB.step>1){ OB.step--; renderOB(); } });
+  on('obNext',function(){
+    if(OB.step===1){ var n=$('#obName'); OB.name=n?n.value.trim():''; OB.step=2; renderOB(); }
+    else if(OB.step===2){ if(!OB.archetype){ toast('Select the baseline that fits your physiology — you can change it anytime.','risk'); return; } OB.step=3; renderOB(); }
+    else if(OB.step===3){ OB.step=4; renderOB(); }
+    else finishOnboarding();
+  });
+  on('wizBack',function(){ if(WZ&&WZ.step>1){ WZ.step--; renderWiz(); } });
+  on('wizNext',function(){
+    if(!WZ) return;
+    if(WZ.step===1){ WZ.step=2; renderWiz(); }
+    else if(WZ.step===2){ WZ.step=3; renderWiz(); }
+    else saveWizard();
+  });
+  on('setSave',saveSettings);
+  on('btnPrintGo',doPrint);
+  if(window.IntersectionObserver){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target); } });
+    },{threshold:.1});
+    $$('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    $$('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+}
+try{
+  init();
+  renderAll();
+  if(!S.profile){ setTimeout(openOnboarding,450); }
+  else if(mv('waist')==null){ setTimeout(function(){ toast('📐 Next step: log your <b>Waist</b> (pin №4) to power the WHtR gauge.'); },900); }
+}catch(err){
+  console.error(err);
+  toast('⚠ Startup error: '+err.message,'risk');
+}
+</script>
+</body>
+</html>
