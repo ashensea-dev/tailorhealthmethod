@@ -75,7 +75,7 @@ input.big{font-size:44px;font-weight:800;text-align:center;background:none;paddi
 const $=s=>document.querySelector(s),dlg=$('#dlg');
 const I={shirt:'<path d="M20.4 3.5L16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.4-2.2z"/>',print:'<path d="M7 9V3h10v6"/><path d="M7 17H4v-8h16v8h-3"/><path d="M7 14h10v7H7z"/>',sliders:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',ruler:'<path d="M3 16L16 3l5 5L8 21z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',alert:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h0"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>'};
 const ic=n=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+I[n]+'</svg>';
-const ARCH={feminine:{l:'Feminine',d:'Estrogen-dominant reference model',ess:13,hi:33},masculine:{l:'Masculine',d:'Androgen-dominant reference model',ess:6,hi:25},nonbinary:{l:'Non-binary',d:'Hormonally neutral overlap model. A conservative range that stays safe across physiological shifts without assuming hormone therapy status.',ess:13,hi:25}};
+const ARCH={feminine:{l:'Feminine',d:'Estrogen-dominant reference model',ess:13,hi:32},masculine:{l:'Masculine',d:'Androgen-dominant reference model',ess:6,hi:25},nonbinary:{l:'Non-binary',d:'Hormonally neutral overlap model. A conservative range that stays safe across physiological shifts without assuming hormone therapy status.',ess:13,hi:25}};
 const M=[
 {id:'height',n:'Height',tip:'Stand against a wall, heels on the baseboard. This is the denominator of your WHtR.',pat:'Vertical reference',c:0,def:65},
 {id:'neck',n:'Neck',tip:'Around the base of the neck where a collar sits. Keep one finger under the tape.',pat:'Collar, gorget',c:1,def:14},
@@ -119,15 +119,15 @@ matchMedia('(prefers-color-scheme:dark)').addEventListener('change',applyTheme);
 const whtr=()=>{const w=mv('waist'),h=mv('height');return w&&h?w/h:null};
 function bfp(){const h=mv('height'),n=mv('neck'),w=mv('waist'),p=mv('hips'),a=S.profile&&S.profile.archetype,L=Math.log10;if(!a)return{v:null,need:'a baseline'};
 const ok=x=>x!=null&&isFinite(x)&&x>2&&x<65;let m=null,f=null;
-if(h&&n&&w&&w>n)m=495/(1.0324-.19077*L(w-n)+.15456*L(h))-450;
-if(h&&n&&w&&p)f=495/(1.29579-.35004*L(w+p-n)+.221*L(h))-450;
+if(h&&n&&w&&w>n)m=86.01*L(w-n)-70.041*L(h)+36.76;
+if(h&&n&&w&&p&&w+p>n)f=163.205*L(w+p-n)-97.684*L(h)-78.387;
 if(!ok(m))m=null;if(!ok(f))f=null;
 const v=a==='masculine'?m:a==='feminine'?f:(m!=null&&f!=null?(m+f)/2:f!=null?f:m);
 const miss=['height','neck','waist'].concat(a==='masculine'?[]:['hips']).filter(k=>!mv(k)).map(k=>MM[k].n.toLowerCase());
 return{v:v!=null?Math.round(v*10)/10:null,need:miss.join(', ')||'valid inputs'}}
 function flags(){const o=[],w=whtr(),b=bfp().v,t=S.profile&&ARCH[S.profile.archetype];
 if(w!=null){if(w>=.5)o.push({d:'Waist-to-height ratio is '+w.toFixed(3)+' (0.50 or more)',p:'A'});else if(w<.4)o.push({d:'Waist-to-height ratio is '+w.toFixed(3)+' (under 0.40)',p:'B'})}
-if(b!=null&&t){if(b>=t.hi)o.push({d:'Body fat is '+b.toFixed(1)+'% (at or above '+t.hi+'%)',p:'A'});else if(b<t.ess)o.push({d:'Body fat is '+b.toFixed(1)+'% (under '+t.ess+'%)',p:'B'})}return o}
+if(b!=null&&t){if(b>=t.hi)o.push({d:'Body fat is '+b.toFixed(1)+'% (at or above '+t.hi+'%)',p:'A'});else if(b<t.ess)o.push({d:'Body fat is '+b.toFixed(1)+'% (under '+t.ess+'%)',p:'B'})}const wf=o.find(f=>f.d.startsWith('Waist')),r=wf?o.filter(f=>f.d.startsWith('Waist')||f.p===wf.p):o;r.dropped=r.length<o.length;return r}
 function upsert(){const d=today(),sn={};for(const k in S.meas)sn[k]=S.meas[k].v;const e={d,m:sn,whtr:whtr(),bf:bfp().v},i=S.entries.findIndex(x=>x.d===d);if(i>=0)S.entries[i]=e;else S.entries.push(e);S.entries.sort((a,b)=>a.d<b.d?-1:1);S.entries=S.entries.slice(-80)}
 /* render */
 function gauge(title,v,txt,lo,hi,min,max,labs,need){
@@ -157,7 +157,7 @@ $('#app').innerHTML='<div class="top"><h1>TailorTrack</h1><button class="ib" dat
 '<p class="sub" style="text-align:center;margin-top:12px">'+n+' of 11 logged · tap a measurement to log it</p></div>'+
 '<h2>Health</h2>'+gauge('Waist-to-height ratio',w,w!=null?w.toFixed(3):'—',.4,.5,.3,.6,['Under 0.40','0.40 to 0.49','0.50 or more'],'Log your waist and height.')+
 gauge('Body fat estimate',b.v,b.v!=null?b.v.toFixed(1)+'%':'—',t.ess,t.hi,0,45,['Under '+t.ess+'%',t.ess+' to '+(t.hi-1)+'%',t.hi+'% or more'],'Still needed: '+b.need+'.')+
-(fl.length?'<div class="card"><div class="gh"><b>Risk flags</b><span style="color:var(--risk)">'+ic('alert')+'</span></div>'+fl.map(f=>'<p style="margin-top:8px;font-size:14px">'+f.d+'</p>').join('')+'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">'+protos.map(x=>'<button class="btn bad" data-act="plan" data-p="'+x+'">View action plan '+x+'</button>').join('')+'</div></div>':
+(fl.length?'<div class="card"><div class="gh"><b>Risk flags</b><span style="color:var(--risk)">'+ic('alert')+'</span></div>'+fl.map(f=>'<p style="margin-top:8px;font-size:14px">'+f.d+'</p>').join('')+(fl.dropped?'<p class="sub" style="margin-top:8px">The body fat estimate points the other way. WHtR takes priority because body fat here is only an estimate.</p>':'')+'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">'+protos.map(x=>'<button class="btn bad" data-act="plan" data-p="'+x+'">View action plan '+x+'</button>').join('')+'</div></div>':
 (w!=null||b.v!=null?'<div class="card"><b>No risk flags</b><p class="sub">Every tracked metric is inside its healthy range.</p></div>':''))+
 '<h2>History</h2>'+chart()+
 '<h2>Notes</h2><div class="card"><textarea id="notes" placeholder="Fabric choices, seam allowances, fit tweaks, con deadlines">'+esc(S.notes)+'</textarea></div>'+
@@ -167,7 +167,7 @@ gauge('Body fat estimate',b.v,b.v!=null?b.v.toFixed(1)+'%':'—',t.ess,t.hi,0,45
 function open(h){dlg.innerHTML='<div class="dc"><button class="ib x" data-act="close" aria-label="Close">'+ic('x')+'</button>'+h+'</div>';if(!dlg.open)dlg.showModal()}
 const archOpts=sel=>Object.keys(ARCH).map(k=>{const a=ARCH[k];return '<label class="opt"><input type="radio" name="arch" value="'+k+'"'+(sel===k?' checked':'')+'><span><b>'+a.l+'</b><small>'+a.d+'</small><small>Healthy '+a.ess+' to '+(a.hi-1)+'% · high risk '+a.hi+'% or more</small></span></label>'}).join('');
 function onboard(){open('<h3>Welcome</h3><p class="sub">Set your baseline once. Everything stays in this browser.</p>'+
-'<label class="fl" for="f-name">Name or handle</label><input type="text" id="f-name" placeholder="e.g. J. Doe" autocomplete="off">'+
+'<label class="fl" for="f-name">Name or handle</label><input type="text" id="f-name" placeholder="e.g. StitchWitch" autocomplete="off">'+
 '<label class="fl" for="f-h">Height in inches</label><input type="text" id="f-h" inputmode="decimal" value="65" autocomplete="off">'+
 '<label class="fl">Physiological baseline</label><div class="note">Pick the baseline closest to your current physiology or primary hormone profile, such as estrogen-dominant or androgen-dominant. It only changes body fat thresholds and risk flags. WHtR thresholds are the same for everyone. Update it any time in Settings as your physiology or transition goals evolve.</div>'+archOpts(null)+
 '<button class="btn pri wide" style="margin-top:12px" data-act="obdone">Start tracking</button>')}
@@ -209,7 +209,7 @@ const c=g('chest'),u=g('underbust'),w=g('waist'),h=g('hips'),nk=g('neck'),ins=g(
 const bt=()=>['By bust'];
 const byC=(A,l)=>R(l,['chest'],()=>['<b>'+(pick(A,1,c)||['5XL+'])[0]+'</b>','By chest']);
 const bot=l=>R(l,['waist','hips'],()=>{const a=ix(UB,1,w),b=ix(UB,2,h);return ['<b>'+UB[Math.max(a,b)][0]+'</b>','Waist fits '+UB[a][0]+', hips fit '+UB[b][0]+'. The larger decides']});
-const women=[R('Bra',['underbust','chest'],()=>{const b=Math.ceil(u/2)*2,d=Math.ceil(c-b),i=d<=0?0:Math.min(d,7),s=[];if(i>0)s.push((b+2)+CUPS[i-1]);if(i<7)s.push((b-2)+CUPS[i+1]);return ['<b>'+b+CUPS[i]+(d>7?'+':'')+'</b>','Underbust '+fmt(u)+', bust '+fmt(c)+'. Sister sizes: '+s.join(', ')]}),
+const women=[R('Bra',['underbust','chest'],()=>{const b=Math.round(u/2)*2,d=Math.ceil(c-b),i=d<=0?0:Math.min(d,7),s=[];if(i>0)s.push((b+2)+CUPS[i-1]);if(i<7)s.push((b-2)+CUPS[i+1]);return ['<b>'+b+CUPS[i]+(d>7?'+':'')+'</b>','Underbust '+fmt(u)+', bust '+fmt(c)+'. Sister sizes: '+s.join(', ')]}),
 R('Shirt / top',['chest'],()=>[both(1,c),'By bust']),R('Jacket / coat',['chest'],()=>[both(1,c),'By bust']),
 R('Dress',['chest','waist','hips'],()=>[both(1,c),'By bust. Waist fits '+wNum(2,w)+', hips fit '+wNum(3,h)]),
 R('Pants',['hips','waist'],()=>[both(3,h),'By hips. Waist fits '+wNum(2,w)]),
