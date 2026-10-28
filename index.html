@@ -31,17 +31,14 @@ body{
   min-height:100vh;
 }
 ::selection{background:var(--tape);color:var(--ink)}
-button{font-family:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 input,textarea,select{font-family:inherit;font-size:inherit;color:var(--ink)}
 :focus-visible{outline:3px solid var(--tape);outline-offset:2px;border-radius:4px}
-.mono{font-family:var(--mono)}
 
-/* ambient decor */
-.decor{position:fixed;pointer-events:none;z-index:0;opacity:.55}
-.decor svg{display:block}
+.decor{position:fixed;pointer-events:none;z-index:0;opacity:.5}
 #decorThread{top:70px;right:-40px;animation:floaty 9s ease-in-out infinite alternate}
 #decorChalk{bottom:20px;left:-30px;animation:floaty 12s ease-in-out infinite alternate-reverse}
-@keyframes floaty{from{transform:translateY(0) rotate(0deg)}to{transform:translateY(14px) rotate(1.5deg)}}
+@keyframes floaty{from{transform:translateY(0)}to{transform:translateY(14px)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ---------- top bar ---------- */
@@ -49,7 +46,7 @@ header.topbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(-
 .tb-in{max-width:1240px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;margin-right:auto}
 .brand .mark{width:34px;height:34px;background:var(--tape);border-radius:7px;display:grid;place-items:center;font-size:18px;transform:rotate(-4deg);box-shadow:2px 2px 0 rgba(0,0,0,.35)}
-.brand .wm{font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:.02em;line-height:1}
+.brand .wm{font-family:var(--disp);font-weight:800;font-size:19px;line-height:1}
 .brand .wm small{display:block;font-family:var(--mono);font-weight:500;font-size:9.5px;letter-spacing:.22em;color:var(--tape);margin-top:3px}
 .beta{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;border:1px solid rgba(244,239,226,.4);padding:3px 8px;border-radius:99px;color:rgba(244,239,226,.85)}
 .tb-btn{background:transparent;color:var(--paper);border:1.5px solid rgba(244,239,226,.55);border-radius:8px;padding:7px 12px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:.15s}
@@ -66,7 +63,7 @@ header.topbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(-
 @keyframes tapeScroll{to{background-position:-450px bottom,-450px bottom}}
 
 /* ---------- layout ---------- */
-.wrap{max-width:1240px;margin:0 auto;padding:18px 14px 60px;position:relative;z-index:1}
+.wrap{max-width:1240px;margin:0 auto;padding:18px 14px 40px;position:relative;z-index:1}
 .controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .pill{border:1.5px solid var(--ink);background:var(--card);border-radius:99px;padding:7px 14px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:8px;box-shadow:2px 2px 0 rgba(32,31,26,.08);transition:.15s;user-select:none}
 .pill .dot{width:9px;height:9px;border-radius:50%;background:var(--line);transition:.2s}
@@ -78,30 +75,27 @@ header.topbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(-
 
 .layout{display:grid;gap:18px;grid-template-columns:1fr}
 .card{background:var(--card);border:1.5px solid var(--ink);border-radius:12px;box-shadow:var(--sh);padding:18px;position:relative}
-.card>.card-t{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
-.card>.card-t .tab{width:14px;height:22px;background:var(--tape);border:1.5px solid var(--ink);border-radius:3px;transform:skewX(-8deg)}
-.card>.card-t .sub{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink2);text-transform:none;font-weight:500}
+.card-t{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
+.card-t .tab{width:14px;height:22px;background:var(--tape);border:1.5px solid var(--ink);border-radius:3px;transform:skewX(-8deg)}
+.card-t .sub{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink2);text-transform:none;font-weight:500}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease var(--d,0s),transform .6s ease var(--d,0s)}
 .reveal.in{opacity:1;transform:none}
 
-/* buttons */
 .btn{border:1.5px solid var(--ink);background:var(--card);border-radius:9px;padding:9px 16px;font-weight:650;font-size:13.5px;display:inline-flex;align-items:center;gap:8px;transition:.15s;box-shadow:2px 2px 0 rgba(32,31,26,.15)}
 .btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 rgba(32,31,26,.2)}
-.btn:active{transform:translate(1px,1px);box-shadow:0 0 0 rgba(0,0,0,0)}
+.btn:active{transform:translate(1px,1px);box-shadow:none}
 .btn.primary{background:var(--tape)}
 .btn.dark{background:var(--ink);color:var(--paper)}
-.btn.risk{background:var(--risk);color:#fff;border-color:var(--ink)}
+.btn.risk{background:var(--risk);color:#fff}
 .btn.sm{padding:6px 11px;font-size:12.5px;border-radius:7px}
 .btn.ghost{background:transparent;box-shadow:none;border-style:dashed}
-.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
 
-/* info dots / tooltips */
 .info{width:19px;height:19px;border-radius:50%;border:1.5px solid var(--ink);background:var(--tape);font-family:var(--mono);font-size:11px;font-weight:700;display:inline-grid;place-items:center;flex:none;line-height:1}
 #tip{position:fixed;z-index:200;max-width:270px;background:var(--ink);color:var(--paper);font-size:12.5px;line-height:1.45;padding:10px 12px;border-radius:8px;box-shadow:0 8px 22px rgba(32,31,26,.3);opacity:0;pointer-events:none;transition:opacity .15s;border-left:4px solid var(--tape)}
 #tip.on{opacity:1}
 #tip::before{content:'✂ PATTERN NOTE';display:block;font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--tape);margin-bottom:5px}
 
-/* ---------- profile ---------- */
+/* profile */
 .pf-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .pf-avatar{width:52px;height:52px;border-radius:12px;background:var(--ink);color:var(--tape);display:grid;place-items:center;font-family:var(--disp);font-weight:800;font-size:22px;transform:rotate(-3deg);box-shadow:2px 2px 0 rgba(32,31,26,.2)}
 .pf-name{font-family:var(--disp);font-weight:800;font-size:21px;line-height:1.1}
@@ -112,16 +106,16 @@ header.topbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(-
 .pf-focus{margin-top:12px;border:1.5px dashed var(--ink);border-radius:9px;padding:10px 12px;font-size:13px;background:rgba(242,179,0,.08)}
 .pf-focus b{font-family:var(--disp)}
 
-/* ---------- gauges ---------- */
+/* gauges */
 .gauge{margin-bottom:20px}
 .gauge:last-child{margin-bottom:0}
 .g-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
 .g-head .g-name{font-weight:700;font-size:14px}
-.g-head .g-val{font-family:var(--disp);font-weight:800;font-size:27px;margin-left:auto;letter-spacing:-.01em}
+.g-head .g-val{font-family:var(--disp);font-weight:800;font-size:27px;margin-left:auto}
 .g-head .g-val small{font-size:13px;font-weight:600;color:var(--ink2)}
 .meter{position:relative;padding-top:30px;margin-bottom:4px}
-.meter.empty{opacity:.5}
-.m-track{position:relative;height:20px;border:1.5px solid var(--ink);border-radius:6px;display:flex;overflow:visible;background:#fff}
+.meter.empty{opacity:.55}
+.m-track{position:relative;height:20px;border:1.5px solid var(--ink);border-radius:6px;display:flex;background:#fff}
 .zone{height:100%}
 .z-low{background:#EFC24C}.z-ok{background:#8FCB9B}.z-high{background:#E4694E}
 .z-div{position:absolute;top:-5px;bottom:-5px;width:0;border-left:1.5px dashed var(--ink)}
@@ -140,16 +134,15 @@ header.topbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(-
 .g-foot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}
 .g-note{font-size:11.5px;color:var(--ink2)}
 
-/* risk banner */
 .risk-banner{border:2px solid var(--ink);border-radius:11px;background:var(--risk-bg);overflow:hidden;margin-top:14px;animation:flagPop .5s cubic-bezier(.2,1.3,.4,1)}
 .risk-banner .stripe{height:9px;background:repeating-linear-gradient(-45deg,var(--ink) 0 9px,var(--tape) 9px 18px)}
 .risk-banner .rb-body{padding:13px 15px;display:flex;flex-direction:column;gap:9px}
 .risk-banner .rb-title{font-family:var(--disp);font-weight:800;font-size:15px;color:var(--risk)}
 .risk-banner p{font-size:13px}
 
-/* ---------- figure ---------- */
+/* figure */
 .fig-wrap{display:flex;gap:14px;align-items:flex-start}
-.fig-svg{flex:1 1 240px;max-width:330px;margin:0 auto}
+.fig-svg{flex:1 1 240px;max-width:330px;margin:0 auto;width:100%}
 .fig-svg text{font-family:var(--mono)}
 .chalk{fill:rgba(242,179,0,.07);stroke:var(--ink);stroke-width:1.7;stroke-dasharray:5 4;stroke-linecap:round}
 .guide{stroke:var(--blue);stroke-width:1.4;stroke-dasharray:2 3}
@@ -168,44 +161,38 @@ header.topbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(-
 .fig-legend .v.none{color:#B9B19A}
 @media (max-width:640px){.fig-wrap{flex-direction:column}.fig-legend{flex-direction:row;flex-wrap:wrap;gap:4px}.fig-legend .lg{font-size:11px}}
 
-/* ---------- measurement list ---------- */
+/* measurement list */
 .mlist{display:flex;flex-direction:column}
 .mitem{display:grid;grid-template-columns:24px 1fr auto auto;gap:10px;align-items:center;padding:10px 4px;border-bottom:1.5px dashed var(--line);transition:.15s;border-radius:6px}
 .mitem:last-child{border-bottom:none}
 .mitem:hover,.mitem.hl{background:rgba(242,179,0,.10)}
 .mitem .num{font-family:var(--mono);font-size:11px;font-weight:700;width:22px;height:22px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:var(--paper)}
 .mitem .nm{font-weight:650;font-size:14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.mitem .nm small{display:block;font-weight:400;font-size:11px;color:var(--ink2)}
+.mitem .nm small{display:block;width:100%;font-weight:400;font-size:11px;color:var(--ink2)}
 .mitem .val{font-family:var(--mono);font-weight:600;font-size:15px;text-align:right;white-space:nowrap}
 .mitem .val .cm{display:block;font-size:10px;color:var(--ink2);font-weight:400}
 .mitem .val.none{color:#B9B19A;font-weight:400;font-size:12px}
 .mitem .when{font-family:var(--mono);font-size:9.5px;color:var(--ink2)}
 @media (max-width:430px){.mitem{grid-template-columns:22px 1fr auto}.mitem .when{display:none}}
-
-/* partner quick bar */
 .qbar{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin-bottom:8px;scrollbar-width:thin}
-.qbar::-webkit-scrollbar{height:6px}.qbar::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
 .qchip{flex:none;border:1.5px solid var(--ink);background:var(--paper);border-radius:99px;padding:7px 13px;font-size:12.5px;font-weight:600;display:inline-flex;gap:7px;align-items:center}
 .qchip:hover{background:var(--tape)}
 
-/* ---------- chart ---------- */
+/* chart */
 .chart-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .cm-chip{font-family:var(--mono);font-size:11px;border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:4px 9px}
-.cm-chip b{color:var(--ink)}
 .seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:8px;overflow:hidden}
 .seg button{border:none;background:var(--card);padding:5px 12px;font-size:12px;font-weight:600}
 .seg button.on{background:var(--ink);color:var(--tape)}
 .chart-empty{border:1.5px dashed var(--line);border-radius:9px;padding:22px;text-align:center;color:var(--ink2);font-size:13px}
 #chartBox svg{width:100%;height:auto;display:block}
 
-/* ---------- notes ---------- */
-#notesArea{width:100%;min-height:104px;border:1.5px dashed var(--ink);border-radius:9px;background:
-  repeating-linear-gradient(var(--card) 0 25px,rgba(62,107,143,.18) 25px 26px);
-  padding:8px 12px;font-size:14px;line-height:26px;resize:vertical}
+/* notes */
+#notesArea{width:100%;min-height:104px;border:1.5px dashed var(--ink);border-radius:9px;background:repeating-linear-gradient(var(--card) 0 25px,rgba(62,107,143,.18) 25px 26px);padding:8px 12px;font-size:14px;line-height:26px;resize:vertical}
 .note-status{font-family:var(--mono);font-size:10px;color:var(--ok);margin-top:6px;opacity:0;transition:.3s}
 .note-status.on{opacity:1}
 
-/* ---------- gear callout ---------- */
+/* gear */
 .gear{border:2px solid var(--ink);border-radius:11px;background:#FFF6DC;overflow:hidden}
 .gear .g-top{background:var(--ink);color:var(--tape);font-family:var(--mono);font-size:10px;letter-spacing:.18em;padding:6px 14px}
 .gear .g-body{padding:14px 16px;display:flex;gap:14px;align-items:flex-start}
@@ -214,7 +201,7 @@ header.topbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(-
 .gear p{font-size:13px;margin-bottom:10px}
 .gear .rec{font-size:12.5px;background:rgba(242,179,0,.2);border:1px dashed var(--ink);border-radius:7px;padding:8px 10px;margin-bottom:10px}
 
-/* ---------- modals ---------- */
+/* modals */
 .modal{position:fixed;inset:0;z-index:100;display:none}
 .modal.open{display:block}
 .modal .ovl{position:absolute;inset:0;background:rgba(32,31,26,.55);animation:fadeIn .2s}
@@ -230,26 +217,22 @@ header.topbar{position:sticky;top:0;z-index:60;background:var(--ink);color:var(-
 .modal-x{position:absolute;top:12px;right:12px;width:32px;height:32px;border:1.5px solid var(--ink);border-radius:8px;background:var(--paper);font-size:15px;line-height:1}
 .m-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 .m-actions .btn{flex:1;justify-content:center}
+.step-ind{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink2);margin-bottom:6px}
 
-/* tape progress */
-.tprog{height:13px;background:var(--tape);border:1.5px solid var(--ink);border-radius:4px;margin:14px 0 18px;position:relative;
-  background-image:repeating-linear-gradient(90deg,var(--ink) 0 1.5px,transparent 1.5px 8px);background-size:auto 45%;background-position:left bottom;background-repeat:repeat-x}
+.tprog{height:13px;background:var(--tape);border:1.5px solid var(--ink);border-radius:4px;margin:14px 0 18px;position:relative;background-image:repeating-linear-gradient(90deg,var(--ink) 0 1.5px,transparent 1.5px 8px);background-size:auto 45%;background-position:left bottom;background-repeat:repeat-x}
 .tprog .fill{position:absolute;inset:0;width:0;background:var(--ink);border-radius:2px;transition:width .4s cubic-bezier(.2,.9,.3,1)}
 .tprog .lbl{position:absolute;right:6px;top:-19px;font-family:var(--mono);font-size:10px;color:var(--ink2)}
 
-/* wizard */
-.wz-step{animation:stepIn .3s ease}
-@keyframes stepIn{from{opacity:0;transform:translateX(24px)}}
 .guidebox{border:1.5px dashed var(--ink);border-radius:10px;background:var(--paper);padding:14px;margin-bottom:14px}
 .guidebox svg{display:block;margin:0 auto 8px}
 .tip-list{font-size:13px;display:flex;flex-direction:column;gap:7px;margin-top:10px}
 .tip-list li{list-style:none;display:flex;gap:9px}
 .tip-list li::before{content:'—';color:var(--tape-dk);font-weight:700}
 .stepper{display:flex;align-items:center;justify-content:center;gap:14px;margin:16px 0 8px}
-.stepper .st-btn{width:54px;height:54px;border-radius:12px;border:2px solid var(--ink);background:var(--paper);font-size:24px;font-weight:700;box-shadow:2px 2px 0 rgba(32,31,26,.15)}
-.stepper .st-btn:active{transform:translateY(2px);box-shadow:none}
-body.partner .stepper .st-btn{width:66px;height:66px}
-.st-val{font-family:var(--disp);font-weight:800;font-size:44px;min-width:130px;text-align:center;letter-spacing:-.01em}
+.st-btn{width:54px;height:54px;border-radius:12px;border:2px solid var(--ink);background:var(--paper);font-size:24px;font-weight:700;box-shadow:2px 2px 0 rgba(32,31,26,.15)}
+.st-btn:active{transform:translateY(2px);box-shadow:none}
+body.partner .st-btn{width:66px;height:66px}
+.st-val{font-family:var(--disp);font-weight:800;font-size:44px;min-width:130px;text-align:center}
 .st-val small{font-size:18px;color:var(--ink2)}
 .frac-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0 14px}
 .frac{border:1.5px solid var(--ink);background:var(--paper);border-radius:8px;padding:8px 15px;font-family:var(--mono);font-weight:600;font-size:15px}
@@ -265,7 +248,6 @@ body.partner .stepper .st-btn{width:66px;height:66px}
 .confirm-big{text-align:center;font-family:var(--disp);font-weight:800;font-size:56px;margin:14px 0 2px}
 .confirm-big small{font-size:22px;color:var(--ink2)}
 
-/* onboarding */
 .arch{display:flex;flex-direction:column;gap:10px;margin:12px 0}
 .arch-card{border:2px solid var(--line);border-radius:11px;padding:13px 15px;cursor:pointer;transition:.15s;background:#fff;position:relative}
 .arch-card:hover{border-color:var(--ink)}
@@ -286,10 +268,10 @@ body.partner .stepper .st-btn{width:66px;height:66px}
 .tg-card .ico{font-size:21px;display:block;margin-bottom:5px}
 .tg-card b{font-family:var(--disp);display:block;font-size:13.5px;margin-bottom:3px}
 
-/* action plan */
 .proto-stamp{display:inline-block;font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.1em;border:2px solid var(--ink);padding:4px 12px;border-radius:6px;transform:rotate(-2deg);background:var(--tape);margin-bottom:10px}
 .comorbid{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
 .comorbid span{font-size:11px;border:1px solid var(--risk);color:var(--risk);border-radius:99px;padding:3px 10px;background:var(--risk-bg)}
+.comorbid b{font-size:11px;align-self:center;color:var(--ink2)}
 .ap-item{border:1.5px solid var(--ink);border-radius:10px;background:#fff;margin-bottom:11px;overflow:hidden}
 .ap-head{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--paper);border-bottom:1.5px dashed var(--line);flex-wrap:wrap}
 .ap-head .rank{font-family:var(--disp);font-weight:800;font-size:19px;width:30px;height:30px;border:1.5px solid var(--ink);border-radius:7px;display:grid;place-items:center;background:var(--tape)}
@@ -306,7 +288,6 @@ body.partner .stepper .st-btn{width:66px;height:66px}
 .cred-card{border:2px solid var(--blue);border-radius:10px;background:#EEF3F7;padding:13px 15px;font-size:13px;margin-top:4px}
 .cred-card h6{font-family:var(--disp);font-size:13.5px;color:var(--blue);margin-bottom:5px}
 
-/* settings / export */
 .set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1.5px dashed var(--line);flex-wrap:wrap}
 .set-row label{font-weight:650;font-size:13.5px}
 .set-row small{display:block;font-weight:400;color:var(--ink2);font-size:11.5px}
@@ -315,8 +296,11 @@ body.partner .stepper .st-btn{width:66px;height:66px}
 .ease-opt{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:9px;padding:9px 12px;cursor:pointer;font-size:13px;background:#fff}
 .ease-opt.sel{border-color:var(--ink);background:rgba(242,179,0,.14)}
 .ease-opt input{accent-color:var(--ink)}
-.sheet-doc{border:2px solid var(--ink);background:#fff;padding:22px;max-height:46vh;overflow:auto;font-size:12px}
-.sheet-doc h1{font-family:var(--disp);font-size:19px;letter-spacing:.02em}
+
+/* print-only spec sheet */
+#printSheet{display:none}
+.sheet-doc{border:2px solid var(--ink);background:#fff;padding:22px;font-size:12px}
+.sheet-doc h1{font-family:var(--disp);font-size:19px}
 .sheet-doc .sd-sub{font-family:var(--mono);font-size:10px;color:var(--ink2);letter-spacing:.1em;margin-bottom:12px}
 .sheet-doc table{width:100%;border-collapse:collapse;margin:10px 0}
 .sheet-doc th,.sheet-doc td{border:1px solid var(--ink);padding:5px 7px;text-align:left;font-size:11px}
@@ -324,8 +308,13 @@ body.partner .stepper .st-btn{width:66px;height:66px}
 .sheet-doc td.num{font-family:var(--mono);white-space:nowrap}
 .sheet-doc .sd-sec{font-family:var(--disp);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;margin:13px 0 4px;border-bottom:2px solid var(--ink);padding-bottom:2px}
 .sheet-doc .sd-note{font-size:11px;color:var(--ink2)}
+@media print{
+  body > *:not(#printSheet){display:none !important}
+  #printSheet{display:block !important}
+  .sheet-doc{border:none;padding:0}
+  @page{margin:12mm}
+}
 
-/* toast */
 #toastBox{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:8px;align-items:center;width:min(92vw,420px)}
 .toast{background:var(--ink);color:var(--paper);border-radius:9px;padding:11px 16px;font-size:13px;font-weight:550;box-shadow:0 8px 24px rgba(32,31,26,.35);border-left:5px solid var(--tape);animation:toastIn .3s cubic-bezier(.2,1.2,.4,1);width:100%;text-align:center}
 .toast.risk{border-left-color:var(--risk)}
@@ -333,6 +322,7 @@ body.partner .stepper .st-btn{width:66px;height:66px}
 @keyframes toastIn{from{opacity:0;transform:translateY(14px) scale(.95)}}
 
 footer{max-width:1240px;margin:0 auto;padding:10px 16px 40px;font-family:var(--mono);font-size:10.5px;color:var(--ink2);display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+footer a{color:var(--ink2)}
 
 @media (min-width:1024px){
   .layout{grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:start}
@@ -344,14 +334,7 @@ footer{max-width:1240px;margin:0 auto;padding:10px 16px 40px;font-family:var(--m
   #notesCard{grid-column:2;grid-row:4}
   #gearCard{grid-column:1;grid-row:5}
   #actionCard{grid-column:2;grid-row:5}
-  .wrap{padding:24px 22px 60px}
-}
-@media print{
-  body *{visibility:hidden}
-  #printSheet,#printSheet *{visibility:visible}
-  #printSheet{position:absolute;left:0;top:0;width:100%;padding:0}
-  #printSheet .sheet-doc{border:none;max-height:none;overflow:visible;font-size:12px}
-  @page{margin:14mm}
+  .wrap{padding:24px 22px 40px}
 }
 </style>
 </head>
@@ -377,6 +360,8 @@ footer{max-width:1240px;margin:0 auto;padding:10px 16px 40px;font-family:var(--m
   <div class="tape-strip" aria-hidden="true"></div>
 </header>
 
+<noscript><div style="padding:20px;text-align:center;font-weight:700">TailorTrack needs JavaScript enabled.</div></noscript>
+
 <main class="wrap">
 
   <div class="controls">
@@ -387,7 +372,6 @@ footer{max-width:1240px;margin:0 auto;padding:10px 16px 40px;font-family:var(--m
 
   <div class="layout">
 
-    <!-- PROFILE -->
     <section class="card reveal" id="profileCard">
       <h2 class="card-t"><span class="tab"></span>Profile &amp; Archetype<button class="btn sm ghost" id="btnEditProfile" style="margin-left:auto">Edit ✎</button></h2>
       <div class="pf-row">
@@ -401,15 +385,13 @@ footer{max-width:1240px;margin:0 auto;padding:10px 16px 40px;font-family:var(--m
       <div class="pf-focus" id="pfFocus" hidden></div>
     </section>
 
-    <!-- ANATOMICAL MAP -->
     <section class="card reveal" id="figureCard" style="--d:.05s">
       <h2 class="card-t"><span class="tab"></span>Anatomical Silhouette Map<span class="sub">tap a pin to log</span></h2>
       <div class="fig-wrap">
-        <svg class="fig-svg" viewBox="0 0 220 440" role="img" aria-label="Body measurement map" id="figSvg">
+        <svg class="fig-svg" viewBox="0 0 220 440" role="img" aria-label="Body measurement map">
           <defs>
             <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#3E6B8F"/></marker>
           </defs>
-          <!-- chalk figure -->
           <circle class="chalk" cx="110" cy="40" r="20"/>
           <rect class="chalk" x="102" y="58" width="16" height="14" rx="4"/>
           <path class="chalk" d="M86,76 C96,68 124,68 134,76 C141,98 139,122 133,146 C129,158 129,166 132,178 C139,196 140,206 136,214 C122,223 98,223 84,214 C80,206 81,196 88,178 C91,166 91,158 87,146 C81,122 79,98 86,76 Z"/>
@@ -419,7 +401,6 @@ footer{max-width:1240px;margin:0 auto;padding:10px 16px 40px;font-family:var(--m
           <rect class="chalk" x="115" y="220" width="17" height="168" rx="8" transform="rotate(-1.5 124 225)"/>
           <ellipse class="chalk" cx="91" cy="394" rx="13" ry="5.5"/>
           <ellipse class="chalk" cx="129" cy="394" rx="13" ry="5.5"/>
-          <!-- guides -->
           <line class="guide" x1="86" y1="78" x2="134" y2="78" marker-start="url(#arr)" marker-end="url(#arr)"/>
           <line class="guide" x1="98" y1="98" x2="122" y2="98" marker-start="url(#arr)" marker-end="url(#arr)"/>
           <line class="guide" x1="72" y1="114" x2="148" y2="114" marker-start="url(#arr)" marker-end="url(#arr)"/>
@@ -433,849 +414,9 @@ footer{max-width:1240px;margin:0 auto;padding:10px 16px 40px;font-family:var(--m
           <text class="guide-val" id="fv-waist" x="138" y="156">—</text>
           <text class="guide-val" id="fv-hips" x="142" y="218">—</text>
           <text class="guide-val" id="fv-inseam" x="151" y="308">—</text>
-          <!-- hotspots -->
           <g class="hs" data-m="neck" transform="translate(121,60)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">1</text></g>
           <g class="hs" data-m="chest" transform="translate(110,114)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">2</text></g>
           <g class="hs" data-m="underbust" transform="translate(95,133)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">3</text></g>
           <g class="hs" data-m="waist" transform="translate(110,160)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">4</text></g>
           <g class="hs" data-m="hips" transform="translate(110,204)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">5</text></g>
-          <g class="hs" data-m="shoulder" transform="translate(110,78)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">6</text></g>
-          <g class="hs" data-m="nape" transform="translate(66,62)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">7</text></g>
-          <g class="hs" data-m="bodice" transform="translate(122,122)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">8</text></g>
-          <g class="hs" data-m="apex" transform="translate(98,98)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">9</text></g>
-          <g class="hs" data-m="inseam" transform="translate(147,306)"><circle r="6.5"/><text x="0" y="3" text-anchor="middle">10</text></g>
-        </svg>
-        <div class="fig-legend" id="figLegend"></div>
-      </div>
-    </section>
-
-    <!-- HEALTH GAUGES -->
-    <section class="card reveal" id="healthCard" style="--d:.1s">
-      <h2 class="card-t"><span class="tab"></span>Health Spectrum<span class="sub">binary status · no soft tiers</span></h2>
-
-      <div class="gauge">
-        <div class="g-head"><span class="g-name">Waist-to-Height Ratio</span> <button class="info" data-tip="Waist ÷ Height, both in inches. Identical thresholds for every archetype: below 0.40 is low risk/underweight, 0.40–0.49 is healthy, 0.50 and above is elevated risk.">i</button><span class="g-val" id="whtrVal">—<small> WHtR</small></span></div>
-        <div class="meter" id="whtrMeter">
-          <div class="m-track">
-            <div class="zone z-low" style="width:33.34%"></div><div class="zone z-ok" style="width:33.33%"></div><div class="zone z-high" style="width:33.33%"></div>
-            <div class="z-div" style="left:33.34%"><b>0.40</b></div>
-            <div class="z-div" style="left:66.67%"><b>0.50</b></div>
-            <div class="marker" id="whtrMark" hidden><span class="flag" id="whtrMarkV"></span><span class="pin"></span></div>
-          </div>
-          <div class="m-labels"><span><b>&lt; 0.40</b>Underweight / Low</span><span><b>0.40 – 0.49</b>Healthy Range</span><span><b>≥ 0.50</b>Increased Risk</span></div>
-        </div>
-        <div class="g-foot"><span id="whtrStatus"></span><span class="g-note" id="whtrNote"></span></div>
-      </div>
-
-      <div class="gauge">
-        <div class="g-head"><span class="g-name">Body Fat % Estimate</span> <button class="info" data-tip="Estimated with the U.S. Navy circumference method from Neck, Waist, Height (and Hips for feminine / non-binary baselines). Thresholds follow your archetype's physiological reference model.">i</button><span class="g-val" id="bfVal">—<small> %</small></span></div>
-        <div class="meter" id="bfMeter">
-          <div class="m-track" id="bfTrack"></div>
-          <div class="m-labels" id="bfLabels"></div>
-        </div>
-        <div class="g-foot"><span id="bfStatus"></span><span class="g-note" id="bfNote"></span></div>
-      </div>
-
-      <div id="flagsBox"></div>
-    </section>
-
-    <!-- MEASUREMENTS -->
-    <section class="card reveal" id="measCard" style="--d:.08s">
-      <h2 class="card-t"><span class="tab"></span>Tailoring Measurements<span class="sub">¼-inch precision</span></h2>
-      <div id="partnerBar" hidden>
-        <div class="qbar" id="qbar"></div>
-      </div>
-      <div class="mlist" id="measList"></div>
-      <div class="m-actions"><button class="btn primary" id="btnLogFirst">＋ Log a Measurement</button></div>
-    </section>
-
-    <!-- HISTORY -->
-    <section class="card reveal" id="chartCard" style="--d:.12s">
-      <h2 class="card-t"><span class="tab"></span>Historical Graphing<span class="seg"><button id="cmWhtr" class="on">WHtR</button><button id="cmWaist">Waist ″</button></span></h2>
-      <div class="chart-meta" id="chartMeta"></div>
-      <div id="chartBox"></div>
-    </section>
-
-    <!-- NOTES -->
-    <section class="card reveal" id="notesCard" style="--d:.14s">
-      <h2 class="card-t"><span class="tab"></span>Pattern Drafting Notes</h2>
-      <div class="pf-focus" id="buildFocus" hidden style="margin-bottom:12px;margin-top:0"></div>
-      <textarea id="notesArea" placeholder="Fabric choices, seam allowances, fit tweaks, con deadlines…"></textarea>
-      <div class="note-status" id="noteStatus">✔ saved locally</div>
-    </section>
-
-    <!-- EQUIPMENT -->
-    <section class="gear reveal" id="gearCard" style="--d:.16s">
-      <div class="g-top">💡 COSPLAY PATTERN &amp; TAILORING MEASUREMENT TIP</div>
-      <div class="g-body">
-        <div class="g-icon">📏</div>
-        <div>
-          <h4>Ditch the hardware-store tape</h4>
-          <p>Standard hardware tape measures are rigid and distort body curvature. For accurate cosplay pattern drafting and WHtR tracking, use a <b>flexible, retractable vinyl measuring tape</b>.</p>
-          <div class="rec">🛒 <b>Recommended budget option:</b> Loops &amp; Threads 60″ Retractable Tape Measure — Michaels, ~$2.99</div>
-          <a class="btn sm dark" href="https://www.michaels.com/search?q=loops+%26+threads+retractable+tape+measure" target="_blank" rel="noopener">Open Michaels Product Page ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ACTION PLAN CARD -->
-    <section class="card reveal" id="actionCard" style="--d:.18s">
-      <h2 class="card-t"><span class="tab"></span>Action Plan Status</h2>
-      <div id="actionSummary"></div>
-    </section>
-
-  </div>
-</main>
-
-<footer>
-  <span>🔒 ALL DATA STAYS IN YOUR BROWSER (localStorage) — NOTHING IS UPLOADED</span>
-  <span>TAILORTRACK COSPLAY EDITION · NOT A MEDICAL DEVICE</span>
-</footer>
-
-<!-- ============ MODALS ============ -->
-<div class="modal" id="obModal"><div class="ovl"></div>
-  <div class="sheet"><div class="grab"></div>
-    <button class="modal-x" data-close>✕</button>
-    <div id="obBody"></div>
-    <div class="m-actions"><button class="btn" id="obBack">← Back</button><button class="btn primary" id="obNext">Next →</button></div>
-  </div>
-</div>
-
-<div class="modal" id="wizModal"><div class="ovl"></div>
-  <div class="sheet"><div class="grab"></div>
-    <button class="modal-x" data-close>✕</button>
-    <div id="wizBody"></div>
-    <div class="m-actions"><button class="btn" id="wizBack">← Back</button><button class="btn primary" id="wizNext">Next →</button></div>
-  </div>
-</div>
-
-<div class="modal" id="planModal"><div class="ovl"></div>
-  <div class="sheet center"><div class="grab"></div>
-    <button class="modal-x" data-close>✕</button>
-    <div id="planBody"></div>
-  </div>
-</div>
-
-<div class="modal" id="setModal"><div class="ovl"></div>
-  <div class="sheet center"><div class="grab"></div>
-    <button class="modal-x" data-close>✕</button>
-    <h3>Settings</h3><div class="sub">Your baseline is yours — update it any time as your physiology or goals evolve.</div>
-    <div id="setBody"></div>
-    <div class="m-actions"><button class="btn primary" id="setSave">Save Changes</button></div>
-  </div>
-</div>
-
-<div class="modal" id="expModal"><div class="ovl"></div>
-  <div class="sheet center" style="max-width:680px"><div class="grab"></div>
-    <button class="modal-x" data-close>✕</button>
-    <h3>Cosplay Build Spec Sheet</h3>
-    <div class="sub">Choose an ease allowance, then print or save as PDF.</div>
-    <div class="ease-opts" id="easeOpts"></div>
-    <div id="printSheet"><div class="sheet-doc" id="sheetDoc"></div></div>
-    <div class="m-actions"><button class="btn dark" id="btnPrint">🖨 Print / Save as PDF</button></div>
-  </div>
-</div>
-
-<div id="toastBox" aria-live="polite"></div>
-<div id="tip" role="tooltip"></div>
-
-<script>
-/* ============================================================
-   TailorTrack Cosplay Edition — all logic
-============================================================ */
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const LS='tailortrack.v1';
-const todayISO=()=>new Date().toISOString().slice(0,10);
-const fmtDate=iso=>new Date(iso+'T12:00').toLocaleDateString(undefined,{month:'short',day:'numeric'});
-
-/* ---------- reference data ---------- */
-const ARCHETYPES={
-  feminine:{label:'Feminine Archetype',desc:'Estrogen-dominant reference model',ess:13,high:33,
-    thr:'Essential min 13% · Healthy 13–32% · High risk ≥33%'},
-  masculine:{label:'Masculine Archetype',desc:'Androgen-dominant reference model',ess:6,high:25,
-    thr:'Essential min 6% · Healthy 6–24% · High risk ≥25%'},
-  nonbinary:{label:'Non-Binary Archetype',desc:'Hormonally neutral / overlap reference model',ess:13,high:25,
-    thr:'Essential min 13% · Healthy 13–24% · High risk ≥25%',
-    note:'Uses a conservative overlap model to ensure safety across physiological shifts without assuming hormone therapy status.'}
-};
-const TARGETS={
-  armor:{name:'Armor Fit (Structured/Heavy)',ico:'🛡️',focus:'Joint stability, upper-body strength, and posture for supporting heavy foam or 3D-printed builds.'},
-  catsuit:{name:'Form-Fitting / Catsuit',ico:'🧵',focus:'Lean tissue preservation and abdominal management for close-tailored spandex or leather.'},
-  heroic:{name:'Heroic / Muscular',ico:'💪',focus:'Progressive hypertrophy and muscular density.'},
-  standard:{name:'Standard Tailoring',ico:'📏',focus:'Pure measurement tracking without specific aesthetic workout framing.'}
-};
-const MEASURES=[
- {id:'height',n:0,name:'Height',kind:'height',circ:false,tip:'Stand against a wall on flat ground, heels touching the baseboard. This is the denominator of your WHtR.',pat:'Vertical reference · WHtR denominator'},
- {id:'neck',n:1,name:'Neck',kind:'circ',circ:true,tip:'Around the base of the neck where a collar would sit. Keep one finger under the tape. Feeds the body-fat estimate.',pat:'Collar · gorget · choker block'},
- {id:'chest',n:2,name:'Chest / Bust',kind:'circ',circ:true,tip:'Fullest part of the chest/bust, tape parallel to the floor, arms relaxed at the sides.',pat:'Bodice block · chest-plate circumference'},
- {id:'underbust',n:3,name:'Underbust',kind:'circ',circ:true,tip:'Snug around the ribcage directly beneath the chest. Anchors corsetry and underbust armor plating.',pat:'Corset band · underbust plating'},
- {id:'waist',n:4,name:'Waist',kind:'circ',circ:true,tip:'Natural waist — the narrowest point, usually ~1″ above the navel. Exhale normally, don\u2019t cinch. Drives your WHtR.',pat:'Waist seam · corsetry · belt line'},
- {id:'hips',n:5,name:'Hips',kind:'circ',circ:true,tip:'Fullest part of the hips/seat, feet together, tape parallel to the floor.',pat:'Skirt / trouser block · tasset line'},
- {id:'shoulder',n:6,name:'Shoulder Span',kind:'span',circ:true,tip:'Across the back from shoulder bone to shoulder bone. Keep the tape straight, not drooping.',pat:'Pauldron strap line · yoke width'},
- {id:'nape',n:7,name:'Nape to Waist',kind:'vert',circ:false,tip:'From the nape bone (the prominent C7 vertebra at the back of the neck) down the spine to the natural waistline. Anchors back bodice drafting and zipper length.',pat:'Back bodice length · zipper placement'},
- {id:'bodice',n:8,name:'Front Bodice Length',kind:'vert',circ:false,tip:'From the high point of the shoulder, over the fullest part of the chest, down to the waistline. Determines front bodice balance.',pat:'Princess seams · front bodice balance'},
- {id:'apex',n:9,name:'Bust Apex Span',kind:'span',circ:true,tip:'Distance between the two bust apex points — measures point-to-point, not around. Sets dart placement.',pat:'Dart placement · cup shaping'},
- {id:'inseam',n:10,name:'Inseam',kind:'vert',circ:false,tip:'From the crotch seam point down the inner leg to the ankle bone. Wear footwear similar to the build.',pat:'Trouser length · greaves & boot covers'}
-];
-const M_MAP=Object.fromEntries(MEASURES.map(m=>[m.id,m]));
-const EASES={
- none:{label:'No ease — body measurements',add:0},
- lining:{label:'+0.5″ wearing ease (inner lining)',add:0.5},
- foam15:{label:'+1.5″ under-armor foam / light padding',add:1.5},
- foam2:{label:'+2.0″ under-armor foam / heavy padding',add:2}
-};
-
-/* ---------- state ---------- */
-let S=load()||{profile:null,meas:{},entries:[],notes:'',settings:{voice:speechOK(),partner:false},ease:'none',chartMode:'whtr'};
-function save(){localStorage.setItem(LS,JSON.stringify(S))}
-function load(){try{const j=localStorage.getItem(LS);return j?JSON.parse(j):null}catch(e){return null}}
-function speechOK(){return !!(window.SpeechRecognition||window.webkitSpeechRecognition)}
-function mv(id){return S.meas[id]?S.meas[id].v:null}
-
-/* ---------- formatting ---------- */
-const FRACCH={0:'',0.25:'¼',0.5:'½',0.75:'¾'};
-function fmt(v){if(v==null)return'—';const w=Math.floor(v);const f=Math.round((v-w)*4)/4;return(w+(f===1?1:0))+(f&&f!==1?FRACCH[f]:'')+'″'}
-function fmtPlain(v){return v==null?'—':(Math.round(v*100)/100)+'″'}
-function cm(v){return v==null?'—':(v*2.54).toFixed(1)+' cm'}
-function snapQ(v){return Math.round(v*4)/4}
-
-/* ---------- toast / tip ---------- */
-function toast(msg,cls=''){const t=document.createElement('div');t.className='toast '+cls;t.innerHTML=msg;$('#toastBox').appendChild(t);setTimeout(()=>{t.style.opacity=0;t.style.transition='.4s';setTimeout(()=>t.remove(),400)},3400)}
-const tipEl=$('#tip');
-function showTip(el){const txt=el.dataset.tip;if(!txt)return;tipEl.textContent=txt;tipEl.classList.add('on');const r=el.getBoundingClientRect();let x=r.left+r.width/2-135;x=Math.max(8,Math.min(x,innerWidth-286));tipEl.style.left=x+'px';tipEl.style.top=(r.bottom+9)+'px'}
-function hideTip(){tipEl.classList.remove('on')}
-document.addEventListener('mouseover',e=>{const el=e.target.closest('[data-tip]');if(el)showTip(el)});
-document.addEventListener('mouseout',e=>{if(e.target.closest('[data-tip]'))hideTip()});
-document.addEventListener('click',e=>{const el=e.target.closest('[data-tip]');if(el){showTip(el);setTimeout(hideTip,3200)}});
-
-/* ---------- audio ---------- */
-let AC;
-function beep(f=880,d=.09){if(!S.settings.voice)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;o.type='sine';g.gain.value=.08;o.connect(g);g.connect(AC.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+d);o.stop(AC.currentTime+d)}catch(e){}}
-function speak(txt){if(!S.settings.voice||!('speechSynthesis'in window))return;try{const u=new SpeechSynthesisUtterance(txt);u.rate=1.02;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
-const NUMW={zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90};
-function intWords(n){if(n<20)returnObjectKey(NUMW,n);const t=Math.floor(n/10)*10,o=n%10;return Object.keys(NUMW).find(k=>NUMW[k]===t)+(o?' '+Object.keys(NUMW).find(k=>NUMW[k]===o):'')}
-function returnObjectKey(o,v){return Object.keys(o).find(k=>o[k]===v)||String(v)}
-function sayNum(v){const w=Math.floor(v);const f=Math.round((v-w)*4)/4;const FW={0.25:'and a quarter',0.5:'and a half',0.75:'and three quarters'};return intWords(w)+(f?' '+FW[f]:'')}
-
-/* ---------- voice parsing ---------- */
-function parseSpoken(raw){
-  let t=raw.toLowerCase().replace(/[^a-z0-9./ ]/g,' ').replace(/\s+/g,' ').trim();
-  if(!t)return null;
-  const isCm=/centimeter|\bcm\b/.test(t);
-  let frac=null;
-  if(/three (quarter|fourth)/.test(t))frac=.75;
-  else if(/\bhalf\b/.test(t))frac=.5;
-  else if(/\bquarter\b/.test(t)&&!/three/.test(t))frac=.25;
-  if(/point seven|point seventy/.test(t))frac=.75;
-  else if(/point two|point twenty/.test(t))frac=.25;
-  else if(/point five\b/.test(t))frac=.5;
-  let base=null;
-  const dm=t.match(/(\d+)(?:[.,](\d+))?/);
-  if(dm){base=parseInt(dm[1],10);if(dm[2]&&frac==null){const dec=parseInt(dm[2].slice(0,2).padEnd(2,'0'),10)/100;frac=snapQ(dec)}}
-  else{
-    const stripped=t.replace(/and|inches|inch|centimeters?|cm|point\s+\w+/g,' ').replace(/three (quarter|fourth)s?|a (half|quarter)/g,' ');
-    let tot=0,found=false;
-    stripped.split(/[\s-]+/).forEach(p=>{if(NUMW[p]!=null){tot+=NUMW[p];found=true}});
-    if(found)base=tot;
-  }
-  if(base==null&&frac!=null)base=0;
-  if(base==null)return null;
-  let v=base+(frac||0);
-  if(isCm)v=v/2.54;
-  v=snapQ(v);
-  return(v>=4&&v<=130)?v:null;
-}
-function listen(cb){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){toast('🎙 Speech recognition isn\u2019t supported in this browser — manual entry works great.', 'risk');return null}
-  const rec=new SR();rec.lang='en-US';rec.interimResults=false;rec.maxAlternatives=1;
-  rec.onresult=e=>cb(e.results[0][0].transcript);
-  rec.onerror=()=>{beep(300,.12)};
-  rec.start();beep(1040,.07);
-  return rec;
-}
-
-/* ---------- health math ---------- */
-function calcWHtR(){const w=mv('waist'),h=mv('height');return(w&&h)?w/h:null}
-function calcBFP(){
-  const h=mv('height'),n=mv('neck'),w=mv('waist'),hip=mv('hips');
-  const a=S.profile&&S.profile.archetype;if(!a)return{v:null,need:null};
-  const ok=x=>x!=null&&isFinite(x)&&x>2&&x<65;
-  let m=null,f=null;
-  if(h&&n&&w&&w>n)m=495/(1.0324-0.19077*Math.log10(w-n)+0.15456*Math.log10(h))-450;
-  if(h&&n&&w&&hip&&(w+hip-n)>0)f=495/(1.29579-0.35004*Math.log10(w+hip-n)+0.22100*Math.log10(h))-450;
-  if(!ok(m))m=null;if(!ok(f))f=null;
-  if(a==='masculine')return{v:m,need:m?null:(h?'neck + waist':'height, neck & waist')};
-  if(a==='feminine')return{v:f,need:f?null:(!h?'height, neck, waist & hips':(!n||!w?'neck & waist':'hips'))};
-  const v=(m!=null&&f!=null)?(m+f)/2:(f!=null?f:m);
-  return{v:v!=null?Math.round(v*10)/10:null,need:v!=null?null:'neck, waist (± hips) & height'};
-}
-function healthFlags(){
-  const flags=[],whtr=calcWHtR(),bf=calcBFP().v,a=S.profile&&S.profile.archetype,th=ARCHETYPES[a];
-  if(whtr!=null){
-    if(whtr>=0.50)flags.push({id:'whtr-high',metric:'WHtR',val:whtr.toFixed(3),detail:'Waist-to-Height Ratio ≥ 0.50',proto:'A'});
-    else if(whtr<0.40)flags.push({id:'whtr-low',metric:'WHtR',val:whtr.toFixed(3),detail:'Waist-to-Height Ratio < 0.40',proto:'B'});
-  }
-  if(bf!=null&&th){
-    if(bf>=th.high)flags.push({id:'bf-high',metric:'Body Fat %',val:bf.toFixed(1)+'%',detail:`Body fat ≥ ${th.high}% (${th.label})`,proto:'A'});
-    else if(bf<th.ess)flags.push({id:'bf-low',metric:'Body Fat %',val:bf.toFixed(1)+'%',detail:`Body fat below ${th.ess}% essential minimum (${th.label})`,proto:'B'});
-  }
-  return flags;
-}
-
-/* ---------- protocols ---------- */
-const PROTOCOLS={
- A:{title:'Protocol A — Elevated WHtR / High Body Fat',trigger:'WHtR ≥ 0.50 or body fat above archetype healthy range',
-   comorbid:['Visceral adiposity','Insulin resistance / T2D risk','Elevated arterial pressure','Dyslipidemia','Vascular stiffness'],
-   items:[
-    {t:'Prioritize Strength & Muscle Mass Building (Resistance or Calisthenics/Bodyweight)',impact:'HIGHEST',cls:'i1',
-     action:'3 to 4 weekly sessions of compound movements — using weights, resistance bands, or progressive bodyweight calisthenics (squats, push-ups, lunges).',
-     mech:'Depletes muscle glycogen to drive non-insulin-mediated glucose uptake and burn visceral fat faster than cardio alone.'},
-    {t:'Minimize Ultra-Processed Foods & Highly Palatable Refined Alternatives',impact:'VERY HIGH',cls:'i2',
-     action:'Shift away from cheap, hyper-palatable, highly refined convenience foods; focus on whole, minimally processed ingredients.',
-     mech:'(Diabetes & lipid target) Suppresses chronic postprandial insulin spikes, preventing de novo lipogenesis and fatty liver accumulation.'},
-    {t:'Manage Sodium Intake Baseline & Surge Potassium',impact:'HIGH',cls:'i3',
-     action:'Keep total daily sodium under 2,000 mg/day while increasing potassium-rich foods (spinach, avocado, squash).',
-     mech:'(CVD / hypertension target) Reduces arterial fluid retention and vascular resistance caused by abdominal adiposity.'},
-    {t:'Incorporate Regular Cardiovascular Exercise (Steady-State or Intervals)',impact:'MODERATE-HIGH',cls:'i3',
-     action:'Establish a consistent cardio routine — from brisk walking/running (steady-state) to short HIIT sessions 2–3 times per week.',
-     mech:'Improves systemic cardiovascular endurance and mobilizes abdominal visceral fat.'},
-    {t:'Standardize Sleep Duration (7.5–9 Hours Continuous)',impact:'MODERATE',cls:'i4',
-     action:'Maintain consistent sleep/wake schedules and eliminate night-time screens.',
-     mech:'Lowers baseline cortisol to prevent stress-induced central fat storage.'}],
-   cred:{title:'Consult a Credentialed Healthcare & Therapy Specialist',impact:'CONTEXTUAL / HIGH',
-     action:'Seek guidance from a licensed mental health professional or specialist.',
-     cert:'Registered Dietitian (RD/RDN) for nutritional guidance, and a Licensed Professional Counselor (LPC/LMHC) or Licensed Clinical Social Worker (LCSW) holding certification from the Academy for Eating Disorders (CEDS) or specialized training in behavioral health / body image.'}},
- B:{title:'Protocol B — Low WHtR / Low Body Fat',trigger:'WHtR < 0.40 or body fat below essential-fat threshold',
-   comorbid:['Hypogonadism / hormonal shutdown','Osteopenia (bone density loss)','Immune suppression','Bradycardia'],
-   items:[
-    {t:'Increase Intake of Micronutrients & Healthy Fats',impact:'HIGHEST',cls:'i1',
-     action:'Prioritize nutrient-dense foods rich in healthy fats (nut butter, avocados, olive oil, eggs) to ensure adequate substrate for hormone production.',
-     mech:'Supplies direct precursor substrates for steroid hormone synthesis (testosterone, estrogen, progesterone) and restores HPG axis signalling.'},
-    {t:'Scale Back High-Volume Aerobic Conditioning',impact:'VERY HIGH',cls:'i2',
-     action:'Limit long-distance running or endurance cardio to a maximum of 1–2 light sessions per week.',
-     mech:'Preserves daily energy availability for essential physiological repair and tissue maintenance.'},
-    {t:'Shift Training toward Progressive Hypertrophy (Resistance or Calisthenics)',impact:'HIGH',cls:'i3',
-     action:'Perform progressive hypertrophy movements using moderate weights or bodyweight progressions, ensuring adequate rest intervals (2–3 minutes).',
-     mech:'Provides an anabolic stimulus to rebuild lean mass without triggering metabolic burnout.'}],
-   cred:{title:'Consult a Credentialed Healthcare & Therapy Specialist',impact:'CONTEXTUAL / HIGH',
-     action:'Seek professional clinical evaluation.',
-     cert:'Licensed Clinical Social Worker (LCSW) or Licensed Marriage and Family Therapist (LMFT) holding a Certified Eating Disorders Specialist (CEDS) designation through the International Association of Eating Disorders Professionals (iaedp), alongside a Registered Dietitian (RD) specializing in metabolic recovery.'}}
-};
-
-/* ============================================================
-   RENDERING
-============================================================ */
-function renderAll(){renderProfile();renderList();renderFigure();renderGauges();renderFlags();renderChart();renderNotes();renderToggles()}
-
-function renderToggles(){
-  $('#tglVoice').setAttribute('aria-pressed',S.settings.voice);$('#voiceHint').textContent=S.settings.voice?'ON':'OFF';
-  $('#tglPartner').setAttribute('aria-pressed',S.settings.partner);$('#partnerHint').textContent=S.settings.partner?'ON':'OFF';
-  document.body.classList.toggle('partner',S.settings.partner);
-  $('#pillArch').textContent=S.profile?ARCHETYPES[S.profile.archetype].label.replace(' Archetype',''):'no profile';
-  $('#partnerBar').hidden=!S.settings.partner;
-  if(S.settings.partner)renderQuickBar();
-}
-function renderQuickBar(){
-  const missing=MEASURES.filter(m=>m.id!=='height'&&!S.meas[m.id]);
-  const list=(missing.length?missing:MEASURES.filter(m=>m.id!=='height')).slice(0,6);
-  $('#qbar').innerHTML=list.map(m=>`<button class="qchip" data-log="${m.id}">🎙 ${m.name}</button>`).join('');
-  $$('#qbar .qchip').forEach(b=>b.onclick=()=>openWizard(b.dataset.log,true));
-}
-function renderProfile(){
-  const p=S.profile;
-  if(!p){$('#pfName').textContent='New Maker';$('#pfMeta').textContent='Complete onboarding to set your baseline';$('#pfChips').innerHTML='';$('#pfFocus').hidden=true;$('#pfAvatar').textContent='?';return}
-  $('#pfAvatar').textContent=(p.name||'M')[0].toUpperCase();
-  $('#pfName').textContent=p.name||'Maker';
-  const h=mv('height');
-  $('#pfMeta').textContent=`${ARCHETYPES[p.archetype].label} · ${h?'Height '+fmt(h):'Height not set'} · logging since ${fmtDate(p.since)}`;
-  const chips=[`<span class="chip gold">${ARCHETYPES[p.archetype].thr}</span>`];
-  if(p.target)chips.push(`<span class="chip">${TARGETS[p.target].ico} ${TARGETS[p.target].name}</span>`);
-  chips.push(`<span class="chip">WHtR scale invariant across archetypes</span>`);
-  $('#pfChips').innerHTML=chips.join('');
-  if(p.target){$('#pfFocus').hidden=false;$('#pfFocus').innerHTML=`<b>Build focus — ${TARGETS[p.target].name}:</b> ${TARGETS[p.target].focus}`}
-  else $('#pfFocus').hidden=true;
-}
-function renderList(){
-  $('#measList').innerHTML=MEASURES.map(m=>{
-    const rec=S.meas[m.id];
-    const val=rec?`<span class="val">${fmt(rec.v)}<span class="cm">${cm(rec.v)}</span></span>`:`<span class="val none">not logged</span>`;
-    const when=rec?`<span class="when">${fmtDate(rec.d)}</span>`:'';
-    return `<div class="mitem" data-m="${m.id}">
-      <span class="num">${m.n||'H'}</span>
-      <span class="nm">${m.name}<button class="info" data-tip="${m.tip.replace(/"/g,'&quot;')}">i</button><small>${m.pat}</small></span>
-      ${val}${when}
-      <button class="btn sm ${rec?'':'primary'}" data-log="${m.id}">${rec?'Re-log':'Log'}</button>
-    </div>`}).join('');
-  $$('#measList [data-log]').forEach(b=>b.onclick=()=>openWizard(b.dataset.log));
-  $$('#measList .mitem').forEach(row=>{
-    row.addEventListener('mouseenter',()=>{const hs=document.querySelector(`.hs[data-m="${row.dataset.m}"]`);if(hs)hs.classList.add('hot')});
-    row.addEventListener('mouseleave',()=>{const hs=document.querySelector(`.hs[data-m="${row.dataset.m}"]`);if(hs)hs.classList.remove('hot')});
-  });
-  const first=MEASURES.find(m=>!S.meas[m.id])||MEASURES[3];
-  $('#btnLogFirst').textContent=`＋ Log ${first.name}`;
-  $('#btnLogFirst').onclick=()=>openWizard(first.id);
-}
-function renderFigure(){
-  MEASURES.forEach(m=>{const t=$('#fv-'+m.id);if(t)t.textContent=S.meas[m.id]?fmt(S.meas[m.id].v):'—'});
-  $$('.hs').forEach(h=>{
-    const has=!!S.meas[h.dataset.m];h.classList.toggle('empty',!has);
-    h.onclick=()=>openWizard(h.dataset.m);
-    h.addEventListener('mouseenter',()=>{const r=document.querySelector(`.mitem[data-m="${h.dataset.m}"]`);if(r)r.classList.add('hl')});
-    h.addEventListener('mouseleave',()=>{const r=document.querySelector(`.mitem[data-m="${h.dataset.m}"]`);if(r)r.classList.remove('hl')});
-  });
-  $('#figLegend').innerHTML=MEASURES.filter(m=>m.id!=='height').map(m=>{
-    const rec=S.meas[m.id];
-    return `<div class="lg" data-m="${m.id}"><span class="n">${m.n}</span>${m.name}<span class="v ${rec?'':'none'}">${rec?fmt(rec.v):'—'}</span></div>`}).join('');
-  $$('#figLegend .lg').forEach(l=>{l.onclick=()=>openWizard(l.dataset.m);
-    l.addEventListener('mouseenter',()=>{const hs=document.querySelector(`.hs[data-m="${l.dataset.m}"]`);if(hs)hs.classList.add('hot')});
-    l.addEventListener('mouseleave',()=>{const hs=document.querySelector(`.hs[data-m="${l.dataset.m}"]`);if(hs)hs.classList.remove('hot')});});
-}
-function markerHTML(id,val,scaleMin,scaleMax){
-  const pct=Math.max(2,Math.min(98,(val-scaleMin)/(scaleMax-scaleMin)*100));
-  const mk=$('#'+id);mk.hidden=false;mk.style.left=pct+'%';
-  return mk;
-}
-function renderGauges(){
-  /* WHtR */
-  const whtr=calcWHtR();
-  if(whtr!=null){
-    $('#whtrVal').innerHTML=whtr.toFixed(3)+'<small> WHtR</small>';
-    markerHTML('whtrMark',whtr,0.30,0.60);$('#whtrMarkV').textContent=whtr.toFixed(3);
-    $('#whtrMeter').classList.remove('empty');
-    if(whtr>=0.5)$('#whtrStatus').innerHTML='<span class="status risk">▲ AT RISK — boundary crossed</span>';
-    else if(whtr<0.4)$('#whtrStatus').innerHTML='<span class="status low">▽ Below range — underweight signal</span>';
-    else $('#whtrStatus').innerHTML='<span class="status ok">● Healthy range</span>';
-    $('#whtrNote').textContent=`waist ${fmtPlain(mv('waist'))} ÷ height ${fmtPlain(mv('height'))}`;
-  }else{
-    $('#whtrVal').innerHTML='—<small> WHtR</small>';$('#whtrMark').hidden=true;
-    $('#whtrStatus').innerHTML='<span class="status na">awaiting waist + height</span>';
-    $('#whtrNote').textContent='Log your Waist (item 4) and Height to activate this gauge.';
-  }
-  /* Body fat */
-  const a=S.profile?S.profile.archetype:null;const th=a?ARCHETYPES[a]:null;
-  const bfRes=calcBFP();const bf=bfRes.v;
-  const track=$('#bfTrack'),labels=$('#bfLabels');
-  const ess=th?th.ess:13,high=th?th.high:25,MAX=45;
-  track.innerHTML=`<div class="zone z-low" style="width:${ess/MAX*100}%"></div><div class="zone z-ok" style="width:${(high-ess)/MAX*100}%"></div><div class="zone z-high" style="width:${(MAX-high)/MAX*100}%"></div>
-    <div class="z-div" style="left:${ess/MAX*100}%"><b>${ess}%</b></div><div class="z-div" style="left:${high/MAX*100}%"><b>${high}%</b></div>
-    <div class="marker" id="bfMark" hidden><span class="flag" id="bfMarkV"></span><span class="pin"></span></div>`;
-  labels.innerHTML=`<span><b>&lt; ${ess}%</b>Essential-fat risk</span><span><b>${ess} – ${high-1}%</b>Healthy range</span><span><b>≥ ${high}%</b>Increased risk</span>`;
-  if(bf!=null){
-    $('#bfVal').innerHTML=bf.toFixed(1)+'<small> %</small>';
-    const mk=$('#bfMark');mk.hidden=false;mk.style.left=Math.max(2,Math.min(98,bf/MAX*100))+'%';$('#bfMarkV').textContent=bf.toFixed(1)+'%';
-    if(bf>=high)$('#bfStatus').innerHTML='<span class="status risk">▲ AT RISK — above healthy range</span>';
-    else if(bf<ess)$('#bfStatus').innerHTML='<span class="status low">▽ Below essential minimum</span>';
-    else $('#bfStatus').innerHTML='<span class="status ok">● Healthy range</span>';
-    $('#bfNote').textContent='U.S. Navy estimate · '+(th?th.label:'');
-  }else{
-    $('#bfVal').innerHTML='—<small> %</small>';
-    $('#bfStatus').innerHTML='<span class="status na">awaiting data</span>';
-    $('#bfNote').textContent=th?('Still needed: '+bfRes.need):'Set an archetype to enable estimation.';
-  }
-}
-function renderFlags(){
-  const flags=healthFlags();const box=$('#flagsBox');
-  if(!flags.length){
-    box.innerHTML=`<div class="risk-banner" style="background:var(--ok-bg)"><div class="stripe" style="background:repeating-linear-gradient(-45deg,var(--ink) 0 9px,#8FCB9B 9px 18px)"></div>
-      <div class="rb-body"><span class="rb-title" style="color:var(--ok)">● No risk flags detected</span>
-      <p>All tracked metrics are inside their healthy ranges. Keep logging to maintain your pattern record.</p></div></div>`;
-    $('#actionSummary').innerHTML='<p style="font-size:13.5px">No targeted interventions right now — both gauges read <b>Healthy Range</b>. If a metric crosses a boundary, its evidence-based protocol will appear here instantly.</p>';
-    return;
-  }
-  box.innerHTML=flags.map(f=>`<div class="risk-banner"><div class="stripe"></div><div class="rb-body">
-    <span class="rb-title">⚠️ Health Risk Boundary Crossed</span>
-    <p><b>${f.detail}</b> — current value ${f.val}.</p>
-    <div><button class="btn risk" data-proto="${f.proto}">🛠️ View Targeted Action Plan</button></div>
-  </div></div>`).join('');
-  $$('#flagsBox [data-proto]').forEach(b=>b.onclick=()=>openPlan(b.dataset.proto));
-  $('#actionSummary').innerHTML=`<p style="font-size:13.5px;margin-bottom:10px"><b>▲ ${flags.length} risk flag${flags.length>1?'s':''} active:</b> ${flags.map(f=>f.metric).join(', ')}.</p>`+
-    [...new Set(flags.map(f=>f.proto))].map(p=>`<button class="btn risk" style="margin-right:8px" data-proto="${p}">🛠️ Protocol ${p}</button>`).join('');
-  $$('#actionSummary [data-proto]').forEach(b=>b.onclick=()=>openPlan(b.dataset.proto));
-}
-function upsertEntry(){
-  const d=todayISO();
-  const snap={};for(const k in S.meas)snap[k]=S.meas[k].v;
-  const whtr=calcWHtR();
-  const ex=S.entries.find(e=>e.d===d);
-  if(ex){ex.m=snap;ex.whtr=whtr;ex.bf=calcBFP().v}
-  else S.entries.push({d,m:snap,whtr,bf:calcBFP().v});
-  S.entries.sort((a,b)=>a.d<b.d?-1:1);
-  if(S.entries.length>80)S.entries=S.entries.slice(-80);
-}
-function renderChart(){
-  const box=$('#chartBox'),meta=$('#chartMeta');
-  $('#cmWhtr').classList.toggle('on',S.chartMode==='whtr');$('#cmWaist').classList.toggle('on',S.chartMode==='waist');
-  const es=S.entries;
-  meta.innerHTML=`<span class="cm-chip">entries: <b>${es.length}</b></span>`+
-    (es.length?`<span class="cm-chip">since <b>${fmtDate(es[0].d)}</b></span>`:'')+
-    (es.length>=2?deltaChip():'');
-  function deltaChip(){
-    const key=S.chartMode==='whtr'?'whtr':'waist';
-    const vals=es.map(e=>key==='whtr'?e.whtr:(e.m&&e.m.waist)).filter(v=>v!=null);
-    if(vals.length<2)return'';
-    const d=vals[vals.length-1]-vals[vals.length-2];
-    if(Math.abs(d)<0.001)return'<span class="cm-chip">Δ latest: <b>±0</b></span>';
-    return `<span class="cm-chip">Δ latest: <b>${d>0?'+':''}${key==='whtr'?d.toFixed(3):fmtPlain(Math.abs(d)*Math.sign(d))}</b></span>`;
-  }
-  const key=S.chartMode==='whtr'?'whtr':'waist';
-  const pts=es.map((e,i)=>({i,d:e.d,v:key==='whtr'?e.whtr:(e.m&&e.m.waist)})).filter(p=>p.v!=null);
-  if(pts.length<2){box.innerHTML='<div class="chart-empty">Log on two different days to reveal your trend line. 📈</div>';return}
-  const W=560,H=150,pad=26;
-  let lo=Math.min(...pts.map(p=>p.v)),hi=Math.max(...pts.map(p=>p.v));
-  if(key==='whtr'){lo=Math.min(lo,0.40)-0.02;hi=Math.max(hi,0.50)+0.02}
-  else{lo-=1;hi+=1}
-  const X=i=>pad+i*(W-2*pad)/(pts.length-1);
-  const Y=v=>H-pad-(v-lo)/(hi-lo)*(H-2*pad);
-  let band='';
-  if(key==='whtr'){band=`<rect x="${pad}" y="${Y(0.49)}" width="${W-2*pad}" height="${Y(0.40)-Y(0.49)}" fill="#8FCB9B" opacity=".35"/>
-    <line x1="${pad}" x2="${W-pad}" y1="${Y(0.50)}" y2="${Y(0.50)}" stroke="#CE4326" stroke-dasharray="4 4" opacity=".6"/>`}
-  const line=pts.map((p,j)=>(j?'L':'M')+X(p.i).toFixed(1)+','+Y(p.v).toFixed(1)).join(' ');
-  const dots=pts.map(p=>`<circle cx="${X(p.i).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="4" fill="#F2B300" stroke="#201F1A" stroke-width="1.5"><title>${p.d}: ${key==='whtr'?p.v.toFixed(3):fmtPlain(p.v)}</title></circle>`).join('');
-  const last=pts[pts.length-1];
-  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}">${band}
-    <path d="${line}" fill="none" stroke="#201F1A" stroke-width="2.2" stroke-linejoin="round"/>${dots}
-    <text x="${X(last.i)}" y="${Y(last.v)-9}" text-anchor="end" font-family="IBM Plex Mono" font-size="11" font-weight="700">${key==='whtr'?last.v.toFixed(3):fmtPlain(last.v)}</text>
-    <text x="${pad}" y="${H-6}" font-family="IBM Plex Mono" font-size="9" fill="#5B5648">${fmtDate(pts[0].d)}</text>
-    <text x="${W-pad}" y="${H-6}" text-anchor="end" font-family="IBM Plex Mono" font-size="9" fill="#5B5648">${fmtDate(last.d)}</text></svg>`;
-}
-function renderNotes(){
-  $('#notesArea').value=S.notes;
-  const t=S.profile&&S.profile.target;
-  const bf=$('#buildFocus');
-  if(t){bf.hidden=false;bf.innerHTML=`<b>${TARGETS[t].ico} ${TARGETS[t].name}:</b> ${TARGETS[t].focus}`}
-  else{bf.hidden=false;bf.innerHTML='<b>No build target set</b> — pick one in Settings to contextualize your notes and training.'}
-}
-
-/* ============================================================
-   ONBOARDING
-============================================================ */
-let OB={step:1,name:'',archetype:null,target:null,hw:65,hf:0};
-function openOnboarding(prefill){
-  if(prefill&&S.profile){OB={step:1,name:S.profile.name||'',archetype:S.profile.archetype,target:S.profile.target,hw:Math.floor(mv('height')||65),hf:(mv('height')||65)%1}}
-  else OB={step:1,name:'',archetype:null,target:null,hw:65,hf:0};
-  renderOB();openModal('#obModal');
-}
-function renderOB(){
-  const b=$('#obBody');
-  $('#obBack').style.visibility=OB.step===1?'hidden':'visible';
-  $('#obNext').textContent=OB.step===4?'🧵 Start Tracking':'Next →';
-  if(OB.step===1){
-    b.innerHTML=`<h3>Welcome to the atelier. ✂️</h3>
-    <div class="sub">TailorTrack keeps your cosplay body measurements, health baselines, and build specs on one pattern table — privately, in your browser.</div>
-    <div class="quote"><b>💡 Physiological Baseline Selection:</b><br>“Select the biological baseline that best aligns with your current physiology or primary hormone profile (e.g., estrogen-dominant vs. androgen-dominant). This only affects body fat % and health risk calculation thresholds. You can update your baseline at any time in settings as your physiology or transition goals evolve.”</div>
-    <label style="font-weight:650;font-size:13.5px;display:block;margin-top:12px">Your name (or maker handle)</label>
-    <input type="text" id="obName" value="${OB.name}" placeholder="e.g., StitchWitch" style="width:100%;margin-top:6px;border:1.5px solid var(--ink);border-radius:8px;padding:10px 12px">`;
-    $('#obName').oninput=e=>OB.name=e.target.value;
-  }
-  if(OB.step===2){
-    b.innerHTML=`<h3>Choose your archetype</h3><div class="sub">Sets body-fat thresholds only. WHtR boundaries stay identical for everyone.</div>
-    <div class="arch">${Object.entries(ARCHETYPES).map(([k,a])=>`
-      <div class="arch-card ${OB.archetype===k?'sel':''}" data-arch="${k}">
-        <h5>${a.label}</h5><div class="ad">${a.desc}</div>
-        <div class="thr"><span>${a.thr}</span></div>
-        ${a.note?`<div class="note">* ${a.note}</div>`:''}
-      </div>`).join('')}</div>`;
-    $$('#obBody .arch-card').forEach(c=>c.onclick=()=>{OB.archetype=c.dataset.arch;renderOB()});
-  }
-  if(OB.step===3){
-    b.innerHTML=`<h3>Set your height</h3><div class="sub">The denominator of every WHtR reading. Fractions in quarter-inches.</div>
-    ${heightPickerHTML(OB.hw,OB.hf)}
-    <div class="cm-read" id="obCm"></div>`;
-    wireHeightPicker('#obBody',v=>{OB.hw=Math.floor(v);OB.hf=v%1;$('#obCm').textContent='= '+cm(v)},OB.hw+OB.hf);
-    $('#obCm').textContent='= '+cm(OB.hw+OB.hf);
-  }
-  if(OB.step===4){
-    b.innerHTML=`<h3>Cosplay Silhouette Build Target <span style="font-size:12px;color:var(--ink2)">(optional)</span></h3>
-    <div class="sub">Contextualizes fitness recommendations alongside your medical metrics. Skippable.</div>
-    <div class="target-grid">${Object.entries(TARGETS).map(([k,t])=>`
-      <div class="tg-card ${OB.target===k?'sel':''}" data-tg="${k}"><span class="ico">${t.ico}</span><b>${t.name}</b>${t.focus}</div>`).join('')}
-      <div class="tg-card ${OB.target===null?'sel':''}" data-tg=""><span class="ico">✨</span><b>Decide later</b>Skip for now — you can set this anytime in Settings.</div>
-    </div>`;
-    $$('#obBody .tg-card').forEach(c=>c.onclick=()=>{OB.target=c.dataset.tg||null;renderOB()});
-  }
-}
-function finishOnboarding(){
-  const isNew=!S.profile;
-  S.profile={name:OB.name.trim()||'Maker',archetype:OB.archetype,target:OB.target,since:(S.profile&&S.profile.since)||todayISO()};
-  S.meas.height={v:snapQ(OB.hw+OB.hf),d:todayISO()};
-  upsertEntry();save();closeModals();renderAll();
-  toast(isNew?`🧵 Welcome, ${S.profile.name}! Log your <b>Waist</b> next to unlock the WHtR gauge.`:'✔ Profile updated.','ok');
-  if(isNew)setTimeout(()=>toast('💡 Tip: tap any numbered pin on the silhouette map to log that measurement.'),2200);
-}
-$('#obNext').onclick=()=>{
-  if(OB.step===1){OB.name=$('#obName').value;OB.step=2;renderOB()}
-  else if(OB.step===2){if(!OB.archetype){toast('Select the baseline that fits your physiology — you can change it anytime.','risk');return}OB.step=3;renderOB()}
-  else if(OB.step===3){OB.step=4;renderOB()}
-  else finishOnboarding();
-};
-$('#obBack').onclick=()=>{if(OB.step>1){OB.step--;renderOB()}};
-
-/* ============================================================
-   MEASUREMENT WIZARD
-============================================================ */
-let WZ=null;
-function openWizard(id,automic){
-  if(!S.profile){openOnboarding();return}
-  const m=M_MAP[id];const cur=mv(id);
-  WZ={id,m,step:1,whole:cur!=null?Math.floor(cur):(id==='height'?65:30),frac:cur!=null?cur%1:0};
-  renderWiz();openModal('#wizModal');
-  if(automic&&S.settings.voice)setTimeout(()=>{const mb=$('#wizMic');if(mb)mb.click()},450);
-}
-function guideSVG(kind){
-  if(kind==='circ')return'<svg width="150" height="58" viewBox="0 0 150 58"><ellipse cx="75" cy="29" rx="60" ry="20" fill="rgba(242,179,0,.15)" stroke="#201F1A" stroke-width="1.6" stroke-dasharray="5 4"/><path d="M15,29 A60,20 0 0 1 135,29" fill="none" stroke="#F2B300" stroke-width="5"/><text x="75" y="33" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="700">wrap · parallel to floor</text></svg>';
-  if(kind==='span')return'<svg width="150" height="58" viewBox="0 0 150 58"><circle cx="30" cy="29" r="7" fill="#F2B300" stroke="#201F1A" stroke-width="1.6"/><circle cx="120" cy="29" r="7" fill="#F2B300" stroke="#201F1A" stroke-width="1.6"/><line x1="39" y1="29" x2="111" y2="29" stroke="#3E6B8F" stroke-width="1.8" stroke-dasharray="3 3" marker-start="url(#arr)" marker-end="url(#arr)"/><text x="75" y="50" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" font-weight="700">point-to-point</text></svg>';
-  return'<svg width="150" height="58" viewBox="0 0 150 58"><line x1="75" y1="8" x2="75" y2="50" stroke="#3E6B8F" stroke-width="1.8" stroke-dasharray="3 3" marker-start="url(#arr)" marker-end="url(#arr)"/><line x1="60" y1="8" x2="90" y2="8" stroke="#201F1A" stroke-width="1.6"/><line x1="60" y1="50" x2="90" y2="50" stroke="#201F1A" stroke-width="1.6"/><text x="100" y="32" font-family="IBM Plex Mono" font-size="10" font-weight="700">top → bottom</text></svg>';
-}
-function renderWiz(){
-  const m=WZ.m,b=$('#wizBody');
-  $('#wizBack').style.visibility=WZ.step===1?'hidden':'visible';
-  $('#wizNext').textContent=WZ.step===3?'✔ Save Measurement':(WZ.step===2?'Review →':'Got it →');
-  const prog=`<div class="tprog"><div class="fill" style="width:${WZ.step/3*100}%"></div><span class="lbl">STEP ${WZ.step} / 3</span></div>`;
-  if(WZ.step===1){
-    b.innerHTML=`<div class="wz-step"><h3>${m.n?('№'+m.n+' · '):''}${m.name}</h3>
-    <div class="sub">Step one — position the tape correctly before reading it.</div>${prog}
-    <div class="guidebox">${guideSVG(m.kind)}<div style="text-align:center;font-size:13px">${m.tip}</div></div>
-    <ul class="tip-list">
-      <li>Use a flexible vinyl tape — rigid rulers lie on curves.</li>
-      <li>Snug, never compressing. Tape parallel to the floor for circumferences.</li>
-      <li>Read at the end of a normal exhale.</li>
-    </ul></div>`;
-  }
-  if(WZ.step===2){
-    const partner=S.settings.partner;
-    b.innerHTML=`<div class="wz-step"><h3>${m.name} — enter the reading</h3>
-    <div class="sub">${partner?'👥 Partner mode: read the value out loud, or use the big controls.':'Quarter-inch precision. Tap 🎙 and speak the number hands-free.'}</div>${prog}
-    <div class="stepper">
-      <button class="st-btn" id="wMinus" aria-label="minus one inch">−</button>
-      <div class="st-val" id="wVal"></div>
-      <button class="st-btn" id="wPlus" aria-label="plus one inch">＋</button>
-    </div>
-    <div class="frac-row">
-      <button class="frac" data-f="0">.0</button><button class="frac" data-f="0.25">¼</button>
-      <button class="frac" data-f="0.5">½</button><button class="frac" data-f="0.75">¾</button>
-    </div>
-    <div class="manual-row"><span style="font-size:12px;color:var(--ink2)">or type:</span>
-      <input type="text" id="wManual" inputmode="decimal" placeholder="32.5 / 32 ½" autocomplete="off">
-    </div>
-    <div class="cm-read" id="wCm"></div>
-    ${S.settings.voice?`<button class="mic-btn" id="wizMic">🎙 <span id="wizMicTxt">Tap &amp; speak the measurement</span></button>
-    <div class="mic-hint">e.g. “${m.id==='height'?'five feet six':'thirty two and a half'}” — quarter fractions are snapped automatically.</div>
-    <div class="heard" id="wHeard"></div>`:''}
-    </div>`;
-    const upd=()=>{const v=WZ.whole+WZ.frac;$('#wVal').innerHTML=`${fmt(v).replace('″','')}<small>″</small>`;$('#wCm').textContent='= '+cm(v);
-      $$('#wizBody .frac').forEach(f=>f.classList.toggle('on',Math.abs(parseFloat(f.dataset.f)-WZ.frac)<0.001));};
-    upd();
-    $('#wMinus').onclick=()=>{if(WZ.whole>0){WZ.whole--;upd();beep(600,.04)}};
-    $('#wPlus').onclick=()=>{WZ.whole++;upd();beep(760,.04)};
-    $$('#wizBody .frac').forEach(f=>f.onclick=()=>{WZ.frac=parseFloat(f.dataset.f);upd();beep(680,.04)});
-    $('#wManual').oninput=e=>{const p=parseManual(e.target.value);if(p!=null){WZ.whole=Math.floor(p);WZ.frac=p%1;upd()}};
-    const mic=$('#wizMic');
-    if(mic)mic.onclick=()=>{
-      if(mic.classList.contains('listening'))return;
-      mic.classList.add('listening');$('#wizMicTxt').textContent='Listening…';
-      const rec=listen(txt=>{
-        mic.classList.remove('listening');$('#wizMicTxt').textContent='Tap & speak the measurement';
-        $('#wHeard').textContent='heard: “'+txt+'”';
-        const v=parseSpoken(txt);
-        if(v!=null){WZ.whole=Math.floor(v);WZ.frac=v%1;upd();beep(1040,.1);
-          speak(sayNum(v)+' inches.');
-          if(S.settings.partner)setTimeout(()=>{$('#wizNext').click()},700);}
-        else{speak('I didn\u2019t catch a number. Try again.');toast('🎙 Couldn\u2019t parse that — try “thirty two and a half”.','risk')}
-      });
-      if(!rec){mic.classList.remove('listening');$('#wizMicTxt').textContent='Tap & speak the measurement'}
-      if(rec)rec.onend=()=>{mic.classList.remove('listening');$('#wizMicTxt').textContent='Tap & speak the measurement'};
-    };
-  }
-  if(WZ.step===3){
-    const v=WZ.whole+WZ.frac;
-    b.innerHTML=`<div class="wz-step"><h3>Confirm — ${m.name}</h3>
-    <div class="sub">${S.settings.voice?'Audio confirmation will play on save.':''}</div>${prog}
-    <div class="confirm-big">${fmt(v).replace('″','')}<small>″</small></div>
-    <div class="cm-read">= ${cm(v)} · logged ${fmtDate(todayISO())}</div>
-    <div class="guidebox" style="font-size:13px;text-align:center">${m.pat}</div></div>`;
-  }
-}
-function parseManual(str){
-  if(!str)return null;
-  let s=str.trim().toLowerCase().replace(',','.');
-  const g={'¼':0.25,'½':0.5,'¾':0.75};
-  let add=null;for(const k in g){if(s.includes(k)){add=g[k];s=s.replace(k,'')}}
-  const fr=s.match(/(\d)\s*(?:\/|\s+over\s+)\s*(\d)/);
-  if(fr){const d=parseInt(fr[2]);if(d>0)add=snapQ(parseInt(fr[1])/d);s=s.replace(fr[0],'')}
-  const m=s.match(/(\d+(?:\.\d+)?)/);
-  if(!m)return null;
-  let v=parseFloat(m[1]);
-  if(add!=null)v=Math.floor(v)+add;
-  v=snapQ(v);
-  return(v>0&&v<=130)?v:null;
-}
-$('#wizNext').onclick=()=>{
-  if(WZ.step===1){WZ.step=2;renderWiz()}
-  else if(WZ.step===2){WZ.step=3;renderWiz()}
-  else{
-    const v=snapQ(WZ.whole+WZ.frac);
-    S.meas[WZ.id]={v,d:todayISO()};
-    upsertEntry();save();closeModals();renderAll();
-    toast(`✔ <b>${WZ.m.name}</b> logged — ${fmt(v)} (${cm(v)})`,'ok');
-    speak(`${WZ.m.name} recorded: ${sayNum(v)} inches.`);
-  }
-};
-$('#wizBack').onclick=()=>{if(WZ&&WZ.step>1){WZ.step--;renderWiz()}};
-
-/* ============================================================
-   ACTION PLAN MODAL
-============================================================ */
-function openPlan(p){
-  const P=PROTOCOLS[p];
-  $('#planBody').innerHTML=`
-    <span class="proto-stamp">${p==='A'?'PROTOCOL A':'PROTOCOL B'}</span>
-    <h3>${P.title}</h3><div class="sub">Trigger: ${P.trigger}. Interventions ranked highest → lowest physiological impact.</div>
-    <div class="comorbid"><b style="font-size:11px;align-self:center;color:var(--ink2)">TARGETED COMORBIDITIES:</b>${P.comorbid.map(c=>`<span>${c}</span>`).join('')}</div>
-    ${P.items.map((it,i)=>`<div class="ap-item">
-      <div class="ap-head"><span class="rank">${i+1}</span><h5>${it.t}</h5><span class="impact ${it.cls}">IMPACT: ${it.impact}</span></div>
-      <div class="ap-body"><p><span class="lab">ACTION — </span>${it.action}</p><p><span class="lab">MECHANISM — </span>${it.mech}</p></div>
-    </div>`).join('')}
-    <div class="ap-item"><div class="ap-head"><span class="rank" style="background:var(--blue);color:#fff">✚</span><h5>${P.cred.title}</h5><span class="impact i4">IMPACT: ${P.cred.impact}</span></div>
-      <div class="ap-body"><p><span class="lab">ACTION — </span>${P.cred.action}</p>
-      <div class="cred-card"><h6>🎓 Recommended credentials</h6>${P.cred.cert}</div></div></div>
-    <div class="m-actions"><button class="btn dark" data-close>Close</button></div>`;
-  openModal('#planModal');
-}
-
-/* ============================================================
-   SETTINGS
-============================================================ */
-function openSettings(){
-  const p=S.profile||{name:'',archetype:null,target:null};
-  const h=mv('height')||65;
-  $('#setBody').innerHTML=`
-  <div class="set-row"><label>Maker name</label><input type="text" id="setName" value="${p.name||''}"></div>
-  <div class="set-row" style="display:block"><label>Physiological baseline <small>Only affects body-fat % &amp; risk thresholds. Fluid — update whenever it suits you.</small></label>
-    <div class="arch" style="margin-top:8px">${Object.entries(ARCHETYPES).map(([k,a])=>`
-      <div class="arch-card ${p.archetype===k?'sel':''}" data-arch="${k}"><h5>${a.label}</h5><div class="ad">${a.desc}</div><div class="thr"><span>${a.thr}</span></div>${a.note?`<div class="note">* ${a.note}</div>`:''}</div>`).join('')}</div></div>
-  <div class="set-row" style="display:block"><label>Height</label>${heightPickerHTML(Math.floor(h),h%1,'setH')}</div>
-  <div class="set-row" style="display:block"><label>Cosplay Build Target <small>Optional context layer for training framing.</small></label>
-    <div class="target-grid" style="margin-top:8px">${Object.entries(TARGETS).map(([k,t])=>`
-      <div class="tg-card ${p.target===k?'sel':''}" data-tg="${k}"><span class="ico">${t.ico}</span><b>${t.name}</b>${t.focus}</div>`).join('')}
-      <div class="tg-card ${!p.target?'sel':''}" data-tg=""><span class="ico">✨</span><b>None</b>No aesthetic framing — pure tracking.</div></div></div>
-  <div class="set-row"><label>Audio confirmations <small>Spoken read-backs when Voice Mode is on.</small></label>
-    <button class="pill" id="setSpeak" aria-pressed="${S.settings.voice}"><span class="dot"></span>${S.settings.voice?'Enabled':'Disabled'}</button></div>
-  <div class="set-row"><label>Backup data <small>Download everything as JSON.</small></label><button class="btn sm" id="setExport">⬇ Export JSON</button></div>
-  <div class="set-row"><label style="color:var(--risk)">Danger zone <small>Erase profile, measurements and history from this browser.</small></label><button class="btn sm risk" id="setReset">Reset all data</button></div>`;
-  let arch=p.archetype,tg=p.target,hv=h;
-  $$('#setBody .arch-card').forEach(c=>c.onclick=()=>{arch=c.dataset.arch;$$('#setBody .arch-card').forEach(x=>x.classList.toggle('sel',x===c))});
-  $$('#setBody .tg-card').forEach(c=>c.onclick=()=>{tg=c.dataset.tg||null;$$('#setBody .tg-card').forEach(x=>x.classList.toggle('sel',x===c))});
-  wireHeightPicker('#setBody',v=>hv=v,h);
-  $('#setSpeak').onclick=e=>{S.settings.voice=!S.settings.voice;e.currentTarget.setAttribute('aria-pressed',S.settings.voice);e.currentTarget.innerHTML=`<span class="dot"></span>${S.settings.voice?'Enabled':'Disabled'}`};
-  $('#setExport').onclick=()=>{const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='tailortrack-backup-'+todayISO()+'.json';a.click()};
-  $('#setReset').onclick=()=>{if(confirm('Erase all TailorTrack data from this browser? This cannot be undone.')){localStorage.removeItem(LS);location.reload()}};
-  $('#setSave').onclick=()=>{
-    if(!arch){toast('Choose a physiological baseline.','risk');return}
-    const wasNew=!S.profile;
-    S.profile={name:$('#setName').value.trim()||'Maker',archetype,tg2:null,target:tg,since:(S.profile&&S.profile.since)||todayISO()};
-    S.meas.height={v:snapQ(hv),d:todayISO()};
-    upsertEntry();save();closeModals();renderAll();
-    toast(wasNew?'✔ Profile created.':'✔ Settings saved.','ok');
-  };
-  openModal('#setModal');
-}
-/* shared height picker builder */
-function heightPickerHTML(w,f,ns){
-  ns=ns||'obH';
-  return `<div class="stepper" style="margin-top:8px">
-    <button class="st-btn" data-ns="${ns}" data-d="-1">−</button>
-    <div class="st-val" id="${ns}Val"></div>
-    <button class="st-btn" data-ns="${ns}" data-d="1">＋</button></div>
-  <div class="frac-row">${[0,0.25,0.5,0.75].map(x=>`<button class="frac" data-ns="${ns}" data-f="${x}">${x===0?'.0':FRACCH[x]}</button>`).join('')}</div>`;
-}
-function wireHeightPicker(scope,onchange,init){
-  const st={v:snapQ(init)};
-  const valEl=$(scope+' [id$="Val"]');
-  const upd=()=>{valEl.innerHTML=`${fmt(st.v).replace('″','')}<small>″</small>`;
-    $$(scope+' .frac').forEach(f=>f.classList.toggle('on',Math.abs(parseFloat(f.dataset.f)-(st.v%1))<0.001));onchange(st.v)};
-  $$(scope+' .st-btn').forEach(b=>b.onclick=()=>{st.v=Math.max(30,Math.min(100,snapQ(st.v)+parseInt(b.dataset.d))));upd()});
-  $$(scope+' .frac').forEach(f=>f.onclick=()=>{st.v=Math.floor(st.v)+parseFloat(f.dataset.f);upd()});
-  upd();
-}
-
-/* ============================================================
-   EXPORT SPEC SHEET
-============================================================ */
-function openExport(){
-  if(!S.profile){openOnboarding();return}
-  renderEase();openModal('#expModal');
-}
-function renderEase(){
-  $('#easeOpts').innerHTML=Object.entries(EASES).map(([k,e])=>`
-    <label class="ease-opt ${S.ease===k?'sel':''}"><input type="radio" name="ease" value="${k}" ${S.ease===k?'checked':''}>
-    <span><b>${e.label}</b>${e.add?` <span class="mono" style="font-size:11px;color:var(--ink2)">(circumferences only — lengths unchanged)</span>`:''}</span></label>`).join('');
-  $$('#easeOpts input').forEach(r=>r.onchange=()=>{S.ease=r.value;save();renderEase()});
-  buildSheet();
-}
-function buildSheet(){
-  const p=S.profile,e=EASES[S.ease];const whtr=calcWHtR();const bf=calcBFP().v;const th=ARCHETYPES[p.archetype];
-  const rows=MEASURES.map(m=>{
-    const rec=S.meas[m.id];if(!rec)return'';
-    const eased=m.circ?rec.v+e.add:null;
-    return `<tr><td>${m.n||'—'}</td><td><b>${m.name}</b></td><td>${m.pat}</td>
-      <td class="num">${fmt(rec.v)}</td><td class="num">${cm(rec.v)}</td>
-      <td class="num">${eased!=null?fmt(snapQ(eased)):'— (length)'}</td><td class="num">${eased!=null?cm(snapQ(eased)):'—'}</td></tr>`;
-  }).join('');
-  const status=(val,lo,hi)=>val==null?'—':(val>=hi?'⚠ AT RISK (high)':(val<lo?'⚠ BELOW RANGE (low)':'✔ Healthy range'));
-  $('#sheetDoc').innerHTML=`
-    <h1>TAILORTRACK — COSPLAY BUILD SPEC SHEET</h1>
-    <div class="sd-sub">GENERATED ${new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})} · CREATOR BETA · EASE: ${e.label.toUpperCase()}</div>
-    <table><tr><th colspan="4">MAKER PROFILE</th></tr>
-      <tr><td><b>Name</b></td><td>${p.name}</td><td><b>Archetype</b></td><td>${th.label} (${th.thr})</td></tr>
-      <tr><td><b>Build target</b></td><td>${p.target?TARGETS[p.target].name:'Standard Tailoring'}</td><td><b>WHtR</b></td><td>${whtr!=null?whtr.toFixed(3)+' — '+status(whtr,0.40,0.50):'—'}</td></tr>
-      <tr><td><b>Body fat est.</b></td><td>${bf!=null?bf.toFixed(1)+'% — '+status(bf,th.ess,th.high):'—'}</td><td><b>Height</b></td><td>${mv('height')?fmt(mv('height'))+' ('+cm(mv('height'))+')':'—'}</td></tr>
-    </table>
-    <div class="sd-sec">Anatomical Measurements → Pattern Sizing</div>
-    <table><tr><th>#</th><th>Measurement</th><th>Armor / Fabric Mapping</th><th>Body (in)</th><th>Body (cm)</th><th>+ Ease (in)</th><th>+ Ease (cm)</th></tr>${rows||'<tr><td colspan="7">No measurements logged yet.</td></tr>'}</table>
-    <p class="sd-note">Ease applies to circumference &amp; span measurements only; vertical lengths (nape-to-waist, bodice, inseam) are drafted at body measurement.</p>
-    ${S.notes?`<div class="sd-sec">Cosplay Notes</div><p style="white-space:pre-wrap;font-size:11px">${S.notes.replace(/</g,'&lt;')}</p>`:''}
-    <div class="sd-sec" style="border:none;margin-top:14px">✂ TailorTrack Cosplay Edition — measurements stored locally on this device. Not a medical device; consult credentialed professionals for health decisions.</div>`;
-}
-$('#btnPrint').onclick=()=>{buildSheet();window.print()};
-
-/* ============================================================
-   MODAL / TOGGLE / MISC WIRING
-============================================================ */
-function openModal(sel){$(sel).classList.add('open');document.body.style.overflow='hidden'}
-function closeModals(){$$('.modal').forEach(m=>m.classList.remove('open'));document.body.style.overflow=''}
-$$('.modal [data-close]').forEach(b=>b.onclick=closeModals);
-$$('.modal .ovl').forEach(o=>o.onclick=closeModals);
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModals()});
-
-$('#tglVoice').onclick=()=>{
-  if(!speechOK()){toast('🎙 This browser doesn\u2019t support speech recognition (try Chrome or Edge). Manual entry still works.','risk');return}
-  S.settings.voice=!S.settings.voice;save();renderToggles();
-  toast(S.settings.voice?'🎙 Voice Mode ON — speak measurements hands-free.':'Voice Mode off.',S.settings.voice?'ok':'');
-  if(S.settings.voice)speak('Voice mode enabled.');
-};
-$('#tglPartner').onclick=()=>{
-  S.settings.partner=!S.settings.partner;save();renderToggles();
-  toast(S.settings.partner?'👥 Partner Mode ON — big controls + quick-log bar for your assistant.':'Partner Mode off.',S.settings.partner?'ok':'');
-  if(S.settings.partner)speak('Partner mode enabled. Tap a measurement chip to begin.');
-};
-$('#btnSettings').onclick=openSettings;
-$('#btnEditProfile').onclick=()=>S.profile?openSettings():openOnboarding();
-$('#btnExportTop').onclick=openExport;
-$('#cmWhtr').onclick=()=>{S.chartMode='whtr';save();renderChart()};
-$('#cmWaist').onclick=()=>{S.chartMode='waist';save();renderChart()};
-let noteTimer;
-$('#notesArea').addEventListener('input',e=>{S.notes=e.target.value;clearTimeout(noteTimer);noteTimer=setTimeout(()=>{save();$('#noteStatus').classList.add('on');setTimeout(()=>$('#noteStatus').classList.remove('on'),1600)},500)});
-
-/* scroll reveal */
-const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1});
-$$('.reveal').forEach(el=>io.observe(el));
-
-/* ---------- boot ---------- */
-renderAll();
-if(!S.profile){setTimeout(()=>openOnboarding(),500)}
-else if(!mv('waist')){setTimeout(()=>toast('📐 Next step: log your <b>Waist</b> (pin №4) to power the WHtR gauge.'),900)}
-window.addEventListener('afterprint',()=>{});
-</script>
-</body>
-</html>
+          <g class="hs" data-m="shoulder" transform="translate(110,78)"><circle r="6.5"/><text x="0
