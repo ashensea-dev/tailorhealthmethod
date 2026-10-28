@@ -64,6 +64,8 @@ input.big{font-size:44px;font-weight:800;text-align:center;background:none;paddi
 #ps{display:none;background:#fff;color:#000;font:12px/1.4 sans-serif;padding:8px}
 #ps table{width:100%;border-collapse:collapse;margin:8px 0}#ps td,#ps th{border:1px solid #000;padding:4px 6px;text-align:left}#ps h1{font-size:18px}
 @media print{body>*:not(#ps){display:none!important}#ps{display:block}body{background:#fff}}
+.ss{border-top:1px solid var(--line);padding:4px 0}.ss summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:44px;font-weight:700;font-size:17px}.ss summary::-webkit-details-marker{display:none}.ss summary::after{content:'';width:8px;height:8px;border-right:2px solid var(--tx2);border-bottom:2px solid var(--tx2);transform:rotate(45deg);margin-right:4px}.ss[open] summary::after{transform:rotate(225deg)}
+.sr{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.sr small{display:block;color:var(--tx2);font-size:12px;margin-top:2px}.sv{text-align:right;font-size:15px;flex:none;max-width:48%}.sv b{color:var(--teal)}.nd{color:var(--tx2);font-size:13px}.ss a{color:var(--teal)}
 </style></head><body>
 <main id="app"></main>
 <dialog id="dlg"></dialog>
@@ -71,7 +73,7 @@ input.big{font-size:44px;font-weight:800;text-align:center;background:none;paddi
 <script>
 'use strict';
 const $=s=>document.querySelector(s),dlg=$('#dlg');
-const I={print:'<path d="M7 9V3h10v6"/><path d="M7 17H4v-8h16v8h-3"/><path d="M7 14h10v7H7z"/>',sliders:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',ruler:'<path d="M3 16L16 3l5 5L8 21z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',alert:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h0"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>'};
+const I={shirt:'<path d="M20.4 3.5L16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.4-2.2z"/>',print:'<path d="M7 9V3h10v6"/><path d="M7 17H4v-8h16v8h-3"/><path d="M7 14h10v7H7z"/>',sliders:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',ruler:'<path d="M3 16L16 3l5 5L8 21z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',alert:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h0"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>'};
 const ic=n=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+I[n]+'</svg>';
 const ARCH={feminine:{l:'Feminine',d:'Estrogen-dominant reference model',ess:13,hi:33},masculine:{l:'Masculine',d:'Androgen-dominant reference model',ess:6,hi:25},nonbinary:{l:'Non-binary',d:'Hormonally neutral overlap model. A conservative range that stays safe across physiological shifts without assuming hormone therapy status.',ess:13,hi:25}};
 const M=[
@@ -148,7 +150,7 @@ const l=pts[pts.length-1];
 return '<div class="card">'+hd+'<svg class="ch" viewBox="0 0 '+W+' '+H+'">'+band+'<path class="cl" d="'+ln+'"/>'+dots+'<text class="cx" x="'+(W-P)+'" y="'+(Y(l.v)-10)+'" text-anchor="end" style="font-weight:700">'+t(l.v)+'</text><text class="cx" x="'+P+'" y="'+(H-6)+'">'+fd(pts[0].d)+'</text><text class="cx" x="'+(W-P)+'" y="'+(H-6)+'" text-anchor="end">'+fd(l.d)+'</text></svg></div>'}
 function render(){applyTheme();const p=S.profile,w=whtr(),b=bfp(),t=p?ARCH[p.archetype]:{ess:13,hi:25},fl=flags(),n=M.filter(m=>S.meas[m.id]).length;
 const protos=[...new Set(fl.map(f=>f.p))];
-$('#app').innerHTML='<div class="top"><h1>TailorTrack</h1><button class="ib" data-act="export" aria-label="Export spec sheet">'+ic('print')+'</button><button class="ib" data-act="settings" aria-label="Settings">'+ic('sliders')+'</button></div>'+
+$('#app').innerHTML='<div class="top"><h1>TailorTrack</h1><button class="ib" data-act="sizes" aria-label="Size guide">'+ic('shirt')+'</button><button class="ib" data-act="export" aria-label="Export spec sheet">'+ic('print')+'</button><button class="ib" data-act="settings" aria-label="Settings">'+ic('sliders')+'</button></div>'+
 '<div class="sub">'+(p?esc(p.name)+' · '+ARCH[p.archetype].l+' baseline · '+fmt(mv('height')):'Set up your profile to start tracking')+'</div>'+
 (p?'':'<div class="card" style="margin-top:12px"><button class="btn pri wide" data-act="onboard">Set up profile</button></div>')+
 '<h2>Measurements</h2><div class="card"><div class="fig"><div class="col">'+['neck','shoulder','chest','apex','underbust'].map(chip).join('')+'</div>'+FIG+'<div class="col">'+['nape','bodice','waist','hips','inseam'].map(chip).join('')+'</div></div>'+
@@ -165,7 +167,7 @@ gauge('Body fat estimate',b.v,b.v!=null?b.v.toFixed(1)+'%':'—',t.ess,t.hi,0,45
 function open(h){dlg.innerHTML='<div class="dc"><button class="ib x" data-act="close" aria-label="Close">'+ic('x')+'</button>'+h+'</div>';if(!dlg.open)dlg.showModal()}
 const archOpts=sel=>Object.keys(ARCH).map(k=>{const a=ARCH[k];return '<label class="opt"><input type="radio" name="arch" value="'+k+'"'+(sel===k?' checked':'')+'><span><b>'+a.l+'</b><small>'+a.d+'</small><small>Healthy '+a.ess+' to '+(a.hi-1)+'% · high risk '+a.hi+'% or more</small></span></label>'}).join('');
 function onboard(){open('<h3>Welcome</h3><p class="sub">Set your baseline once. Everything stays in this browser.</p>'+
-'<label class="fl" for="f-name">Name or handle</label><input type="text" id="f-name" placeholder="e.g. J. Doe" autocomplete="off">'+
+'<label class="fl" for="f-name">Name or handle</label><input type="text" id="f-name" placeholder="e.g. StitchWitch" autocomplete="off">'+
 '<label class="fl" for="f-h">Height in inches</label><input type="text" id="f-h" inputmode="decimal" value="65" autocomplete="off">'+
 '<label class="fl">Physiological baseline</label><div class="note">Pick the baseline closest to your current physiology or primary hormone profile, such as estrogen-dominant or androgen-dominant. It only changes body fat thresholds and risk flags. WHtR thresholds are the same for everyone. Update it any time in Settings as your physiology or transition goals evolve.</div>'+archOpts(null)+
 '<button class="btn pri wide" style="margin-top:12px" data-act="obdone">Start tracking</button>')}
@@ -186,6 +188,45 @@ Object.keys(EASE).map(k=>'<label class="opt"><input type="radio" name="ease" val
 function sheet(){const p=S.profile,e=EASE[S.ease],t=ARCH[p.archetype],w=whtr(),b=bfp().v;
 const rows=M.filter(m=>S.meas[m.id]).map(m=>{const v=S.meas[m.id].v,z=m.c?snap(v+e[1]):null;return '<tr><td>'+m.n+'</td><td>'+m.pat+'</td><td>'+fmt(v)+' ('+toCm(v)+')</td><td>'+(z!=null?fmt(z)+' ('+toCm(z)+')':'length, no ease')+'</td></tr>'}).join('');
 $('#ps').innerHTML='<h1>TailorTrack spec sheet</h1><p>'+esc(p.name)+' · '+t.l+' baseline · '+new Date().toLocaleDateString()+' · Ease: '+e[0]+'</p><p>WHtR '+(w!=null?w.toFixed(3):'—')+' · Body fat '+(b!=null?b.toFixed(1)+'%':'—')+'</p><table><tr><th>Measurement</th><th>Pattern use</th><th>Body</th><th>With ease</th></tr>'+(rows||'<tr><td colspan="4">Nothing logged yet.</td></tr>')+'</table>'+(S.notes?'<p style="white-space:pre-wrap">'+esc(S.notes)+'</p>':'')+'<p>Not a medical device.</p>'}
+/* size guide: charts cited in the Sources list */
+const WN=[['000',30,23.5,33],['00',31,24.5,34],['0',32,25.5,35],['2',33,26.5,36],['4',34,27.5,37],['6',35,28.5,38],['8',36,29.5,39],['10',37,30.5,40],['12',38.5,32,41.5],['14',40,33.5,43],['16',42,35.75,45],['18',44,38,47],['20',46,40.25,49],['22',48,42.5,51]];
+const WA=[['XXS',29.5,23.5,33],['XS',32.5,26,35.5],['S',35.5,29,38.5],['M',38,31.5,41],['L',41,34.5,44],['XL',44.5,38.5,47],['XXL',48.5,42.5,50]];
+const WP=[['1X',49.5,45.5],['2X',52,49],['3X',55,53],['4X',58,57]];
+const JW=[[23,'23'],[24,'24–25'],[27,'26–27'],[29,'28–29'],[32,'30–31'],[35,'32–33'],[37,'34–35'],[39,'36']];
+const MS=[['XS',32],['S',36],['M',40],['L',44],['XL',48],['XXL',52],['3XL',56],['4XL',60],['5XL',64]];
+const UT=[['XS',34],['S',37],['M',41],['L',45],['XL',49],['2XL',53],['3XL',57],['4XL',61],['5XL',65]];
+const UH=[['S',41],['M',45],['L',49],['XL',53],['2XL',57],['3XL',61],['4XL',65],['5XL',69]];
+const UB=[['2XS',27,30],['XS',29.25,32.25],['S',31.5,34.5],['M',33.75,36.75],['L',36,39],['XL',38.25,41.25],['2XL',40.5,43.5],['3XL',42.75,45.75],['4XL',45,48]];
+const CUPS=['AA','A','B','C','D','DD/E','DDD/F','G'];
+const SRC=[['Women’s numbered: Sherpa chart at Campmor','https://www.campmor.com/pages/sherpa-adventure-gear-womens-chart'],['Women’s lettered tops: Nike','https://www.nike.com/size-fit/womens-tops-alpha'],['Swimsuit by hips: Nike','https://www.nike.com/size-fit/womens-swimsuit'],['Jeans waist: Lord &amp; Taylor','https://lordandtaylor.com/pages/womens-size-guide'],['Bra band and cup method: Triumph','https://uk.triumph.com/blog/how-to-measure-bra-size.html'],['Bra cup letters and sister sizes','https://grandavehousing.calpoly.edu/news/find-your-perfect-bra-fit'],['Men’s: L.L.Bean','https://www.llbeanbusiness.com/customer-service/mens-size-chart-static.html'],['Unisex tee: Bella+Canvas 3001','https://store.mollywhite.net/pages/bella-canvas-3001-size-chart'],['Unisex hoodie: Gildan 18500','https://shop.nass.co.uk/products/unisex-hoodie'],['Unisex bottoms: Wardrobe By Me body table','https://gatherhereonline.com/collections/sewing-pattern/products/rebel-sweatpants-pattern'],['Larger measurement decides: SBD','https://sbdapparel.com/products/forge-joggers']];
+const pick=(a,k,v)=>a.find(r=>v<=r[k]),ix=(a,k,v)=>{const i=a.findIndex(r=>v<=r[k]);return i<0?a.length-1:i};
+const wNum=(k,v)=>{const r=pick(WN,k,v);return r?r[0]:'22+'},wAl=(k,v)=>{const r=pick(WA,k,v)||(k<3&&pick(WP,k,v));return r?r[0]:'XXL+'};
+const both=(k,v)=>'US <b>'+wNum(k,v)+'</b> · <b>'+wAl(k,v)+'</b>',jw=v=>{const r=JW.find(x=>v<=x[0]);return r?r[1]:'36+'};
+function sizes(){if(!S.profile)return onboard();
+const g=mv,row=(l,m,d)=>'<div class="sr"><div><b>'+l+'</b>'+(d?'<small>'+d+'</small>':'')+'</div><div class="sv">'+m+'</div></div>';
+const R=(l,ids,fn)=>{const m=ids.filter(i=>!g(i)).map(i=>MM[i].n.toLowerCase());if(m.length)return row(l,'<span class="nd">Needs '+m.join(', ')+'</span>');const o=fn();return row(l,o[0],o[1])};
+const c=g('chest'),u=g('underbust'),w=g('waist'),h=g('hips'),nk=g('neck'),ins=g('inseam');
+const bt=()=>['By bust'];
+const byC=(A,l)=>R(l,['chest'],()=>['<b>'+(pick(A,1,c)||['5XL+'])[0]+'</b>','By chest']);
+const bot=l=>R(l,['waist','hips'],()=>{const a=ix(UB,1,w),b=ix(UB,2,h);return ['<b>'+UB[Math.max(a,b)][0]+'</b>','Waist fits '+UB[a][0]+', hips fit '+UB[b][0]+'. The larger decides']});
+const women=[R('Bra',['underbust','chest'],()=>{const b=Math.ceil(u/2)*2,d=Math.ceil(c-b),i=d<=0?0:Math.min(d,7),s=[];if(i>0)s.push((b+2)+CUPS[i-1]);if(i<7)s.push((b-2)+CUPS[i+1]);return ['<b>'+b+CUPS[i]+(d>7?'+':'')+'</b>','Underbust '+fmt(u)+', bust '+fmt(c)+'. Sister sizes: '+s.join(', ')]}),
+R('Shirt / top',['chest'],()=>[both(1,c),'By bust']),R('Jacket / coat',['chest'],()=>[both(1,c),'By bust']),
+R('Dress',['chest','waist','hips'],()=>[both(1,c),'By bust. Waist fits '+wNum(2,w)+', hips fit '+wNum(3,h)]),
+R('Pants',['hips','waist'],()=>[both(3,h),'By hips. Waist fits '+wNum(2,w)]),
+R('Jeans',['waist'],()=>['Waist <b>'+jw(w)+'</b>','By natural waist']),
+R('Skirt',['waist','hips'],()=>[both(2,w),'By waist. Hips fit '+wNum(3,h)]),
+R('Swimsuit',['hips','chest'],()=>[both(3,h),'By hips. Bust fits '+wAl(1,c)])];
+const men=[byC(MS,'Shirt / tee'),R('Dress shirt',['neck'],()=>['Collar <b>'+fmtN(Math.ceil(nk*2)/2)+'″</b>','Sleeve: center back of neck to wrist']),byC(MS,'Jacket / coat'),
+R('Pants',['waist'],()=>['Waist <b>'+Math.ceil(w)+'″</b>'+(ins?' × <b>'+Math.round(ins)+'″</b>':''),ins?'Waist, then inseam length':'Log your inseam for length']),
+R('Belt',['waist'],()=>['<b>'+Math.ceil(w)+'</b>','Same as your pants waist'])];
+const uni=[byC(UT,'T-shirt'),byC(UH,'Hoodie / jacket'),bot('Pants / joggers'),bot('Shorts')];
+const D={w:["Women’s sizes",'US numbered and lettered. Tops, dresses and jackets go by bust, pants and swimsuits by hips, skirts by waist.',women],
+m:["Men’s sizes",'US sizes from body measurements. Between sizes, take the next size up.',men],
+u:["Unisex sizes",'There is no industry standard. These follow common tee, hoodie and jogger charts.',uni]};
+const ord={feminine:['w','u','m'],masculine:['m','u','w'],nonbinary:['u','m','w']}[S.profile.archetype];
+open('<h3>Size guide</h3><p class="sub">Estimated from your logged measurements. Brands differ, so check the brand chart before you buy.</p><div style="margin-top:12px">'+
+ord.map((k,i)=>'<details class="ss"'+(i?'':' open')+'><summary>'+D[k][0]+'</summary><p class="sub">'+D[k][1]+'</p>'+D[k][2].join('')+'</details>').join('')+
+'<details class="ss"><summary>Sources</summary><p class="sub" style="line-height:2">'+SRC.map(s=>'<a href="'+s[1]+'" target="_blank" rel="noopener">'+s[0]+'</a>').join('<br>')+'</p></details></div>')}
 /* events */
 let armed=false;
 document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t){if(e.target===dlg)dlg.close();return}
@@ -193,6 +234,7 @@ const a=t.dataset.act;
 if(a==='log')openLog(t.dataset.id);
 else if(a==='onboard')onboard();
 else if(a==='settings')settings();
+else if(a==='sizes')sizes();
 else if(a==='export')exportDlg();
 else if(a==='close')dlg.close();
 else if(a==='plan')openPlan(t.dataset.p);
