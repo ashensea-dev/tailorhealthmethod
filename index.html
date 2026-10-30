@@ -68,14 +68,25 @@ input.big{font-size:44px;font-weight:800;text-align:center;background:none;paddi
 .sr{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.sr small{display:block;color:var(--tx2);font-size:12px;margin-top:2px}.sv{text-align:right;font-size:15px;flex:none;max-width:48%}.sv b{color:var(--teal)}.nd{color:var(--tx2);font-size:13px}.ss a{color:var(--teal)}
 .sets{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.dot{width:40px;height:40px;border-radius:50%;border:0;background:var(--chip);color:var(--tx2);font-weight:700;font-size:15px}.dot.on{background:var(--teal);color:var(--on)}.sets .wt{width:130px;margin-left:auto;padding:10px 12px;font-size:14px}
 .mi{display:flex;align-items:center;gap:14px;width:100%;border:0;background:none;color:var(--tx);padding:12px 4px;border-top:1px solid var(--line);font-size:17px;font-weight:600;text-align:left;min-height:52px}.mi.on{color:var(--teal)}
+#mdlg{margin:0 auto auto;border-radius:0 0 24px 24px;max-width:640px}#mdlg .dc{padding-top:calc(16px + env(safe-area-inset-top,0px))}.ml2{max-height:62dvh;overflow-y:auto;margin-top:8px}
+.gh{align-items:flex-start}.gh b{flex:1;min-width:0}.pill{white-space:nowrap;flex:none}
+.sets{flex-wrap:nowrap}.dot{flex:none;width:38px;height:38px}.sets .wt{flex:1;min-width:0;width:auto;margin-left:6px}
+.cw{position:relative;border-radius:16px;overflow:hidden;background:var(--chip);margin-bottom:12px}
+.cs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.cs::-webkit-scrollbar{display:none}
+.sl{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;aspect-ratio:4/5;position:relative}#dlg .sl{aspect-ratio:1}.sl img{width:100%;height:100%;object-fit:cover;display:block}
+.nv{position:absolute;top:0;bottom:0;width:22%;border:0;background:none;z-index:1}.nv.l{left:0}.nv.r{right:0}
+.rm{position:absolute;top:10px;right:10px;z-index:2;width:40px;height:40px;background:rgba(0,0,0,.55);color:#fff}
+.addimg{width:100%;height:100%;border:0;background:var(--chip);color:var(--tx2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:600}
+.lr{display:flex;gap:8px;align-items:center;margin-bottom:8px}.lr div{flex:1;display:grid;gap:6px;min-width:0}
+.lk{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 0;border-top:1px solid var(--line);color:var(--teal);font-weight:600;text-decoration:none;min-height:44px}
 </style></head><body>
 <main id="app"></main>
-<dialog id="dlg"></dialog>
+<dialog id="dlg"></dialog><dialog id="mdlg"></dialog>
 <div id="ps"></div>
 <script>
 'use strict';
 const $=s=>document.querySelector(s),dlg=$('#dlg');
-const I={menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',dumbbell:'<path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/>',shirt:'<path d="M20.4 3.5L16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.4-2.2z"/>',print:'<path d="M7 9V3h10v6"/><path d="M7 17H4v-8h16v8h-3"/><path d="M7 14h10v7H7z"/>',sliders:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',ruler:'<path d="M3 16L16 3l5 5L8 21z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',alert:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h0"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>'};
+const I={menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',dumbbell:'<path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/>',shirt:'<path d="M20.4 3.5L16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.4-2.2z"/>',print:'<path d="M7 9V3h10v6"/><path d="M7 17H4v-8h16v8h-3"/><path d="M7 14h10v7H7z"/>',sliders:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',ruler:'<path d="M3 16L16 3l5 5L8 21z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',alert:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h0"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>',plus:'<path d="M12 5v14M5 12h14"/>',star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'};
 const ic=n=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+I[n]+'</svg>';
 const ARCH={feminine:{l:'Feminine',d:'Estrogen-dominant reference model',ess:13,hi:32},masculine:{l:'Masculine',d:'Androgen-dominant reference model',ess:6,hi:25},nonbinary:{l:'Non-binary',d:'Hormonally neutral overlap model. A conservative range that stays safe across physiological shifts without assuming hormone therapy status.',ess:13,hi:25}};
 const M=[
@@ -152,10 +163,10 @@ const l=pts[pts.length-1];
 return '<div class="card">'+hd+'<svg class="ch" viewBox="0 0 '+W+' '+H+'">'+band+'<path class="cl" d="'+ln+'"/>'+dots+'<text class="cx" x="'+(W-P)+'" y="'+(Y(l.v)-10)+'" text-anchor="end" style="font-weight:700">'+t(l.v)+'</text><text class="cx" x="'+P+'" y="'+(H-6)+'">'+fd(pts[0].d)+'</text><text class="cx" x="'+(W-P)+'" y="'+(H-6)+'" text-anchor="end">'+fd(l.d)+'</text></svg></div>'}
 function renderMeasure(){const p=S.profile,w=whtr(),b=bfp(),t=p?ARCH[p.archetype]:{ess:13,hi:25},fl=flags(),n=M.filter(m=>S.meas[m.id]).length;
 const protos=[...new Set(fl.map(f=>f.p))];
-$('#app').innerHTML='<div class="top"><button class="ib" data-act="menu" aria-label="Menu">'+ic('menu')+'</button><span style="flex:1"></span><button class="ib" data-act="sizes" aria-label="Size guide">'+ic('shirt')+'</button><button class="ib" data-act="export" aria-label="Export spec sheet">'+ic('print')+'</button><button class="ib" data-act="settings" aria-label="Settings">'+ic('sliders')+'</button></div><h1>TailorTrack</h1>'+
+$('#app').innerHTML='<div class="top"><button class="ib" data-act="menu" aria-label="Menu">'+ic('menu')+'</button><span style="flex:1"></span><button class="ib" data-act="sizes" aria-label="Size guide">'+ic('shirt')+'</button><button class="ib" data-act="export" aria-label="Export spec sheet">'+ic('print')+'</button><button class="ib" data-act="settings" aria-label="Settings">'+ic('sliders')+'</button></div><h1>Measurements</h1>'+
 '<div class="sub">'+(p?esc(p.name)+' · '+ARCH[p.archetype].l+' baseline · '+fmt(mv('height')):'Set up your profile to start tracking')+'</div>'+
 (p?'':'<div class="card" style="margin-top:12px"><button class="btn pri wide" data-act="onboard">Set up profile</button></div>')+
-'<h2>Measurements</h2><div class="card"><div class="fig"><div class="col">'+['neck','shoulder','chest','apex','underbust'].map(chip).join('')+'</div>'+FIG+'<div class="col">'+['nape','bodice','waist','hips','inseam'].map(chip).join('')+'</div></div>'+
+'<h2>Body map</h2><div class="card"><div class="fig"><div class="col">'+['neck','shoulder','chest','apex','underbust'].map(chip).join('')+'</div>'+FIG+'<div class="col">'+['nape','bodice','waist','hips','inseam'].map(chip).join('')+'</div></div>'+
 '<p class="sub" style="text-align:center;margin-top:12px">'+n+' of 11 logged · tap a measurement to log it</p></div>'+
 '<h2>Health</h2>'+gauge('Waist-to-height ratio',w,w!=null?w.toFixed(3):'—',.4,.5,.3,.6,['Under 0.40','0.40 to 0.49','0.50 or more'],'Log your waist and height.')+
 gauge('Body fat estimate',b.v,b.v!=null?b.v.toFixed(1)+'%':'—',t.ess,t.hi,0,45,['Under '+t.ess+'%',t.ess+' to '+(t.hi-1)+'%',t.hi+'% or more'],'Still needed: '+b.need+'.')+
@@ -262,7 +273,7 @@ b:[
 [X.ank,['Single-leg glute bridge','Glutes',4,'5 to 8 reps each leg','1-1-2','Hold a dumbbell on your hips.'],['Single-leg Romanian deadlift','Hamstrings, glutes',4,'10 to 12 reps each leg','2-0-3','Bodyweight or one dumbbell. Keep your hips square.'],['Side-lying leg raise',GM,4,'12 to 15 reps each side','1-1-2',X.sl[5]],['Side-lying inner thigh lift','Inner thighs',4,'12 to 15 reps each side','1-1-2',X.add[5]],['Jog','Cardio',1,'30 minutes','','Your pace.']],
 [X.walkW,X.wl,X.gob,X.brow,X.curt,X.curl]]};
 const WK=()=>S.wk=S.wk||{ph:'a',day:1,done:{},w:{}};
-function renderWorkout(){const k=WK(),ex=PROG[k.ph][k.day-1],dn=k.done[today()]||{};let tot=0,dd=0;
+function renderWorkout(){const a0=S.profile&&S.profile.archetype;if(a0!=='feminine')return wkBlank(a0);const k=WK(),ex=PROG[k.ph][k.day-1],dn=k.done[today()]||{};let tot=0,dd=0;
 const cards=ex.map((e,i)=>{const key=k.ph+k.day+'_'+i,n=dn[key]||0;tot+=e[2];dd+=Math.min(n,e[2]);
 return '<div class="card"><div class="gh"><b>'+e[0]+'</b>'+(e[4]?'<span class="pill">Tempo '+e[4]+'</span>':'')+'</div><div class="sub">'+e[1]+'</div>'+
 '<p style="margin:8px 0;font-weight:600">'+(e[2]>1?e[2]+' sets × ':'')+e[3]+'</p>'+(e[5]?'<p class="sub" style="margin-bottom:10px">'+e[5]+'</p>':'')+
@@ -275,26 +286,58 @@ $('#app').innerHTML='<div class="top"><button class="ib" data-act="menu" aria-la
 '<h2>'+DN[k.day-1]+'</h2><p class="sub" style="margin:-4px 4px 12px">'+dd+' of '+tot+' sets done today. Tap a set when you finish it. When every set feels manageable, add 2.5 to 5 lb the next week.</p>'+cards+
 '<div class="card"><b>Stretch afterward</b><p class="sub" style="margin-top:4px">About 10 minutes. '+(up?'Triceps stretch, 30 seconds × 2. Chest stretch, 30 seconds × 2.':'Standing quad stretch, 15 seconds × 4. Hamstring stretch, 20 seconds × 3. Lying spinal twist, 6 slow reps each side.')+'</p></div>'+
 '<p class="foot">Based on <a href="https://docs.google.com/document/d/1-NyE5EY5TTaRRMhk7HlTbKJ7HifjEsA4jlDO1qKQVl0" target="_blank" rel="noopener">Valkaine Fitness, Beginner Program 2.0</a>. Gym machines and benches swapped for floor, dumbbell and bodyweight moves, with glute medius and minimus work added on days 1, 3 and 4. Tempo is seconds lowering, pausing, lifting.</p>'}
-let PAGE=location.hash==='#workout'?'workout':'measure';
-const TABS=[['measure','Measure','ruler'],['workout','Workout','dumbbell']];
-const menu=()=>open('<h3>Menu</h3><div style="margin-top:8px">'+TABS.map(t=>'<button class="mi'+(PAGE===t[0]?' on':'')+'" data-act="tab" data-p="'+t[0]+'">'+ic(t[2])+t[1]+'</button>').join('')+'</div>');
-function render(){applyTheme();PAGE==='workout'?renderWorkout():renderMeasure()}
-addEventListener('hashchange',()=>{PAGE=location.hash==='#workout'?'workout':'measure';render()});
+const pg=()=>({'#workout':'workout','#wishlist':'wishlist'}[location.hash]||'measure');let PAGE=pg();const TOP='<div class="top"><button class="ib" data-act="menu" aria-label="Menu">'+ic('menu')+'</button></div>';
+const wkBlank=a=>{$('#app').innerHTML=TOP+'<h1>Workout</h1><div class="card" style="margin-top:14px"><b>'+(a?'Yet to come':'Set your baseline first')+'</b><p class="sub" style="margin-top:4px">'+(a?'The '+ARCH[a].l.toLowerCase()+' program is not built yet. The home program is currently written for the feminine baseline.':'The workout follows your baseline. Set it up on the Measurements page.')+'</p></div>'};
+const TABS=[['measure','Measurements','ruler'],['workout','Workout','dumbbell'],['wishlist','Wishlist','star']];
+const menu=()=>{const m=$('#mdlg');m.innerHTML='<div class="dc"><button class="ib x" data-act="close" aria-label="Close menu">'+ic('x')+'</button><h3>TailorTrack</h3><div class="ml2">'+TABS.map(t=>'<button class="mi'+(PAGE===t[0]?' on':'')+'" data-act="tab" data-p="'+t[0]+'">'+ic(t[2])+t[1]+'</button>').join('')+'</div></div>';m.showModal()};
+function render(){applyTheme();({workout:renderWorkout,wishlist:renderWish}[PAGE]||renderMeasure)()}
+addEventListener('hashchange',()=>{PAGE=pg();render()});
+/* wishlist */
+const IDB=()=>new Promise((res,rej)=>{const r=indexedDB.open('tailortrack',1);r.onupgradeneeded=()=>r.result.createObjectStore('img');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+const idbx=(m,f)=>IDB().then(db=>new Promise((res,rej)=>{const t=db.transaction('img',m),q=f(t.objectStore('img'));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)}));
+const imgPut=(id,b)=>idbx('readwrite',s=>s.put(b,id)),imgGet=id=>idbx('readonly',s=>s.get(id)),imgDel=id=>idbx('readwrite',s=>s.delete(id));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+async function shrink(f){try{const b=await createImageBitmap(f),k=Math.min(1,1280/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=Math.round(b.width*k);c.height=Math.round(b.height*k);c.getContext('2d').drawImage(b,0,0,c.width,c.height);return await new Promise(r=>c.toBlob(r,'image/jpeg',.82))}catch(e){return f}}
+function hydrate(root){root.querySelectorAll('img[data-i]').forEach(async el=>{try{const b=await imgGet(el.dataset.i);if(b)el.src=URL.createObjectURL(b)}catch(e){}})}
+const safeUrl=u=>{u=u.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;try{return new URL(u).href}catch(e){return ''}};
+const car=(ids,ed)=>{const n=ids.length+(ed?1:0);if(!n)return '';return '<div class="cw"><div class="cs">'+ids.map(i=>'<div class="sl"><img data-i="'+i+'" alt="Cosplay reference">'+(ed?'<button class="ib rm" data-act="wrm" data-i="'+i+'" aria-label="Remove image">'+ic('x')+'</button>':'')+'</div>').join('')+(ed?'<div class="sl"><button class="addimg" data-act="wadd">'+ic('plus')+'Add image</button></div>':'')+'</div>'+(n>1?'<button class="nv l" data-act="cnav" data-d="-1" aria-label="Previous image"></button><button class="nv r" data-act="cnav" data-d="1" aria-label="Next image"></button>':'')+'</div>'};
+function renderWish(){const L=S.wish||[];
+$('#app').innerHTML=TOP+'<h1>Wishlist</h1><div class="sub">Cosplays to buy or make, with sourcing links</div><button class="btn pri wide" style="margin-top:14px" data-act="wnew">'+ic('plus')+'Add cosplay</button><div style="margin-top:14px">'+(L.length?L.map(w=>'<div class="card">'+car(w.imgs,false)+'<div class="gh"><b style="font-size:19px">'+esc(w.name)+'</b><button class="btn" style="min-height:40px;padding:8px 14px" data-act="wedit" data-id="'+w.id+'">Edit</button></div>'+(w.desc?'<p class="sub" style="margin:6px 0 8px;white-space:pre-wrap">'+esc(w.desc)+'</p>':'')+(w.urls.length?'<div style="margin-top:6px">'+w.urls.map(u=>'<a class="lk" href="'+esc(u.u)+'" target="_blank" rel="noopener noreferrer"><span>'+esc(u.n)+'</span>'+ic('ext')+'</a>').join('')+'</div>':'')+'</div>').join(''):'<div class="card sub">Nothing here yet. Add the first cosplay.</div>')+'</div>';hydrate($('#app'))}
+let D=null;
+const wlinks=()=>D.urls.map((x,i)=>'<div class="lr"><div><input type="text" data-w="un" data-i="'+i+'" placeholder="Link name" value="'+esc(x.n)+'" aria-label="Link name"><input type="text" data-w="uu" data-i="'+i+'" placeholder="https://" inputmode="url" autocapitalize="none" value="'+esc(x.u)+'" aria-label="Link URL"></div><button class="ib" data-act="wlrm" data-i="'+i+'" aria-label="Remove link">'+ic('x')+'</button></div>').join('');
+function wform(w){D=w?JSON.parse(JSON.stringify(w)):{id:uid(),name:'',desc:'',urls:[{n:'',u:''}],imgs:[]};D.added=[];D.removed=[];if(!D.urls.length)D.urls=[{n:'',u:''}];
+open('<h3>'+(w?'Edit cosplay':'New cosplay')+'</h3><div style="margin-top:12px" id="wc">'+car(D.imgs,true)+'</div><label class="fl" for="w-n">Name</label><input type="text" id="w-n" data-w="name" placeholder="Cosplay name" autocomplete="off" value="'+esc(D.name)+'"><label class="fl" for="w-d">Description</label><textarea id="w-d" data-w="desc" placeholder="Buy, make, materials needed, pre-built option">'+esc(D.desc)+'</textarea><label class="fl">Sourcing links</label><div id="wl">'+wlinks()+'</div><button class="btn wide" data-act="wlink">'+ic('plus')+'Add link</button><div style="display:flex;gap:8px;margin-top:18px"><button class="btn pri" style="flex:1" data-act="wsave">Save</button>'+(w?'<button class="btn bad" data-act="wdel">Delete</button>':'')+'</div><input type="file" id="wf" accept="image/*" multiple hidden>')}
+async function addImgs(fs){for(const f of fs){const id=uid(),b=await shrink(f);try{await imgPut(id,b);D.imgs.push(id);D.added.push(id)}catch(e){toast('Could not store that image. Browser storage may be full.')}}
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+$('#wc').innerHTML=car(D.imgs,true);hydrate($('#wc'));const c=$('#wc .cs');if(c)c.scrollLeft=Math.max(0,D.imgs.length-1)*c.clientWidth}
+function wsave(){if(!D.name.trim())return toast('Give the cosplay a name.');
+const urls=D.urls.filter(x=>x.u.trim()).map(x=>{const u=safeUrl(x.u);return u&&{n:x.n.trim()||new URL(u).hostname.replace(/^www\./,''),u}}).filter(Boolean);
+const it={id:D.id,name:D.name.trim(),desc:D.desc.trim(),urls,imgs:D.imgs};S.wish=S.wish||[];const k=S.wish.findIndex(x=>x.id===D.id);k<0?S.wish.unshift(it):S.wish[k]=it;
+D.removed.forEach(i=>imgDel(i).catch(()=>{}));D.saved=true;save();dlg.close();render()}
 /* events */
 let armed=false;
-document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t){if(e.target===dlg)dlg.close();return}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t){if(e.target===dlg)dlg.close();if(e.target===$('#mdlg'))$('#mdlg').close();return}
 const a=t.dataset.act;
 if(a==='log')openLog(t.dataset.id);
 else if(a==='onboard')onboard();
 else if(a==='settings')settings();
 else if(a==='menu')menu();
-else if(a==='tab'){dlg.close();PAGE=t.dataset.p;try{location.hash=PAGE}catch(x){}render();scrollTo(0,0)}
+else if(a==='tab'){dlg.close();$('#mdlg').close();PAGE=t.dataset.p;try{location.hash=PAGE}catch(x){}render();scrollTo(0,0)}
 else if(a==='wph'){WK().ph=t.dataset.v;WK().day=1;save();render()}
 else if(a==='wday'){WK().day=+t.dataset.v;save();render()}
 else if(a==='wset'){const d=WK().done[today()]=WK().done[today()]||{},i=+t.dataset.i,n=d[t.dataset.k]||0;d[t.dataset.k]=(i+1===n)?i:i+1;save();render()}
+else if(a==='wnew')wform();
+else if(a==='wedit')wform(S.wish.find(x=>x.id===t.dataset.id));
+else if(a==='wadd')$('#wf').click();
+else if(a==='wrm'){const id=t.dataset.i;D.imgs=D.imgs.filter(x=>x!==id);if(D.added.includes(id)){D.added=D.added.filter(x=>x!==id);imgDel(id).catch(()=>{})}else D.removed.push(id);$('#wc').innerHTML=car(D.imgs,true);hydrate($('#wc'))}
+else if(a==='wlink'){D.urls.push({n:'',u:''});$('#wl').innerHTML=wlinks()}
+else if(a==='wlrm'){D.urls.splice(+t.dataset.i,1);$('#wl').innerHTML=wlinks()}
+else if(a==='cnav'){const c=t.parentNode.querySelector('.cs');c.scrollBy({left:+t.dataset.d*c.clientWidth,behavior:'instant'})}
+else if(a==='wsave')wsave();
+else if(a==='wdel'){if(!armed){armed=true;t.textContent='Tap again to delete';return}[...new Set([...D.imgs,...D.removed,...D.added])].forEach(i=>imgDel(i).catch(()=>{}));S.wish=S.wish.filter(x=>x.id!==D.id);D.saved=true;save();armed=false;dlg.close();render()}
 else if(a==='sizes')sizes();
 else if(a==='export')exportDlg();
-else if(a==='close')dlg.close();
+else if(a==='close'){dlg.close();$('#mdlg').close()}
 else if(a==='plan')openPlan(t.dataset.p);
 else if(a==='cm'){S.chartMode=t.dataset.m;save();render()}
 else if(a==='step'){const i=$('#lv'),v=Math.max(0,snap((parse(i.value)||0)+ +t.dataset.d));i.value=fmtN(v);$('#cmr').textContent='inches · '+toCm(v)}
@@ -306,15 +349,17 @@ S.profile={name:$('#f-name').value.trim()||'Maker',archetype:r.value,since:today
 else if(a==='sset'){const r=document.querySelector('input[name=arch]:checked'),h=parse($('#s-h').value);
 if(!r)return toast('Choose a baseline.');if(h==null||h<36||h>100)return toast('Enter a height between 36 and 100 inches.');
 S.profile={name:$('#s-name').value.trim()||'Maker',archetype:r.value,since:(S.profile&&S.profile.since)||today()};S.meas.height={v:h,d:today()};upsert();save();dlg.close();render()}
-else if(a==='reset'){if(!armed){armed=true;t.textContent='Tap again to erase everything';t.className='btn bad wide';return}try{localStorage.removeItem('tailortrack.v1')}catch(x){}S=Object.assign({},DEF,{meas:{},entries:[]});armed=false;dlg.close();render();onboard()}
+else if(a==='reset'){if(!armed){armed=true;t.textContent='Tap again to erase everything';t.className='btn bad wide';return}try{localStorage.removeItem('tailortrack.v1');indexedDB.deleteDatabase('tailortrack')}catch(x){}S=Object.assign({},DEF,{meas:{},entries:[]});armed=false;dlg.close();render();onboard()}
 else if(a==='print'){sheet();dlg.close();setTimeout(()=>{try{window.print()}catch(x){toast('Open this page in its own tab to print.')}},100)}});
 document.addEventListener('input',e=>{const t=e.target;
+if(t.dataset.w&&D){const k=t.dataset.w,i=t.dataset.i;if(k==='name')D.name=t.value;else if(k==='desc')D.desc=t.value;else if(k==='un')D.urls[i].n=t.value;else if(k==='uu')D.urls[i].u=t.value}
 if(t.id==='lv'){const v=parse(t.value);$('#cmr').textContent='inches · '+(v!=null?toCm(v):'—')}
 if(t.id==='notes'){S.notes=t.value;clearTimeout(window.nt);window.nt=setTimeout(save,400)}});
 document.addEventListener('change',e=>{const t=e.target;
+if(t.id==='wf'&&D){addImgs([...t.files]);t.value=''}
 if(t.name==='theme'){S.theme=t.value;save();applyTheme()}
 if(t.name==='ease'){S.ease=t.value;save()}
 if(t.classList.contains('wt')){WK().w[t.dataset.k]=t.value;save()}});
-dlg.addEventListener('close',()=>{armed=false});
+dlg.addEventListener('close',()=>{armed=false;if(D&&!D.saved)D.added.forEach(i=>imgDel(i).catch(()=>{}));D=null});
 render();if(!S.profile&&PAGE==='measure')onboard();
 </script></body></html>
