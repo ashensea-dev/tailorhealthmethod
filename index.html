@@ -12,7 +12,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{background:var(--bg);color:var(--tx);font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 main{max-width:640px;margin:0 auto;padding:12px 16px 40px}
 .top{display:flex;align-items:center;gap:8px;margin-top:8px}
-h1{font-size:34px;font-weight:800;letter-spacing:-.03em;flex:1}
+h1{font-size:34px;font-weight:800;letter-spacing:-.03em;margin-top:10px}
 h2{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:26px 4px 10px}
 .sub{color:var(--tx2);font-size:14px}
 .ic{width:22px;height:22px;flex:none}
@@ -66,6 +66,8 @@ input.big{font-size:44px;font-weight:800;text-align:center;background:none;paddi
 @media print{body>*:not(#ps){display:none!important}#ps{display:block}body{background:#fff}}
 .ss{border-top:1px solid var(--line);padding:4px 0}.ss summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:44px;font-weight:700;font-size:17px}.ss summary::-webkit-details-marker{display:none}.ss summary::after{content:'';width:8px;height:8px;border-right:2px solid var(--tx2);border-bottom:2px solid var(--tx2);transform:rotate(45deg);margin-right:4px}.ss[open] summary::after{transform:rotate(225deg)}
 .sr{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.sr small{display:block;color:var(--tx2);font-size:12px;margin-top:2px}.sv{text-align:right;font-size:15px;flex:none;max-width:48%}.sv b{color:var(--teal)}.nd{color:var(--tx2);font-size:13px}.ss a{color:var(--teal)}
+.sets{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.dot{width:40px;height:40px;border-radius:50%;border:0;background:var(--chip);color:var(--tx2);font-weight:700;font-size:15px}.dot.on{background:var(--teal);color:var(--on)}.sets .wt{width:130px;margin-left:auto;padding:10px 12px;font-size:14px}
+.mi{display:flex;align-items:center;gap:14px;width:100%;border:0;background:none;color:var(--tx);padding:12px 4px;border-top:1px solid var(--line);font-size:17px;font-weight:600;text-align:left;min-height:52px}.mi.on{color:var(--teal)}
 </style></head><body>
 <main id="app"></main>
 <dialog id="dlg"></dialog>
@@ -73,7 +75,7 @@ input.big{font-size:44px;font-weight:800;text-align:center;background:none;paddi
 <script>
 'use strict';
 const $=s=>document.querySelector(s),dlg=$('#dlg');
-const I={shirt:'<path d="M20.4 3.5L16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.4-2.2z"/>',print:'<path d="M7 9V3h10v6"/><path d="M7 17H4v-8h16v8h-3"/><path d="M7 14h10v7H7z"/>',sliders:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',ruler:'<path d="M3 16L16 3l5 5L8 21z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',alert:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h0"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>'};
+const I={menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',dumbbell:'<path d="M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12"/>',shirt:'<path d="M20.4 3.5L16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.4-2.2z"/>',print:'<path d="M7 9V3h10v6"/><path d="M7 17H4v-8h16v8h-3"/><path d="M7 14h10v7H7z"/>',sliders:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',ruler:'<path d="M3 16L16 3l5 5L8 21z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/>',ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',alert:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h0"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>'};
 const ic=n=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+I[n]+'</svg>';
 const ARCH={feminine:{l:'Feminine',d:'Estrogen-dominant reference model',ess:13,hi:32},masculine:{l:'Masculine',d:'Androgen-dominant reference model',ess:6,hi:25},nonbinary:{l:'Non-binary',d:'Hormonally neutral overlap model. A conservative range that stays safe across physiological shifts without assuming hormone therapy status.',ess:13,hi:25}};
 const M=[
@@ -148,9 +150,9 @@ const ln=pts.map((p,j)=>(j?'L':'M')+X(j).toFixed(1)+','+Y(p.v).toFixed(1)).join(
 const dots=pts.map((p,j)=>'<circle class="cd" cx="'+X(j).toFixed(1)+'" cy="'+Y(p.v).toFixed(1)+'" r="5"><title>'+p.d+': '+t(p.v)+'</title></circle>').join('');
 const l=pts[pts.length-1];
 return '<div class="card">'+hd+'<svg class="ch" viewBox="0 0 '+W+' '+H+'">'+band+'<path class="cl" d="'+ln+'"/>'+dots+'<text class="cx" x="'+(W-P)+'" y="'+(Y(l.v)-10)+'" text-anchor="end" style="font-weight:700">'+t(l.v)+'</text><text class="cx" x="'+P+'" y="'+(H-6)+'">'+fd(pts[0].d)+'</text><text class="cx" x="'+(W-P)+'" y="'+(H-6)+'" text-anchor="end">'+fd(l.d)+'</text></svg></div>'}
-function render(){applyTheme();const p=S.profile,w=whtr(),b=bfp(),t=p?ARCH[p.archetype]:{ess:13,hi:25},fl=flags(),n=M.filter(m=>S.meas[m.id]).length;
+function renderMeasure(){const p=S.profile,w=whtr(),b=bfp(),t=p?ARCH[p.archetype]:{ess:13,hi:25},fl=flags(),n=M.filter(m=>S.meas[m.id]).length;
 const protos=[...new Set(fl.map(f=>f.p))];
-$('#app').innerHTML='<div class="top"><h1>TailorTrack</h1><button class="ib" data-act="sizes" aria-label="Size guide">'+ic('shirt')+'</button><button class="ib" data-act="export" aria-label="Export spec sheet">'+ic('print')+'</button><button class="ib" data-act="settings" aria-label="Settings">'+ic('sliders')+'</button></div>'+
+$('#app').innerHTML='<div class="top"><button class="ib" data-act="menu" aria-label="Menu">'+ic('menu')+'</button><span style="flex:1"></span><button class="ib" data-act="sizes" aria-label="Size guide">'+ic('shirt')+'</button><button class="ib" data-act="export" aria-label="Export spec sheet">'+ic('print')+'</button><button class="ib" data-act="settings" aria-label="Settings">'+ic('sliders')+'</button></div><h1>TailorTrack</h1>'+
 '<div class="sub">'+(p?esc(p.name)+' · '+ARCH[p.archetype].l+' baseline · '+fmt(mv('height')):'Set up your profile to start tracking')+'</div>'+
 (p?'':'<div class="card" style="margin-top:12px"><button class="btn pri wide" data-act="onboard">Set up profile</button></div>')+
 '<h2>Measurements</h2><div class="card"><div class="fig"><div class="col">'+['neck','shoulder','chest','apex','underbust'].map(chip).join('')+'</div>'+FIG+'<div class="col">'+['nape','bodice','waist','hips','inseam'].map(chip).join('')+'</div></div>'+
@@ -167,7 +169,7 @@ gauge('Body fat estimate',b.v,b.v!=null?b.v.toFixed(1)+'%':'—',t.ess,t.hi,0,45
 function open(h){dlg.innerHTML='<div class="dc"><button class="ib x" data-act="close" aria-label="Close">'+ic('x')+'</button>'+h+'</div>';if(!dlg.open)dlg.showModal()}
 const archOpts=sel=>Object.keys(ARCH).map(k=>{const a=ARCH[k];return '<label class="opt"><input type="radio" name="arch" value="'+k+'"'+(sel===k?' checked':'')+'><span><b>'+a.l+'</b><small>'+a.d+'</small><small>Healthy '+a.ess+' to '+(a.hi-1)+'% · high risk '+a.hi+'% or more</small></span></label>'}).join('');
 function onboard(){open('<h3>Welcome</h3><p class="sub">Set your baseline once. Everything stays in this browser.</p>'+
-'<label class="fl" for="f-name">Name or handle</label><input type="text" id="f-name" placeholder="e.g. StitchWitch" autocomplete="off">'+
+'<label class="fl" for="f-name">Name or handle</label><input type="text" id="f-name" placeholder="e.g. J. Doe" autocomplete="off">'+
 '<label class="fl" for="f-h">Height in inches</label><input type="text" id="f-h" inputmode="decimal" value="65" autocomplete="off">'+
 '<label class="fl">Physiological baseline</label><div class="note">Pick the baseline closest to your current physiology or primary hormone profile, such as estrogen-dominant or androgen-dominant. It only changes body fat thresholds and risk flags. WHtR thresholds are the same for everyone. Update it any time in Settings as your physiology or transition goals evolve.</div>'+archOpts(null)+
 '<button class="btn pri wide" style="margin-top:12px" data-act="obdone">Start tracking</button>')}
@@ -209,7 +211,7 @@ const c=g('chest'),u=g('underbust'),w=g('waist'),h=g('hips'),nk=g('neck'),ins=g(
 const bt=()=>['By bust'];
 const byC=(A,l)=>R(l,['chest'],()=>['<b>'+(pick(A,1,c)||['5XL+'])[0]+'</b>','By chest']);
 const bot=l=>R(l,['waist','hips'],()=>{const a=ix(UB,1,w),b=ix(UB,2,h);return ['<b>'+UB[Math.max(a,b)][0]+'</b>','Waist fits '+UB[a][0]+', hips fit '+UB[b][0]+'. The larger decides']});
-const women=[R('Bra',['underbust','chest'],()=>{const b=Math.round(u/2)*2,d=Math.ceil(c-b),i=d<=0?0:Math.min(d,7),s=[];if(i>0)s.push((b+2)+CUPS[i-1]);if(i<7)s.push((b-2)+CUPS[i+1]);return ['<b>'+b+CUPS[i]+(d>7?'+':'')+'</b>','Underbust '+fmt(u)+', bust '+fmt(c)+'. Sister sizes: '+s.join(', ')]}),
+const women=[R('Bra',['underbust','chest'],()=>{const b=Math.round(u/2)*2,d=Math.ceil(c-b),i=d<=0?0:Math.min(d,7),s=[],b2=Math.ceil(u/2)*2;if(i>0)s.push((b+2)+CUPS[i-1]);if(i<7)s.push((b-2)+CUPS[i+1]);return ['<b>'+b+CUPS[i]+(d>7?'+':'')+'</b>','Underbust '+fmt(u)+', bust '+fmt(c)+'. Sister sizes: '+s.join(', ')+(b2!==b?'. Rounding the band up instead gives <b>'+b2+CUPS[Math.max(0,Math.min(7,Math.ceil(c-b2)))]+'</b>':'')]}),
 R('Shirt / top',['chest'],()=>[both(1,c),'By bust']),R('Jacket / coat',['chest'],()=>[both(1,c),'By bust']),
 R('Dress',['chest','waist','hips'],()=>[both(1,c),'By bust. Waist fits '+wNum(2,w)+', hips fit '+wNum(3,h)]),
 R('Pants',['hips','waist'],()=>[both(3,h),'By hips. Waist fits '+wNum(2,w)]),
@@ -227,6 +229,57 @@ const ord={feminine:['w','u','m'],masculine:['m','u','w'],nonbinary:['u','m','w'
 open('<h3>Size guide</h3><p class="sub">Estimated from your logged measurements. Brands differ, so check the brand chart before you buy.</p><div style="margin-top:12px">'+
 ord.map((k,i)=>'<details class="ss"'+(i?'':' open')+'><summary>'+D[k][0]+'</summary><p class="sub">'+D[k][1]+'</p>'+D[k][2].join('')+'</details>').join('')+
 '<details class="ss"><summary>Sources</summary><p class="sub" style="line-height:2">'+SRC.map(s=>'<a href="'+s[1]+'" target="_blank" rel="noopener">'+s[0]+'</a>').join('<br>')+'</p></details></div>')}
+/* workout page */
+const GM='Glute medius and minimus',X={
+lung:['Bodyweight lunges','Quads, hamstrings, glutes',2,'25 reps each leg','','Warm-up. Rest 3 minutes after.'],
+walk20:['Brisk walk','Cardio',1,'20 minutes','','Use a hill if you have one.'],
+walkW:['Brisk walk','Warm-up',1,'5 to 10 minutes','',''],
+arm:['Arm circles','Shoulders, upper traps',3,'30 seconds each arm','',''],
+ank:['Ankle mobility','Ankles',3,'30 seconds each side','',''],
+calf:['Single-leg calf raise','Calves',4,'10 to 12 reps each leg','1-0-2','Dumbbell in one hand, free hand on a wall. Rise fast, lower slowly.'],
+plank:['Side plank leg lift',GM,3,'10 to 12 reps each side','1-1-2','Forearm side plank, lift the top leg to hip height. Drop to your knee to make it easier.'],
+plank2:['Side plank leg lift',GM,3,'12 to 15 reps each side','1-1-2','Forearm side plank, lift the top leg to hip height.'],
+tri:['Overhead triceps extension','Triceps',2,'5 to 12 reps','1-1-2','Standing, both hands on one dumbbell.'],
+row1:['Single-arm row','Lats, mid-traps',3,'6 to 10 reps each arm','1-1-3','Hinge forward and rest your free hand on your thigh.'],
+tuck:['Lying knee tucks','Abdominals',4,'15 reps','1-1-3','On your back. Control the way down.'],
+rdl:['Dumbbell Romanian deadlift','Hamstrings, glutes',4,'10 to 12 reps','2-0-3','Push your hips back for a deep stretch. Stop before your back rounds.'],
+sl:['Side-lying leg raise',GM,3,'12 to 15 reps each side','1-1-2','Lie on your side and lift the top leg slightly behind you, toes forward.'],
+add:['Side-lying inner thigh lift','Inner thighs',3,'12 to 15 reps each side','1-1-2','Top leg bent in front of you, lift the bottom leg.'],
+wl:['Dumbbell walking lunges','Quads, glutes, hamstrings',4,'10 to 12 reps each leg','1-0-1','Push up, not forward.'],
+gob:['Goblet squat','Quads, glutes',3,'8 to 10 reps','3-1-3','One dumbbell at your chest. Go slow.'],
+brow:['Bent-over row','Lats, mid-traps',4,'5 to 10 reps','1-1-3','Both arms, flat back.'],
+curt:['Curtsy lunge',GM+', glutes',3,'10 reps each leg','2-0-1','Step behind and across. Add a dumbbell when it feels easy.'],
+curl:['Dumbbell curl','Biceps, forearms',3,'8 to 12 reps','2-0-2','']};
+const DN=['Glutes and calves','Upper body','Glutes and hamstrings','Quads and back'];
+const PROG={a:[
+[X.lung,['Dumbbell glute bridge','Glutes',3,'12 to 15 reps','2-0-3','On the floor with a dumbbell across your hips. Control the weight.'],X.calf,X.plank,X.walk20],
+[X.arm,['Push-ups','Shoulders, triceps, chest',4,'3 to 15 reps','1-0-1','Wall or knee push-ups make these easier.'],X.tri,X.row1,X.tuck],
+[X.ank,['Single-leg glute bridge','Glutes',4,'5 to 8 reps each leg','1-1-2','Hold a dumbbell on your hips once bodyweight feels easy.'],X.rdl,X.sl,X.add],
+[X.walkW,X.wl,X.gob,X.brow,X.curt,X.curl]],
+b:[
+[X.lung,['Dumbbell glute bridge','Glutes',4,'8 to 10 reps','2-0-3','Dumbbell across your hips. Control the weight.'],X.calf,['Dumbbell Romanian deadlift','Hamstrings, glutes',4,'8 to 12 reps','2-1-2','Focus on the stretch and stay slow. Do not go heavy.'],X.plank2,X.walk20],
+[X.arm,['Push-ups','Shoulders, triceps, chest',4,'3 to 15 reps','1-0-1','Mix standard and knee push-ups.'],['Overhead triceps extension','Triceps',3,'5 to 12 reps','1-1-2','Lower slowly for a deep stretch.'],['Single-arm row','Lats, mid-traps',4,'6 to 10 reps each arm','1-1-3','Hinge forward and rest your free hand on your thigh.'],X.tuck],
+[X.ank,['Single-leg glute bridge','Glutes',4,'5 to 8 reps each leg','1-1-2','Hold a dumbbell on your hips.'],['Single-leg Romanian deadlift','Hamstrings, glutes',4,'10 to 12 reps each leg','2-0-3','Bodyweight or one dumbbell. Keep your hips square.'],['Side-lying leg raise',GM,4,'12 to 15 reps each side','1-1-2',X.sl[5]],['Side-lying inner thigh lift','Inner thighs',4,'12 to 15 reps each side','1-1-2',X.add[5]],['Jog','Cardio',1,'30 minutes','','Your pace.']],
+[X.walkW,X.wl,X.gob,X.brow,X.curt,X.curl]]};
+const WK=()=>S.wk=S.wk||{ph:'a',day:1,done:{},w:{}};
+function renderWorkout(){const k=WK(),ex=PROG[k.ph][k.day-1],dn=k.done[today()]||{};let tot=0,dd=0;
+const cards=ex.map((e,i)=>{const key=k.ph+k.day+'_'+i,n=dn[key]||0;tot+=e[2];dd+=Math.min(n,e[2]);
+return '<div class="card"><div class="gh"><b>'+e[0]+'</b>'+(e[4]?'<span class="pill">Tempo '+e[4]+'</span>':'')+'</div><div class="sub">'+e[1]+'</div>'+
+'<p style="margin:8px 0;font-weight:600">'+(e[2]>1?e[2]+' sets × ':'')+e[3]+'</p>'+(e[5]?'<p class="sub" style="margin-bottom:10px">'+e[5]+'</p>':'')+
+'<div class="sets">'+Array.from({length:e[2]},(_,j)=>'<button class="dot'+(j<n?' on':'')+'" data-act="wset" data-k="'+key+'" data-i="'+j+'" aria-label="Set '+(j+1)+'">'+(j+1)+'</button>').join('')+
+(e[4]?'<input type="text" class="wt" inputmode="decimal" placeholder="Weight (lb)" data-k="'+key+'" value="'+esc(k.w[key]||'')+'" aria-label="Weight in pounds">':'')+'</div></div>'}).join('');
+const up=k.day===2;
+$('#app').innerHTML='<div class="top"><button class="ib" data-act="menu" aria-label="Menu">'+ic('menu')+'</button></div><h1>Workout</h1><div class="sub">Home program · dumbbells and bodyweight only</div>'+
+'<div class="seg" style="margin-top:14px">'+[['a','Months 0 to 12'],['b','Months 13 to 24']].map(x=>'<button data-act="wph" data-v="'+x[0]+'" class="'+(k.ph===x[0]?'on':'')+'">'+x[1]+'</button>').join('')+'</div>'+
+'<div class="seg" style="display:flex;margin-top:10px">'+[1,2,3,4].map(d=>'<button style="flex:1" data-act="wday" data-v="'+d+'" class="'+(k.day===d?'on':'')+'">Day '+d+'</button>').join('')+'</div>'+
+'<h2>'+DN[k.day-1]+'</h2><p class="sub" style="margin:-4px 4px 12px">'+dd+' of '+tot+' sets done today. Tap a set when you finish it. When every set feels manageable, add 2.5 to 5 lb the next week.</p>'+cards+
+'<div class="card"><b>Stretch afterward</b><p class="sub" style="margin-top:4px">About 10 minutes. '+(up?'Triceps stretch, 30 seconds × 2. Chest stretch, 30 seconds × 2.':'Standing quad stretch, 15 seconds × 4. Hamstring stretch, 20 seconds × 3. Lying spinal twist, 6 slow reps each side.')+'</p></div>'+
+'<p class="foot">Based on <a href="https://docs.google.com/document/d/1-NyE5EY5TTaRRMhk7HlTbKJ7HifjEsA4jlDO1qKQVl0" target="_blank" rel="noopener">Valkaine Fitness, Beginner Program 2.0</a>. Gym machines and benches swapped for floor, dumbbell and bodyweight moves, with glute medius and minimus work added on days 1, 3 and 4. Tempo is seconds lowering, pausing, lifting.</p>'}
+let PAGE=location.hash==='#workout'?'workout':'measure';
+const TABS=[['measure','Measure','ruler'],['workout','Workout','dumbbell']];
+const menu=()=>open('<h3>Menu</h3><div style="margin-top:8px">'+TABS.map(t=>'<button class="mi'+(PAGE===t[0]?' on':'')+'" data-act="tab" data-p="'+t[0]+'">'+ic(t[2])+t[1]+'</button>').join('')+'</div>');
+function render(){applyTheme();PAGE==='workout'?renderWorkout():renderMeasure()}
+addEventListener('hashchange',()=>{PAGE=location.hash==='#workout'?'workout':'measure';render()});
 /* events */
 let armed=false;
 document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t){if(e.target===dlg)dlg.close();return}
@@ -234,6 +287,11 @@ const a=t.dataset.act;
 if(a==='log')openLog(t.dataset.id);
 else if(a==='onboard')onboard();
 else if(a==='settings')settings();
+else if(a==='menu')menu();
+else if(a==='tab'){dlg.close();PAGE=t.dataset.p;try{location.hash=PAGE}catch(x){}render();scrollTo(0,0)}
+else if(a==='wph'){WK().ph=t.dataset.v;WK().day=1;save();render()}
+else if(a==='wday'){WK().day=+t.dataset.v;save();render()}
+else if(a==='wset'){const d=WK().done[today()]=WK().done[today()]||{},i=+t.dataset.i,n=d[t.dataset.k]||0;d[t.dataset.k]=(i+1===n)?i:i+1;save();render()}
 else if(a==='sizes')sizes();
 else if(a==='export')exportDlg();
 else if(a==='close')dlg.close();
@@ -255,7 +313,8 @@ if(t.id==='lv'){const v=parse(t.value);$('#cmr').textContent='inches · '+(v!=nu
 if(t.id==='notes'){S.notes=t.value;clearTimeout(window.nt);window.nt=setTimeout(save,400)}});
 document.addEventListener('change',e=>{const t=e.target;
 if(t.name==='theme'){S.theme=t.value;save();applyTheme()}
-if(t.name==='ease'){S.ease=t.value;save()}});
+if(t.name==='ease'){S.ease=t.value;save()}
+if(t.classList.contains('wt')){WK().w[t.dataset.k]=t.value;save()}});
 dlg.addEventListener('close',()=>{armed=false});
-render();if(!S.profile)onboard();
+render();if(!S.profile&&PAGE==='measure')onboard();
 </script></body></html>
